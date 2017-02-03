@@ -1,1 +1,10 @@
+table.table.table-striped.table-hover
+  thead
+    tr
+      td Title
+  tbody
+    - @questions.each do |question|
+      tr
+        td = link_to question.title, question_path(question)
+
 p= link_to t('common.button.question.add_new'), new_question_path

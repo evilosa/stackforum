@@ -10,7 +10,6 @@ feature 'Register user', %q{
 
   let!(:fill_user) do
     Proc.new do |user, password_confirmation = user.password_confirmation|
-
       fill_in t('activerecord.attributes.user.email'), with: user.email
       fill_in t('activerecord.attributes.user.password'), with: user.password
       fill_in t('activerecord.attributes.user.password_confirmation'), with: password_confirmation
@@ -29,7 +28,6 @@ feature 'Register user', %q{
 
   scenario 'Guest tries to register with invalid password confirmation' do
     user = build(:user)
-
     fill_user.call(user, user.password.reverse)
 
     expect(page).to have_content t('activerecord.errors.models.user.attributes.password_confirmation.confirmation')
@@ -43,5 +41,4 @@ feature 'Register user', %q{
     expect(page).to have_content t('activerecord.errors.models.user.attributes.email.taken')
     expect(current_path).to eq user_registration_path
   end
-
 end

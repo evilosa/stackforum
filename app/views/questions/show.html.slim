@@ -1,0 +1,7 @@
+.bs-callout.bs-callout-info
+  h4 = @question.title
+  p = @question.body
+
+  - @question.answers.each do |answer|
+    .bs-callout.bs-callout-limegreen
+      p = answer.body

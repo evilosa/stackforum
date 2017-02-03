@@ -10,9 +10,12 @@ ru:
       log_in: 'Войти'
       register: 'Зарегистрировать'
       log_out: 'Выйти'
+      create: 'Создать'
+      open: 'Открыть'
+      edit: 'Изменить'
+      delete: 'Удалить'
       question:
         add_new: 'Задать вопрос'
-        create: 'Создать'
     authentication:
           forgot_password: 'Забыли пароль?'
           recieve_confirmation: 'Не получили инструкцию по подтверждению почты?'
@@ -20,23 +23,23 @@ ru:
           sign_with_provider: 'Войти с %{provider}.'
   activerecord:
     models:
+      users: 'Пользователи'
       user:
-        default: 'Пользователи'
-        zero: 'пользователей'
-        one: 'пользователь'
-        few: 'пользователя'
-        other: 'пользователей'
+        zero: 'Пользователей'
+        one: 'Пользователь'
+        few: 'Пользователя'
+        other: 'Пользователей'
       questions: 'Вопросы'
       question:
-        zero: 'вопросов'
-        one: 'вопрос'
-        few: 'вопроса'
-        other: 'вопросов'
+        zero: 'Вопросов'
+        one: 'Вопрос'
+        few: 'Вопроса'
+        other: 'Вопросов'
       answer:
-        zero: 'ответов'
-        one: 'ответ'
-        few: 'ответа'
-        other: 'ответов'
+        zero: 'Ответов'
+        one: 'Ответ'
+        few: 'Ответа'
+        other: 'Ответов'
     attributes:
       user:
         email: 'Почта'
@@ -56,5 +59,7 @@ ru:
           attributes:
             email:
               taken: 'уже занята другим пользователем'
+            password:
+              too_short: 'слишком короткий'
             password_confirmation:
-              confirmation: 'Подтверждение пароля не совпадает'
+              confirmation: 'не совпадает'

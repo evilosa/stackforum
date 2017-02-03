@@ -10,9 +10,9 @@ en:
       log_in: 'Log in'
       register: 'Register'
       log_out: 'Log out'
+      create: 'Create'
       question:
         add_new: 'Ask question'
-        create: 'Create'
     authentication:
       forgot_password: 'Forgot your password?'
       recieve_confirmation: 'Didn''t receive confirmation instructions?'

@@ -13,7 +13,7 @@ feature 'Create question', %q{
     click_on t('common.button.question.add_new')
     fill_in t('activerecord.attributes.question.title'), with: 'Test question'
     fill_in t('activerecord.attributes.question.body'), with: 'text text'
-    click_on t('common.button.question.create')
+    click_on t('common.button.create')
 
     expect(page).to have_content 'Your question successfully created.'
   end
