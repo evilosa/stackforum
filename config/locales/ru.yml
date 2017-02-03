@@ -9,13 +9,20 @@ ru:
       question:
         add_new: 'Задать вопрос'
         create: 'Создать'
+    authentication:
+          forgot_password: 'Забыли пароль?'
+          recieve_confirmation: 'Не получили инструкцию по подтверждению почты?'
+          recieve_unlock: 'Не получили инструкцию по разблокировке учетной записи?'
+          sign_with_provider: 'Войти с %{provider}.'
   activerecord:
     models:
       user:
+        default: 'Пользователи'
         zero: 'пользователей'
         one: 'пользователь'
         few: 'пользователя'
         other: 'пользователей'
+      questions: 'Вопросы'
       question:
         zero: 'вопросов'
         one: 'вопрос'

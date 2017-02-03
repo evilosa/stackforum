@@ -10,6 +10,19 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
+    .navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          a.navbar-brand StackForum
+
+        .collapse.navbar-collapse
+          .nav.navbar-nav
+            li
+              = link_to t('activerecord.models.questions'), questions_path
+            li
+              a href="#2" Link2
+            li
+              a href="#3" Link3
     .container
       .row
         .col-sm-12

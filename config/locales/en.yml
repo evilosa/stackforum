@@ -9,6 +9,11 @@ en:
       question:
         add_new: 'Ask question'
         create: 'Create'
+    authentication:
+      forgot_password: 'Forgot your password?'
+      recieve_confirmation: 'Didn''t receive confirmation instructions?'
+      recieve_unlock: 'Didn''t receive unlock instructions?'
+      sign_with_provider: 'Sign in with %{provider}.'
   activerecord:
     attributes:
       user:
