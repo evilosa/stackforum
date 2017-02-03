@@ -1,6 +1,9 @@
 ru:
   common:
     hello: 'Добро пожаловать'
+    titles:
+      new_user_session: 'Вход в систему'
+      new_user_registration: 'Регистрация пользователя'
     button:
       sign_in: 'Войти'
       sign_up: 'Зарегистрироваться'
@@ -35,8 +38,10 @@ ru:
         other: 'ответов'
     attributes:
       user:
-        email: 'почта'
-        password: 'пароль'
+        email: 'Почта'
+        password: 'Пароль'
+        remember_me: 'Запомнить меня'
+        password_confirmation: 'Подтверждение пароля'
       question:
         title: 'Заголовок'
         body: 'Вопрос'

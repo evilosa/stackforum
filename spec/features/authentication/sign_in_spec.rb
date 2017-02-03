@@ -17,7 +17,7 @@ feature 'User sign in', %q{
     visit new_user_session_path
     fill_in t('activerecord.attributes.user.email'), with: 'wrong@test.com'
     fill_in t('activerecord.attributes.user.password'), with: '12345678'
-    click_on t('common.button.log_in')
+    click_button t('common.button.log_in')
 
     expect(page).to have_content t('devise.failure.invalid', authentication_keys: t('activerecord.attributes.user.email'))
     expect(current_path).to eq new_user_session_path

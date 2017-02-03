@@ -1,6 +1,9 @@
 en:
   common:
     hello: 'Hello world'
+    titles:
+      new_user_session: 'Log in'
+      new_user_registration: 'Sign up'
     button:
       sign_in: 'Sign in'
       sign_up: 'Sign up'

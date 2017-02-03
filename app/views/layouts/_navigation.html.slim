@@ -1,0 +1,18 @@
+.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      = link_to 'StackForum', root_path, class: 'navbar-brand'
+
+    .collapse.navbar-collapse
+      .nav.navbar-nav
+        li
+          = link_to t('activerecord.models.questions'), questions_path
+      .nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          li
+            = link_to t('common.button.log_out'), destroy_user_session_path, method: :delete
+        - else
+          li
+            = link_to t('common.button.sign_in'), new_user_session_path
+          li
+            = link_to t('common.button.sign_up'), new_user_registration_path

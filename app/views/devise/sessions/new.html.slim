@@ -1,5 +1,5 @@
 h2
-  | Log in
+  = t('common.titles.new_user_session')
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .field
     = f.label :email
