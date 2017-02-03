@@ -1,0 +1,39 @@
+ru:
+  common:
+    hello: 'Добро пожаловать'
+    button:
+      sign_in: 'Войти'
+      sign_up: 'Зарегистрироваться'
+      log_in: 'Войти'
+      log_out: 'Выйти'
+      question:
+        add_new: 'Задать вопрос'
+        create: 'Создать'
+  activerecord:
+    models:
+      user:
+        zero: 'пользователей'
+        one: 'пользователь'
+        few: 'пользователя'
+        other: 'пользователей'
+      question:
+        zero: 'вопросов'
+        one: 'вопрос'
+        few: 'вопроса'
+        other: 'вопросов'
+      answer:
+        zero: 'ответов'
+        one: 'ответ'
+        few: 'ответа'
+        other: 'ответов'
+    attributes:
+      user:
+        email: 'почта'
+        password: 'пароль'
+      question:
+        title: 'Заголовок'
+        body: 'Вопрос'
+      answer:
+        title: 'Заголовок'
+        question: 'Вопрос'
+        body: 'Ответ'

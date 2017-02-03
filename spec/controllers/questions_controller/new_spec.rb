@@ -2,6 +2,8 @@ RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
 
   describe 'GET #new' do
+    sign_in_user
+
     before { get :new }
 
     it 'assign a new Question to @question' do
