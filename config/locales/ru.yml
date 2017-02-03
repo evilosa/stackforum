@@ -8,6 +8,7 @@ ru:
       sign_in: 'Войти'
       sign_up: 'Зарегистрироваться'
       log_in: 'Войти'
+      register: 'Зарегистрировать'
       log_out: 'Выйти'
       question:
         add_new: 'Задать вопрос'
@@ -49,3 +50,11 @@ ru:
         title: 'Заголовок'
         question: 'Вопрос'
         body: 'Ответ'
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: 'уже занята другим пользователем'
+            password_confirmation:
+              confirmation: 'Подтверждение пароля не совпадает'

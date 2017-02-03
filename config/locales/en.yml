@@ -8,6 +8,7 @@ en:
       sign_in: 'Sign in'
       sign_up: 'Sign up'
       log_in: 'Log in'
+      register: 'Register'
       log_out: 'Log out'
       question:
         add_new: 'Ask question'
