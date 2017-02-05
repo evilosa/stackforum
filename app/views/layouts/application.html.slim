@@ -6,17 +6,23 @@ html
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     title
       | Stackforum
-    = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tags
   body
-    = render 'layouts/navigation'
-    .container
-      .row
-        .col-sm-12
-          p.notice
-            = notice
-          p.alert
-            = alert
-          - bootstrap_flash
-          = yield
+    #wrapper
+
+      = render 'layouts/navigation'
+
+      #page-wrapper.gray-bg
+
+        = render 'layouts/topnavbar'
+
+        .container
+          .row
+            .col-sm-12
+              p.notice
+                = notice
+              p.alert
+                = alert
+              = yield
