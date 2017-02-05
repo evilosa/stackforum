@@ -17,5 +17,6 @@
 //= require pace/pace.min.js
 //= require slimscroll/jquery.slimscroll.min.js
 //= require iCheck/icheck.min.js
+//= require summernote
 //= require turbolinks
 //= require_tree .

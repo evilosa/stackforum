@@ -5,6 +5,7 @@ en:
       list: 'List'
       new: 'Create'
       edit: 'Edit'
+      show: 'View'
     titles:
       new_user_session: 'Log in'
       new_user_registration: 'Sign up'

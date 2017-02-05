@@ -8,6 +8,9 @@
 
 document.addEventListener("turbolinks:load", function() {
 
+    $('[data-provider="summernote"]').each(function(){
+        $(this).summernote({ });
+    })
 
     // Add body-small class if window less than 768px
     if ($(this).width() < 769) {

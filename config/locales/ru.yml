@@ -5,6 +5,7 @@ ru:
       list: 'Список'
       new: 'Создание'
       edit: 'Редактирование'
+      show: 'Просмотр'
     titles:
       new_user_session: 'Вход в систему'
       new_user_registration: 'Регистрация пользователя'

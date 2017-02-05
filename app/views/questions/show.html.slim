@@ -1,7 +1,55 @@
-.bs-callout.bs-callout-info
-  h4 = @question.title
-  p = @question.body
+= render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.view')}
 
-  - @question.answers.each do |answer|
-    .bs-callout.bs-callout-limegreen
-      p = answer.body
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .social-feed-box
+        = form_for @question do |f|
+          .social-avatar
+            a.pull-left
+              img src="#{image_path('a1.jpg')}"
+            .media-body
+              a = current_user.email if user_signed_in?
+              small.text-muted = @question.created_at
+          .social-body
+            p = @question.body
+            .btn-group
+              button.btn.btn-white.btn-xs
+                i.fa.fa-thumbs-up Like this!
+              button.btn.btn-white.btn-xs
+                i.fa.fa-thumbs-down Dislike this!
+              button.btn.btn-white.btn-xs
+                i.fa.fa-share Share
+          .social-footer
+            .social-comment
+              .vote-actions.pull-left
+                a
+                  i.fa.fa-chevron-up
+                div 15
+                a
+                  i.fa.fa-chevron-down
+              a.pull-left
+                img src="#{image_path('a2.jpg')}"
+              .media-body
+                a Andrew williams
+                br asdfsdf asdfasdf asdfsdf
+                smass.text-muted = @question.created_at
+            .social-comment
+              .vote-actions.pull-left
+                a
+                  i.fa.fa-chevron-up
+                div 15
+                a
+                  i.fa.fa-chevron-down
+              a.pull-left
+                img src="#{image_path('a4.jpg')}"
+                .media-body
+                  a Andrew williams
+                  br asdfsdf asdfasdf asdfsdf
+                  smass.text-muted = @question.created_at
+          .ibox
+            .ibox-content.no-padding
+              = f.text_field :body, data: { provider: 'summernote' }
+
+              = f.submit t('common.button.create'), class: 'btn btn-primary btn-xs pull-right'
+
