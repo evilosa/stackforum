@@ -10,7 +10,7 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
-  body
+  body.mini-navbar
     #wrapper
 
       = render 'layouts/navigation'
@@ -19,12 +19,12 @@ html
 
         = render 'layouts/topnavbar'
 
+        = yield
+
         p.notice
           = notice
         p.alert
           = alert
-
-        = yield
 
         = render 'layouts/footer'
 

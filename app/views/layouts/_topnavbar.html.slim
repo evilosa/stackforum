@@ -1,7 +1,7 @@
 .row.border-bottom
-  nav.navbar.navbar-static-top.white-bg role="navigation" style="..."
+  nav.navbar.navbar-static-top role="navigation" style="margin-bottom: 0"
     .navbar-header
-      = link_to new_user_session_path, class: 'navbar-minimalize minimalize-styl-2 btn btn-primary'
+      a.navbar-minimalize.minimalize-styl-2.btn.btn-primary
         i.fa.fa-bars
     ul.nav.navbar-top-links.navbar-right
       - if user_signed_in?

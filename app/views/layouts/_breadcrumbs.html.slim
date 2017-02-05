@@ -1,0 +1,12 @@
+- if user_signed_in?
+  .row.wrapper.border-bottom.white-bg.page-heading
+    .col-lg-10
+      h2 = source[:title]
+      ol.breadcrumb
+        li
+          = link_to t('common.titles.pages.main'), root_path
+        li
+          = link_to source[:second], source[:path]
+        li.active
+          strong = source[:action]
+    .col-lg-2

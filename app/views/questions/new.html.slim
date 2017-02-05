@@ -1,8 +1,18 @@
-= form_for @question do |f|
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
-  .form-group
-    = f.label :body
-    = f.text_area :body, class: 'form-control'
-  = f.submit t('common.button.create'), class: 'btn btn-default'
+= render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.new')}
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        = form_for @question do |f|
+          .ibox-title
+            h5 = t('common.titles.pages.new_question')
+            .ibox-tools
+              = f.submit t('common.button.create'), class: 'btn btn-primary btn-xs pull-right'
+          .ibox-content
+            .form-group
+              = f.label :title
+              = f.text_field :title, class: 'form-control'
+            .form-group
+              = f.label :body
+              = f.text_area :body, class: 'form-control'

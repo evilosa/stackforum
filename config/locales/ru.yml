@@ -1,9 +1,17 @@
 ru:
   common:
     hello: 'Добро пожаловать'
+    actions:
+      list: 'Список'
+      new: 'Создание'
+      edit: 'Редактирование'
     titles:
       new_user_session: 'Вход в систему'
       new_user_registration: 'Регистрация пользователя'
+      pages:
+        main: 'Главная'
+        questions: 'Вопросы'
+        new_question: 'Создание нового вопроса'
     button:
       sign_in: 'Войти'
       sign_up: 'Зарегистрироваться'

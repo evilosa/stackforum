@@ -6,7 +6,7 @@
  */
 
 
-$(document).ready(function () {
+document.addEventListener("turbolinks:load", function() {
 
 
     // Add body-small class if window less than 768px
