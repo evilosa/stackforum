@@ -1,4 +1,20 @@
 .row.border-bottom
-  .navbar.navbar-static-top.white-bg role="navigation" style="..."
+  nav.navbar.navbar-static-top.white-bg role="navigation" style="..."
     .navbar-header
-      = link_to 'Class', new_user_session_path
+      = link_to new_user_session_path, class: 'navbar-minimalize minimalize-styl-2 btn btn-primary'
+        i.fa.fa-bars
+    ul.nav.navbar-top-links.navbar-right
+      - if user_signed_in?
+        li
+          = link_to destroy_user_session_path, method: :delete
+            i.fa.fa-sign-out
+            = t('common.button.log_out')
+      - else
+        li
+          = link_to new_user_session_path
+            i.fa.fa-sign-in
+            = t('common.button.sign_in')
+        li
+          = link_to new_user_registration_path
+            i.fa.fa-user-circle
+            = t('common.button.sign_up')

@@ -1,18 +1,18 @@
-.navbar.navbar-default
-  .container-fluid
-    .navbar-header
-      = link_to 'StackForum', root_path, class: 'navbar-brand'
-
-    .collapse.navbar-collapse
-      .nav.navbar-nav
-        li
-          = link_to t('activerecord.models.questions'), questions_path
-      .nav.navbar-nav.navbar-right
-        - if user_signed_in?
-          li
-            = link_to t('common.button.log_out'), destroy_user_session_path, method: :delete
-        - else
-          li
-            = link_to t('common.button.sign_in'), new_user_session_path
-          li
-            = link_to t('common.button.sign_up'), new_user_registration_path
+nav.navbar-default.navbar-static-side role="navigation"
+  .sidebar-collapse
+   ul.nav.metismenu#side-menu
+     li.nav-header
+       .dropdown.profile-element
+         a.dropdown-toggle
+          span.clear
+           strong.font-bold Example user
+          span.text-muted.text-xs-block Example menu
+       .logo-element SF
+     li class="#{'active' if current_page?(root_path)}"
+       = link_to root_path
+        i.fa.fa-laptop
+        span.nav-label Main page
+     li class="#{'active' if current_page?(questions_path )}"
+       = link_to questions_path
+        i.fa.fa-question
+        span.nav-label Questions

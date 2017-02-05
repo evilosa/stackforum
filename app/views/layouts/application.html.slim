@@ -6,6 +6,7 @@ html
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     title
       | Stackforum
+    = stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css")
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
@@ -18,11 +19,14 @@ html
 
         = render 'layouts/topnavbar'
 
-        .container
-          .row
-            .col-sm-12
-              p.notice
-                = notice
-              p.alert
-                = alert
-              = yield
+        p.notice
+          = notice
+        p.alert
+          = alert
+
+        = yield
+
+        = render 'layouts/footer'
+
+      = javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js")
+      = yield :javascript
