@@ -1,0 +1,74 @@
+ru:
+  common:
+    hello: 'Добро пожаловать'
+    actions:
+      list: 'Список'
+      new: 'Создание'
+      edit: 'Редактирование'
+      show: 'Просмотр'
+    titles:
+      new_user_session: 'Вход в систему'
+      new_user_registration: 'Регистрация пользователя'
+      pages:
+        main: 'Главная'
+        questions: 'Вопросы'
+        new_question: 'Создание нового вопроса'
+    button:
+      sign_in: 'Войти'
+      sign_up: 'Зарегистрироваться'
+      log_in: 'Войти'
+      register: 'Зарегистрировать'
+      log_out: 'Выйти'
+      create: 'Создать'
+      open: 'Открыть'
+      edit: 'Изменить'
+      delete: 'Удалить'
+      question:
+        add_new: 'Задать вопрос'
+    authentication:
+          forgot_password: 'Забыли пароль?'
+          recieve_confirmation: 'Не получили инструкцию по подтверждению почты?'
+          recieve_unlock: 'Не получили инструкцию по разблокировке учетной записи?'
+          sign_with_provider: 'Войти с %{provider}.'
+  activerecord:
+    models:
+      users: 'Пользователи'
+      user:
+        zero: 'Пользователей'
+        one: 'Пользователь'
+        few: 'Пользователя'
+        other: 'Пользователей'
+      questions: 'Вопросы'
+      question:
+        zero: 'Вопросов'
+        one: 'Вопрос'
+        few: 'Вопроса'
+        other: 'Вопросов'
+      answer:
+        zero: 'Ответов'
+        one: 'Ответ'
+        few: 'Ответа'
+        other: 'Ответов'
+    attributes:
+      user:
+        email: 'Почта'
+        password: 'Пароль'
+        remember_me: 'Запомнить меня'
+        password_confirmation: 'Подтверждение пароля'
+      question:
+        title: 'Заголовок'
+        body: 'Вопрос'
+      answer:
+        title: 'Заголовок'
+        question: 'Вопрос'
+        body: 'Ответ'
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: 'уже занята другим пользователем'
+            password:
+              too_short: 'слишком короткий'
+            password_confirmation:
+              confirmation: 'не совпадает'

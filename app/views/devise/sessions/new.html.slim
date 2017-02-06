@@ -1,0 +1,17 @@
+.middle-box.text-center.loginscreen.animated.fadeInDown
+  div
+    div
+      h1.logo-name SF
+    h3 = t('common.titles.new_user_session')
+    = form_for(resource, as: resource_name, url: session_path(resource_name), class: 'm-t') do |f|
+      .form-group
+        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('activerecord.attributes.user.email')
+      .form-group
+        = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: t('activerecord.attributes.user.password')
+      - if devise_mapping.rememberable?
+        .form-group
+          = f.check_box :remember_me, class: 'checkbox-primary'
+          = f.label :remember_me
+      .actions
+        = f.submit t('common.button.log_in'), class: 'btn btn-primary bloack full-width m-b'
+    = render "devise/shared/links"

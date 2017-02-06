@@ -1,0 +1,18 @@
+nav.navbar-default.navbar-static-side role="navigation"
+  .sidebar-collapse
+   ul.nav.metismenu#side-menu
+     li.nav-header
+       .dropdown.profile-element
+         a.dropdown-toggle
+          span.clear
+           strong.font-bold Example user
+          span.text-muted.text-xs-block Example menu
+       .logo-element SF
+     li class="#{'active' if current_page?(root_path)}"
+       = link_to root_path
+        i.fa.fa-laptop
+        span.nav-label Main page
+     li class="#{'active' if current_page?(questions_path )}"
+       = link_to questions_path
+        i.fa.fa-question
+        span.nav-label Questions

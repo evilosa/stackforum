@@ -1,0 +1,16 @@
+.middle-box.text-center.loginscreen.animated.fadeInDown
+  div
+    div
+      h1.logo-name SF
+    h3 = t('common.titles.new_user_registration')
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'm-t') do |f|
+      = devise_error_messages!
+      .form-group
+        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('activerecord.attributes.user.email')
+      .form-group
+        = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: t('activerecord.attributes.user.password')
+      .form-group
+        = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: t('activerecord.attributes.user.password_confirmation')
+      .actions
+        = f.submit t('common.button.sign_up'), class: 'btn btn-primary block full-width m-b'
+    = render "devise/shared/links"

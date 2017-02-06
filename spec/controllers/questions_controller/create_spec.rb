@@ -9,6 +9,8 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'POST #create' do
+    sign_in_user
+
     context 'with valid attributes' do
       it 'saves the new question in the database' do
         expect { create_post.call }.to change(Question, :count).by(1)
