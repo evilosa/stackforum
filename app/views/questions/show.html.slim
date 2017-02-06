@@ -21,19 +21,20 @@
               button.btn.btn-white.btn-xs
                 i.fa.fa-share Share
           .social-footer
-            .social-comment
-              .vote-actions.pull-left
-                a
-                  i.fa.fa-chevron-up
-                div 15
-                a
-                  i.fa.fa-chevron-down
-              a.pull-left
-                img src="#{image_path('a2.jpg')}"
-              .media-body
-                a Andrew williams
-                br asdfsdf asdfasdf asdfsdf
-                smass.text-muted = @question.created_at
+            - @question.answers.each do |answer|
+              .social-comment
+                .vote-actions.pull-left
+                  a
+                    i.fa.fa-chevron-up
+                  div 15
+                  a
+                    i.fa.fa-chevron-down
+                a.pull-left
+                  img src="#{image_path('a2.jpg')}"
+                .media-body
+                  a Andrew williams
+                  br = answer.body
+                  smass.text-muted = answer.created_at
             .social-comment
               .vote-actions.pull-left
                 a
