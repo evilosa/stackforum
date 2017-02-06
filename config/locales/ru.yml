@@ -25,6 +25,7 @@ ru:
       delete: 'Удалить'
       question:
         add_new: 'Задать вопрос'
+        answer: 'Ответить'
     authentication:
           forgot_password: 'Забыли пароль?'
           recieve_confirmation: 'Не получили инструкцию по подтверждению почты?'
@@ -63,7 +64,23 @@ ru:
         question: 'Вопрос'
         body: 'Ответ'
     errors:
+      messages:
+        record_invalid: 'Запись недействительна'
       models:
+        answer:
+          attributes:
+            question:
+              required: 'обязателен'
+            question_id:
+              blank: 'не заполнен'
+            body:
+              blank: 'пустой'
+        question:
+          attributes:
+            title:
+              blank: 'пустой'
+            body:
+              blank: 'пустой'
         user:
           attributes:
             email:

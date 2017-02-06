@@ -22,6 +22,7 @@ en:
       create: 'Create'
       question:
         add_new: 'Ask question'
+        answer: 'Answer'
     authentication:
       forgot_password: 'Forgot your password?'
       recieve_confirmation: 'Didn''t receive confirmation instructions?'

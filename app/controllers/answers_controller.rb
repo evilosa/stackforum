@@ -7,10 +7,11 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.new(answer_params)
+    @answer.user = current_user
     if @answer.save
       redirect_to @question
     else
-      render :new
+      redirect_to @question, notice: @answer.errors.full_messages
     end
   end
 
@@ -21,6 +22,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:question_id, :body)
+    params.require(:answer).permit(:question_id, :body, :user_id)
   end
 end

@@ -5,7 +5,7 @@ feature 'Write answer for question', %q{
 } do
 
   given(:user) { create(:user) }
-  given(:question) { create(:question_with_answers) }
+  given!(:question) { create(:question_with_answers) }
 
   scenario 'Authenticated user create answer for the question' do
     sign_in(user)
@@ -21,8 +21,8 @@ feature 'Write answer for question', %q{
   scenario 'Unauthenticated user tries create answer for the question' do
     visit question_path(question)
 
-    fill_in 'Answer', with: 'Test answer'
-    click_on 'AnswerButton'
+    fill_in 'Body', with: 'Test answer'
+    click_on t('common.button.question.answer')
 
     expect(page).to have_content t('devise.failure.unauthenticated')
   end
