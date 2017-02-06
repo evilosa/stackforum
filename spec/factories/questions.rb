@@ -17,5 +17,15 @@ FactoryGirl.define do
         create_list(:answer, evaluator.answers_count, question: question)
       end
     end
+
+    factory :question_with_owner_answers do
+      transient do
+        answers_count 2
+      end
+
+      after(:create) do |question, evaluator|
+        create_list(:answer, evaluator.answers_count, question: question, user: question.user)
+      end
+    end
   end
 end

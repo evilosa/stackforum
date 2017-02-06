@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     if @question.save
-      redirect_to @question, notice: 'Your question successfully created.'
+      redirect_to @question, notice: t('common.messages.questions.create')
     else
       render :new
     end
@@ -34,8 +34,12 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path
+    if @question.user == current_user
+      @question.destroy
+      redirect_to questions_path, notice: t('common.messages.questions.destroy')
+    else
+      redirect_to @question, notice: t('common.errors.not_allow')
+    end
   end
 
   private

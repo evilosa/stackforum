@@ -1,5 +1,6 @@
 RSpec.describe AnswersController, type: :controller do
-  let!(:question) { create(:question_with_answers) }
+  let!(:user) { create(:user) }
+  let!(:question) { create(:question_with_owner_answers, user: user) }
   let!(:answer) { question.answers[0] }
 
   let!(:destroy_request) do
@@ -9,13 +10,17 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    sign_in_user
-
     it 'deletes answer' do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      sign_in user
+
       expect { destroy_request.call }.to change(question.answers, :count).by(-1)
     end
 
     it 'redirect to question' do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      sign_in user
+
       destroy_request.call
       expect(response).to redirect_to question
     end

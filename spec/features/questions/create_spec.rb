@@ -15,7 +15,7 @@ feature 'Create question', %q{
     fill_in t('activerecord.attributes.question.body'), with: 'text text'
     click_on t('common.button.create')
 
-    expect(page).to have_content 'Your question successfully created.'
+    expect(page).to have_content t('common.messages.questions.create')
   end
 
   scenario 'Non-authenticated user tries to create question' do

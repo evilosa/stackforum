@@ -4,15 +4,19 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer = @question.answers.find(params[:id])
-    @answer.destroy
-    redirect_to @question
+    if @answer.user == current_user
+      @answer.destroy
+      redirect_to @question, notice: t('common.messages.answers.destroy')
+    else
+      redirect_to @question, notice: t('common.errors.not_allow')
+    end
   end
 
   def create
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
     if @answer.save
-      redirect_to @question
+      redirect_to @question, notice: t('common.messages.answers.create')
     else
       redirect_to @question, error: @answer.errors.full_messages
     end

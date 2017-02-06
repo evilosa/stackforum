@@ -13,6 +13,15 @@ en:
         main: 'Main'
         questions: 'Questions'
         new_question: 'Create question'
+    errors:
+      not_allow: 'You can not remove this item'
+    messages:
+      answers:
+        create: 'Answer was successfully created'
+        destroy: 'Answer was removed successfully'
+      questions:
+        create: 'Question was successfully created'
+        destroy: 'Question was removed successfully'
     button:
       sign_in: 'Sign in'
       sign_up: 'Sign up'
@@ -20,6 +29,9 @@ en:
       register: 'Register'
       log_out: 'Log out'
       create: 'Create'
+      open: 'View'
+      edit: 'Edit'
+      delete: 'Remove'
       question:
         add_new: 'Ask question'
         answer: 'Answer'

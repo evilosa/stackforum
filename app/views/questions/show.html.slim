@@ -6,6 +6,8 @@
   .row
     .col-lg-12
       .social-feed-box
+        .social-action.pull-right
+          = link_to t('common.button.delete'), @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-primary btn-xs', id: 'remove_question'
         .social-avatar
           a.pull-left
             img src="#{image_path('a1.jpg')}"
@@ -33,9 +35,12 @@
               a.pull-left
                 img src="#{image_path('a2.jpg')}"
               .media-body
-                a Andrew williams
+                a = answer.user.email
                 br = answer.body.html_safe
-                smass.text-muted = answer.created_at
+                .btn-group
+                  = link_to question_answers_path(@question, id: answer), id: 'remove_answer', method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
+                    i.fa.fa-trash = t('common.button.delete')
+                small.text-muted = answer.created_at
         .ibox
           .ibox-content
             = form_for [@question, @question.answers.build], method: :post, class: 'form' do |f|
