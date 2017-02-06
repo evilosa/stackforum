@@ -12,18 +12,19 @@ feature 'Write answer for question', %q{
 
     visit question_path(question)
 
-    fill_in 'Answer', with: 'Test answer'
-    click_on 'AnswerButton'
+    fill_in id: 'answer_body', with: 'Test answer'
+    click_on t('common.button.question.answer')
 
-    expect(page).to have_content 'Your answer created successfuly'
+    expect(page).to have_content 'Test answer'
   end
 
   scenario 'Unauthenticated user tries create answer for the question' do
     visit question_path(question)
 
-    fill_in 'Body', with: 'Test answer'
+    fill_in id: 'answer_body', with: 'Test answer'
     click_on t('common.button.question.answer')
 
     expect(page).to have_content t('devise.failure.unauthenticated')
+    expect(current_path).to eq new_user_session_path
   end
 end

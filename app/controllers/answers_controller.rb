@@ -1,8 +1,11 @@
 class AnswersController < ApplicationController
-  before_action :set_question, only: [:new, :create]
+  before_action :authenticate_user!
+  before_action :set_question
 
-  def new
-    @answer = Answer.new
+  def destroy
+    @answer = @question.answers.find(params[:id])
+    @answer.destroy
+    redirect_to @question
   end
 
   def create
@@ -11,7 +14,7 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to @question
     else
-      redirect_to @question, notice: @answer.errors.full_messages
+      redirect_to @question, error: @answer.errors.full_messages
     end
   end
 

@@ -22,5 +22,6 @@ feature 'View questions list', %q{
     expect(page).to have_content questions[0].body
     expect(page).to have_content questions[0].answers[0].body
     expect(page).to have_content questions[0].answers[1].body
+
   end
 end

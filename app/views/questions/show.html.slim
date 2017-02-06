@@ -1,6 +1,6 @@
 = render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.view')}
 
-= flash[:notice].join('<br>').html_safe unless flash[:notice].nil?
+= flash[:error].join('<br>').html_safe unless flash[:error].nil?
 
 .wrapper.wrapper-content.animated.fadeInRight
   .row
@@ -10,7 +10,7 @@
           a.pull-left
             img src="#{image_path('a1.jpg')}"
           .media-body
-            a = current_user.email if user_signed_in?
+            a = "#{@question.user.email} - #{@question.title}"
             small.text-muted = @question.created_at
         .social-body
           p = @question.body.html_safe
