@@ -5,7 +5,7 @@ RSpec.describe AnswersController, type: :controller do
 
   let!(:create_post) do
     Proc.new do |params = answer_valid_params |
-      post :create, params: params
+      post :create, params: params, format: :js
     end
   end
 
@@ -17,9 +17,9 @@ RSpec.describe AnswersController, type: :controller do
         expect { create_post.call }.to change(question.answers, :count).by(1)
       end
 
-      it 'redirect to question show view' do
+      it 'render answer create template' do
         create_post.call
-        expect(response).to redirect_to question_path(question)
+        expect(response).to render_template :create
       end
     end
 
@@ -28,9 +28,9 @@ RSpec.describe AnswersController, type: :controller do
         expect { create_post.call(answer_invalid_params) }.to_not change(question.answers, :count)
       end
 
-      it 'redirect to question show view' do
+      it 'render answer create template' do
         create_post.call(answer_invalid_params)
-        expect(response).to redirect_to question_path(question)
+        expect(response).to render_template :create
       end
     end
   end
