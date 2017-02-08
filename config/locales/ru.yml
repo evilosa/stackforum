@@ -13,6 +13,15 @@ ru:
         main: 'Главная'
         questions: 'Вопросы'
         new_question: 'Создание нового вопроса'
+    errors:
+      not_allow: 'У вас нет прав на удаление этого объекта'
+    messages:
+      answers:
+        create: 'Ответ был успешно создан'
+        destroy: 'Ответ был успешно удален'
+      questions:
+        create: 'Вопрос был успешно создан'
+        destroy: 'Вопрос был успешно удален'
     button:
       sign_in: 'Войти'
       sign_up: 'Зарегистрироваться'
@@ -25,6 +34,7 @@ ru:
       delete: 'Удалить'
       question:
         add_new: 'Задать вопрос'
+        answer: 'Ответить'
     authentication:
           forgot_password: 'Забыли пароль?'
           recieve_confirmation: 'Не получили инструкцию по подтверждению почты?'
@@ -63,7 +73,23 @@ ru:
         question: 'Вопрос'
         body: 'Ответ'
     errors:
+      messages:
+        record_invalid: 'Запись недействительна'
       models:
+        answer:
+          attributes:
+            question:
+              required: 'обязателен'
+            question_id:
+              blank: 'не заполнен'
+            body:
+              blank: 'пустой'
+        question:
+          attributes:
+            title:
+              blank: 'пустой'
+            body:
+              blank: 'пустой'
         user:
           attributes:
             email:

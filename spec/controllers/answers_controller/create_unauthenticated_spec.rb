@@ -9,28 +9,18 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
-  describe 'POST #create authenticated' do
-    sign_in_user
-
+  describe 'POST #create unauthenticated' do
     context 'with valid attributes' do
-      it 'save new answer for the question in the database' do
-        expect { create_post.call }.to change(question.answers, :count).by(1)
-      end
-
-      it 'redirect to question show view' do
-        create_post.call
-        expect(response).to redirect_to question_path(question)
+      it 'not save new answer for the question in the database' do
+        expect { create_post.call }.to_not change(question.answers, :count)
+        expect(response).to redirect_to new_user_session_path
       end
     end
 
     context 'with invalid attributes' do
       it 'does not save the new answer for question in the database' do
         expect { create_post.call(answer_invalid_params) }.to_not change(question.answers, :count)
-      end
-
-      it 'redirect to question show view' do
-        create_post.call(answer_invalid_params)
-        expect(response).to redirect_to question_path(question)
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end

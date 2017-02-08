@@ -1,40 +1,30 @@
 = render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.view')}
 
+= flash[:error].join('<br>').html_safe unless flash[:error].nil?
+
 .wrapper.wrapper-content.animated.fadeInRight
   .row
     .col-lg-12
       .social-feed-box
-        = form_for @question do |f|
-          .social-avatar
-            a.pull-left
-              img src="#{image_path('a1.jpg')}"
-            .media-body
-              a = current_user.email if user_signed_in?
-              small.text-muted = @question.created_at
-          .social-body
-            p = @question.body
-            .btn-group
-              button.btn.btn-white.btn-xs
-                i.fa.fa-thumbs-up Like this!
-              button.btn.btn-white.btn-xs
-                i.fa.fa-thumbs-down Dislike this!
-              button.btn.btn-white.btn-xs
-                i.fa.fa-share Share
-          .social-footer
-            - @question.answers.each do |answer|
-              .social-comment
-                .vote-actions.pull-left
-                  a
-                    i.fa.fa-chevron-up
-                  div 15
-                  a
-                    i.fa.fa-chevron-down
-                a.pull-left
-                  img src="#{image_path('a2.jpg')}"
-                .media-body
-                  a Andrew williams
-                  br = answer.body
-                  smass.text-muted = answer.created_at
+        .social-action.pull-right
+          = link_to t('common.button.delete'), @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-primary btn-xs', id: 'remove_question'
+        .social-avatar
+          a.pull-left
+            img src="#{image_path('a1.jpg')}"
+          .media-body
+            a = "#{@question.user.email} - #{@question.title}"
+            small.text-muted = @question.created_at
+        .social-body
+          p = @question.body.html_safe
+          .btn-group
+            button.btn.btn-white.btn-xs
+              i.fa.fa-thumbs-up Like this!
+            button.btn.btn-white.btn-xs
+              i.fa.fa-thumbs-down Dislike this!
+            button.btn.btn-white.btn-xs
+              i.fa.fa-share Share
+        .social-footer
+          - @question.answers.each do |answer|
             .social-comment
               .vote-actions.pull-left
                 a
@@ -43,14 +33,18 @@
                 a
                   i.fa.fa-chevron-down
               a.pull-left
-                img src="#{image_path('a4.jpg')}"
-                .media-body
-                  a Andrew williams
-                  br asdfsdf asdfasdf asdfsdf
-                  smass.text-muted = @question.created_at
-          .ibox
-            .ibox-content.no-padding
-              = f.text_field :body, data: { provider: 'summernote' }
-
-              = f.submit t('common.button.create'), class: 'btn btn-primary btn-xs pull-right'
-
+                img src="#{image_path('a2.jpg')}"
+              .media-body
+                a = answer.user.email
+                br = answer.body.html_safe
+                .btn-group
+                  = link_to question_answers_path(@question, id: answer), id: 'remove_answer', method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
+                    i.fa.fa-trash = t('common.button.delete')
+                small.text-muted = answer.created_at
+        .ibox
+          .ibox-content
+            = form_for [@question, @question.answers.build], method: :post, class: 'form' do |f|
+              .form-group
+                = f.bootsy_area :body, class: 'form-control', rows: 12
+              br
+              = f.submit t('common.button.question.answer'), class: 'btn btn-primary pull-right'
