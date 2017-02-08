@@ -43,7 +43,7 @@
                 small.text-muted = answer.created_at
         .ibox
           .ibox-content
-            = form_for [@question, @question.answers.build], method: :post, class: 'form' do |f|
+            = form_for [@question, @answer], method: :post, class: 'form' do |f|
               .form-group
                 = f.bootsy_area :body, class: 'form-control', rows: 12
               br

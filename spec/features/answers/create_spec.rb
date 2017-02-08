@@ -1,6 +1,6 @@
 feature 'Write answer for question', %q{
   In order to answer for the question
-  As a authenticated user
+  As an authenticated user
   I want to be able to create answer
 } do
 
@@ -15,7 +15,10 @@ feature 'Write answer for question', %q{
     fill_in id: 'answer_body', with: 'Test answer'
     click_on t('common.button.question.answer')
 
-    expect(page).to have_content 'Test answer'
+    expect(current_path).to eq question_path(question)
+    within '.social-footer' do
+      expect(page).to have_content 'Test answer'
+    end
   end
 
   scenario 'Unauthenticated user tries create answer for the question' do
