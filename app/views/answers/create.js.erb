@@ -1,2 +1,2 @@
-$('.social-footer').html('<%= j render 'questions/answers' %>');
+$('.social-footer').append('<%= j render 'questions/answer', answer: @answer %>');
 $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='';

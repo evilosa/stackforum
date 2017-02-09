@@ -12,5 +12,5 @@
     br = answer.body.html_safe
     .btn-group
       = link_to question_answers_path(@question, id: answer), id: 'remove_answer', method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
-      i.fa.fa-trash = t('common.button.delete')
+        i.fa.fa-trash = t('common.button.delete')
     small.text-muted = answer.created_at
