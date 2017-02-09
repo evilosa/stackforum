@@ -35,6 +35,8 @@ en:
       question:
         add_new: 'Ask question'
         answer: 'Answer'
+      answer:
+        add_new: 'Answer'
     authentication:
       forgot_password: 'Forgot your password?'
       recieve_confirmation: 'Didn''t receive confirmation instructions?'

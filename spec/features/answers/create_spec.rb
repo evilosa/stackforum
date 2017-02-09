@@ -17,21 +17,15 @@ feature 'Write answer for question', %q{
     end
     click_on t('common.button.question.answer')
 
-    wait_for_ajax
-
     expect(current_path).to eq question_path(question)
+    expect(page).not_to have_content t('common.button.answer.add_new')
     within '.social-footer' do
       expect(page).to have_content 'Test answer'
     end
   end
 
-  scenario 'Unauthenticated user tries create answer for the question' do
+  scenario 'Unauthenticated user tries create answer for the question', js: true do
     visit question_path(question)
-
-    fill_in id: 'answer_body', with: 'Test answer'
-    click_on t('common.button.question.answer')
-
-    expect(page).to have_content t('devise.failure.unauthenticated')
-    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content t('common.button.answer.add_new')
   end
 end

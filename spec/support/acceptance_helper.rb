@@ -4,6 +4,5 @@ module AcceptanceHelper
     fill_in t('activerecord.attributes.user.email'), with: user.email
     fill_in t('activerecord.attributes.user.password'), with: user.password
     click_button t('common.button.log_in')
-    wait_for_ajax
   end
 end

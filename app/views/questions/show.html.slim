@@ -25,10 +25,13 @@
               i.fa.fa-share Share
         .social-footer
           = render 'answers'
-        .ibox
-          .ibox-content
-            = form_for [@question, @answer], remote: true, method: :post, class: 'form' do |f|
-              .form-group
-                = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
-              br
-              = f.submit t('common.button.question.answer'), class: 'btn btn-primary pull-right'
+        - if user_signed_in?
+          .ibox
+            .ibox-content
+              = form_for [@question, @answer], remote: true, method: :post, class: 'form' do |f|
+                .form-group
+                  = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
+                br
+                = f.submit t('common.button.question.answer'), class: 'btn btn-primary pull-right'
+        - else
+          = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'

@@ -32,7 +32,6 @@ RSpec.configure do |config|
   config.extend ControllerMacros, type: :controller
   config.include AcceptanceHelper, type: :feature
   config.include I18nMacros, type: :feature
-  config.include WaitForAjax, type: :feature
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -81,6 +80,8 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  Capybara.javascript_driver = :webkit
 end
 
 Shoulda::Matchers.configure do |config|
@@ -88,4 +89,9 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+Capybara::Webkit.configure do |config|
+  config.block_unknown_urls
+  config.timeout = 5
 end
