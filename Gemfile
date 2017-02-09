@@ -26,7 +26,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'capybara-webkit'
   gem 'database_cleaner'
 end
 
@@ -41,6 +40,7 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rails-controller-testing'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'launchy'
 end
 

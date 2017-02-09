@@ -1,2 +1,27 @@
-$('.social-footer').append('<%= j render 'questions/answer', answer: @answer %>');
-$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='';
+<% if @answer.errors.any? %>
+  console.log('Was an error');
+
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "onclick": null,
+    "showDuration": "400",
+    "hideDuration": "1000",
+    "timeOut": "7000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+
+  <% @answer.errors.full_messages.each do |message| %>
+    toastr["error"]("<%= message %>", "Ошибка");
+  <% end %>
+
+<% else %>
+  $('.social-footer').append('<%= j render 'questions/answer', answer: @answer %>');
+  $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='';
+<% end %>
