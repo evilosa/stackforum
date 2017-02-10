@@ -1,3 +1,5 @@
+require_relative '../acceptance_helper'
+
 feature 'Delete question', %q{
   In order to remove the question
   As an question owner

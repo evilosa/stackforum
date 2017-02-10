@@ -1,3 +1,5 @@
+require_relative '../acceptance_helper'
+
 feature 'Delete answer for question', %q{
   In order to remove bad answer for the question
   As an answer owner

@@ -1,3 +1,5 @@
+require_relative '../acceptance_helper'
+
 feature 'Write answer for question', %q{
   In order to answer for the question
   As an authenticated user
