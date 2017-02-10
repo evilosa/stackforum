@@ -24,27 +24,14 @@
             button.btn.btn-white.btn-xs
               i.fa.fa-share Share
         .social-footer
-          - @question.answers.each do |answer|
-            .social-comment
-              .vote-actions.pull-left
-                a
-                  i.fa.fa-chevron-up
-                div 15
-                a
-                  i.fa.fa-chevron-down
-              a.pull-left
-                img src="#{image_path('a2.jpg')}"
-              .media-body
-                a = answer.user.email
-                br = answer.body.html_safe
-                .btn-group
-                  = link_to question_answers_path(@question, id: answer), id: 'remove_answer', method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
-                    i.fa.fa-trash = t('common.button.delete')
-                small.text-muted = answer.created_at
-        .ibox
-          .ibox-content
-            = form_for [@question, @question.answers.build], method: :post, class: 'form' do |f|
-              .form-group
-                = f.bootsy_area :body, class: 'form-control', rows: 12
-              br
-              = f.submit t('common.button.question.answer'), class: 'btn btn-primary pull-right'
+          = render 'answers'
+        - if user_signed_in?
+          .ibox
+            .ibox-content
+              = form_for [@question, @answer], remote: true, method: :post, class: 'form' do |f|
+                .form-group
+                  = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
+                br
+                = f.submit t('common.button.question.answer'), class: 'btn btn-primary pull-right'
+        - else
+          = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'

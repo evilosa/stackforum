@@ -35,6 +35,8 @@ ru:
       question:
         add_new: 'Задать вопрос'
         answer: 'Ответить'
+      answer:
+        add_new: 'Ответить'
     authentication:
           forgot_password: 'Забыли пароль?'
           recieve_confirmation: 'Не получили инструкцию по подтверждению почты?'

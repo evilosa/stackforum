@@ -1,0 +1,16 @@
+.social-comment
+  .vote-actions.pull-left
+    a
+      i.fa.fa-chevron-up
+    div 15
+    a
+      i.fa.fa-chevron-down
+  a.pull-left
+    img src="#{image_path('a2.jpg')}"
+  .media-body
+    a = answer.user.email
+    br = answer.body.html_safe
+    .btn-group
+      = link_to question_answers_path(@question, id: answer), id: 'remove_answer', method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
+        i.fa.fa-trash = t('common.button.delete')
+    small.text-muted = answer.created_at

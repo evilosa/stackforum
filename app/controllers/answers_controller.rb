@@ -15,11 +15,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-    if @answer.save
-      redirect_to @question, notice: t('common.messages.answers.create')
-    else
-      redirect_to @question, error: @answer.errors.full_messages
-    end
+    @answer.save
   end
 
   private
