@@ -26,12 +26,23 @@
         .social-footer
           = render 'answers'
         - if user_signed_in?
-          .ibox
-            .ibox-content
-              = form_for [@question, @answer], remote: true, method: :post, class: 'form' do |f|
-                .form-group
-                  = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
-                br
-                = f.submit t('common.button.question.answer'), class: 'btn btn-primary pull-right'
+          button.btn.btn-white.btn-xs#edit-answer data-toggle="modal" data-target="#edit-answer-form"
+            i.fa.fa-edit = t('common.button.answer.add_new')
         - else
           = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
+
+.modal.inmodal#edit-answer-form tabindex="-1" role="dialog" aria-hidden="true"
+  .modal-dialog
+    .modal-content.animated.bounceInRight
+      .modal-header
+        button.close type="button" data-dismiss="modal"
+          span.sr-only Close
+        h4.modal-title Ответ
+      = form_for [@question, @answer], remote: true, method: :post, class: 'form' do |f|
+        .ibox
+          .ibox-content
+            .form-group
+              = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
+        .modal-footer
+          button type="button" class="btn btn-white" data-dismiss="modal" Close
+          = f.submit t('common.button.ready'), class: 'btn btn-primary'

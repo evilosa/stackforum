@@ -22,21 +22,6 @@ en:
       questions:
         create: 'Question was successfully created'
         destroy: 'Question was removed successfully'
-    button:
-      sign_in: 'Sign in'
-      sign_up: 'Sign up'
-      log_in: 'Log in'
-      register: 'Register'
-      log_out: 'Log out'
-      create: 'Create'
-      open: 'View'
-      edit: 'Edit'
-      delete: 'Remove'
-      question:
-        add_new: 'Ask question'
-        answer: 'Answer'
-      answer:
-        add_new: 'Answer'
     authentication:
       forgot_password: 'Forgot your password?'
       recieve_confirmation: 'Didn''t receive confirmation instructions?'

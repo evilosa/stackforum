@@ -14,13 +14,15 @@ feature 'Write answer for question', %q{
 
     visit question_path(question)
 
+    click_on t('common.button.answer.add_new')
+
     within_frame 0 do
       first('.bootsy_text_area').set('Test answer')
     end
-    click_on t('common.button.question.answer')
+    click_on t('common.button.ready')
 
     expect(current_path).to eq question_path(question)
-    expect(page).not_to have_content t('common.button.answer.add_new')
+    expect(page).not_to have_content t('common.button.ready')
     within '.social-footer' do
       expect(page).to have_content 'Test answer'
     end

@@ -22,21 +22,6 @@ ru:
       questions:
         create: 'Вопрос был успешно создан'
         destroy: 'Вопрос был успешно удален'
-    button:
-      sign_in: 'Войти'
-      sign_up: 'Зарегистрироваться'
-      log_in: 'Войти'
-      register: 'Зарегистрировать'
-      log_out: 'Выйти'
-      create: 'Создать'
-      open: 'Открыть'
-      edit: 'Изменить'
-      delete: 'Удалить'
-      question:
-        add_new: 'Задать вопрос'
-        answer: 'Ответить'
-      answer:
-        add_new: 'Ответить'
     authentication:
           forgot_password: 'Забыли пароль?'
           recieve_confirmation: 'Не получили инструкцию по подтверждению почты?'

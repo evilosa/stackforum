@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim-rails'
 gem 'devise'
 gem 'bootsy'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'byebug', platform: :mri
