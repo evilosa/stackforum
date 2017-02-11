@@ -1,0 +1,10 @@
+<% if @answer.errors.any? %>
+  console.log('Was an error in deletion');
+
+  <% @answer.errors.full_messages.each do |message| %>
+  toastr["error"]("<%= message %>", "Ошибка");
+  <% end %>
+
+<% else %>
+  $('*[data-answer-id="<%= @answer.id %>"]').remove();
+<% end %>

@@ -1,4 +1,4 @@
-.social-comment
+.social-comment data-answer-id="#{answer.id}"
   .vote-actions.pull-left
     a
       i.fa.fa-chevron-up
@@ -18,6 +18,6 @@
         - if current_user.author_of?(answer)
           button.btn.btn-white.btn-xs#edit-answer data-answer-id="#{answer.id}" data-toggle="modal" data-target="#edit-answer-form"
             i.fa.fa-edit = t('common.button.edit')
-          = link_to question_answers_path(@question, id: answer), id: 'remove_answer', method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
+          = link_to question_answers_path(@question, id: answer), id: 'remove_answer', method: :delete, remote:true, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
             i.fa.fa-trash = t('common.button.delete')
     small.text-muted = answer.created_at

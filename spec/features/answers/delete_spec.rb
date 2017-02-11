@@ -21,7 +21,7 @@ feature 'Delete answer for question', %q{
     end
   end
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     before do
       sign_in user
     end
@@ -40,8 +40,9 @@ feature 'Delete answer for question', %q{
       scenario 'can remove his answer' do
         visit question_path(question)
 
+        answer = question.answers.first
         first('#remove_answer').click
-        expect(page).to have_content t('common.messages.answers.destroy')
+        expect(page).to_not have_content(answer.body)
         expect(current_path).to eq question_path(question)
       end
 
