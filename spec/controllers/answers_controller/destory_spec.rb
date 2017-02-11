@@ -5,7 +5,7 @@ RSpec.describe AnswersController, type: :controller do
 
   let!(:destroy_request) do
     Proc.new do |params = { id: answer, question_id: question } |
-      delete :destroy, params: params
+      delete :destroy, params: params, format: :js
     end
   end
 
@@ -17,12 +17,12 @@ RSpec.describe AnswersController, type: :controller do
       expect { destroy_request.call }.to change(question.answers, :count).by(-1)
     end
 
-    it 'redirect to question' do
+    it 'render template destroy' do
       @request.env['devise.mapping'] = Devise.mappings[:user]
       sign_in user
 
       destroy_request.call
-      expect(response).to redirect_to question
+      expect(response).to render_template :destroy
     end
   end
 end
