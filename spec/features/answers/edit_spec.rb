@@ -21,10 +21,10 @@ feature 'Edit answer', %q{
     end
   end
 
-  scenario 'can edit his answer v1', js: true do
+  scenario 'can edit his answer', js: true do
     create(:answer, question: question, user: user)
 
-    sign_in user
+    login_as(user, scope: :user, run_callbacks: false)
 
     visit question_path(question)
 
@@ -37,42 +37,19 @@ feature 'Edit answer', %q{
     end
     click_on t('common.button.ready')
 
+    using_wait_time 10 do
+      within '.social-footer' do
+        expect(page).to have_content 'Test answer'
+      end
+    end
     expect(current_path).to eq question_path(question)
     expect(page).not_to have_content t('common.button.ready')
 
-    within '.social-footer' do
-      expect(page).to have_content 'Test answer'
-    end
   end
 
-  scenario 'can edit his answer v2', js: true do
+  scenario 'sees link to edit answer', js: true do
     create(:answer, question: question, user: user)
-
-    sign_in user
-
-    visit question_path(question)
-
-    within '.social-footer' do
-      click_on t('common.button.edit')
-    end
-
-    within_frame 0 do
-      first('.bootsy_text_area').set('Test answer')
-    end
-    click_on t('common.button.ready')
-
-    expect(current_path).to eq question_path(question)
-    expect(page).not_to have_content t('common.button.ready')
-
-    within '.social-footer' do
-      expect(page).to have_content 'Test answer'
-    end
-  end
-
-
-  scenario 'sees link to edit answer v3', js: true do
-    create(:answer, question: question, user: user)
-    sign_in user
+    login_as(user, scope: :user)
 
     visit question_path(question)
 
@@ -81,33 +58,10 @@ feature 'Edit answer', %q{
     end
   end
 
-  scenario 'can edit his answer', js: true do
-    create(:answer, question: question, user: user)
-    sign_in user
-
-    visit question_path(question)
-
-    within '.social-footer' do
-      click_on t('common.button.edit')
-    end
-
-    within_frame 0 do
-      first('.bootsy_text_area').set('Test answer')
-    end
-    click_on t('common.button.ready')
-
-    expect(current_path).to eq question_path(question)
-    expect(page).not_to have_content t('common.button.ready')
-
-    within '.social-footer' do
-      expect(page).to have_content 'Test answer'
-    end
-  end
-
   scenario 'not sees link to edit', js: true do
     create(:answer, question: question, user: second_user)
 
-    sign_in user
+    login_as(user, scope: :user)
 
     visit question_path(question)
 

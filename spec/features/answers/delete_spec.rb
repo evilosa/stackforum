@@ -23,7 +23,7 @@ feature 'Delete answer for question', %q{
 
   describe 'Authenticated user', js: true do
     before do
-      sign_in user
+      login_as(user, scope: :user)
     end
 
     context 'Answer belongs to user' do
@@ -41,7 +41,8 @@ feature 'Delete answer for question', %q{
         visit question_path(question)
 
         answer = question.answers.first
-        first('#remove_answer').click
+        find('#remove_answer', match: :first).click
+        page.driver.browser.switch_to.alert.accept
         expect(page).to_not have_content(answer.body)
         expect(current_path).to eq question_path(question)
       end

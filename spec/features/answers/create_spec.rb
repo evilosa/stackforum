@@ -10,14 +10,14 @@ feature 'Write answer for question', %q{
   given!(:question) { create(:question_with_answers) }
 
   scenario 'Authenticated user create answer for the question', js: true do
-    sign_in user
+    login_as(user, scope: :user)
 
     visit question_path(question)
 
     click_on t('common.button.answer.add_new')
 
     within_frame 0 do
-      first('.bootsy_text_area').set('Test answer')
+      find('.bootsy_text_area', match: :first).set('Test answer')
     end
     click_on t('common.button.ready')
 
