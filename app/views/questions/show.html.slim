@@ -26,7 +26,7 @@
         .social-footer
           = render 'answers'
         - if user_signed_in?
-          button.btn.btn-primary.pull-right#edit-answer data-toggle="modal" data-target="#edit-answer-form" = t('common.button.answer.add_new')
+          button.btn.btn-primary.pull-right#new-answer data-toggle="modal" data-target="#edit-answer-form" data-question-id="#{@question.id}" = t('common.button.answer.add_new')
         - else
           = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
 
@@ -35,11 +35,12 @@
     .modal-content.animated.bounceInRight
       .modal-header
         h4.modal-title Введите данные
-      = form_for [@question, @answer], remote: true, method: :post, class: 'form' do |f|
-        .ibox
-          .ibox-content
-            .form-group
-              = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
-        .modal-footer
-          button type="button" class="btn btn-white" data-dismiss="modal" Close
-          = f.submit t('common.button.ready'), class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-answer-form' }
+      .edit-form
+        = form_for [@question, @answer], remote: true, method: :post do |f|
+          .ibox
+            .ibox-content
+              .form-group
+                = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
+          .modal-footer
+            button type="button" class="btn btn-white" data-dismiss="modal" Close
+            = f.submit t('common.button.ready'), class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-answer-form' }

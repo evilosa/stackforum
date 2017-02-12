@@ -21,7 +21,7 @@ feature 'Edit answer', %q{
     end
   end
 
-  describe 'Authenticated user', js: true do
+  describe 'Authenticated user' do
     before do
       sign_in user
     end
@@ -29,7 +29,7 @@ feature 'Edit answer', %q{
     context 'answers belongs to user' do
       given!(:answer) { create(:answer, question: question, user: user) }
 
-      scenario 'sees link to edit answer' do
+      scenario 'sees link to edit answer', js: true do
         visit question_path(question)
 
         within '.social-footer' do
@@ -37,7 +37,7 @@ feature 'Edit answer', %q{
         end
       end
 
-      scenario 'can edit his answer' do
+      scenario 'can edit his answer', js: true do
         visit question_path(question)
 
         within '.social-footer' do
@@ -45,15 +45,15 @@ feature 'Edit answer', %q{
         end
 
         within_frame 0 do
-          first('.bootsy_text_area').set('Edited answer text')
+          first('.bootsy_text_area').set('Test answer')
         end
-
         click_on t('common.button.ready')
 
         expect(current_path).to eq question_path(question)
         expect(page).not_to have_content t('common.button.ready')
+
         within '.social-footer' do
-          expect(page).to have_content 'Edited answer text'
+          expect(page).to have_content 'Test answer'
         end
 
       end

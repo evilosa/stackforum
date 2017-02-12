@@ -16,8 +16,8 @@
           a.btn.btn-white.btn-xs
             i.fa.fa-check = t('common.button.best')
         - if current_user.author_of?(answer)
-          button.btn.btn-white.btn-xs#edit-answer data-answer-id="#{answer.id}" data-toggle="modal" data-target="#edit-answer-form"
+          = link_to edit_question_answer_path(@question, answer), remote: true, class: 'btn btn-white btn-xs', id: 'edit-answer', data: { toggle: 'modal', question_id: @question.id, answer_id: answer.id , target: '#edit-answer-form' }
             i.fa.fa-edit = t('common.button.edit')
-          = link_to question_answers_path(@question, id: answer), id: 'remove_answer', method: :delete, remote:true, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
+          = link_to question_answer_path(@question, answer), id: 'remove_answer', method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
             i.fa.fa-trash = t('common.button.delete')
     small.text-muted = answer.created_at
