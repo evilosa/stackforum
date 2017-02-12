@@ -21,56 +21,98 @@ feature 'Edit answer', %q{
     end
   end
 
-  describe 'Authenticated user', js: true do
-    before do
-      sign_in user
+  scenario 'can edit his answer v1', js: true do
+    create(:answer, question: question, user: user)
+
+    sign_in user
+
+    visit question_path(question)
+
+    within '.social-footer' do
+      click_on t('common.button.edit')
     end
 
-    context 'answers belongs to user', js: true do
-      given!(:answer) { create(:answer, question: question, user: user) }
+    within_frame 0 do
+      first('.bootsy_text_area').set('Test answer')
+    end
+    click_on t('common.button.ready')
 
-      scenario 'sees link to edit answer', js: true do
-        visit question_path(question)
+    expect(current_path).to eq question_path(question)
+    expect(page).not_to have_content t('common.button.ready')
 
-        within '.social-footer' do
-          expect(page).to have_content t('common.button.edit')
-        end
-      end
+    within '.social-footer' do
+      expect(page).to have_content 'Test answer'
+    end
+  end
 
-      scenario 'can edit his answer', js: true do
-        visit question_path(question)
+  scenario 'can edit his answer v2', js: true do
+    create(:answer, question: question, user: user)
 
-        within '.social-footer' do
-          click_on t('common.button.edit')
-        end
+    sign_in user
 
-        within_frame 0 do
-          first('.bootsy_text_area').set('Test answer')
-        end
-        click_on t('common.button.ready')
+    visit question_path(question)
 
-        expect(current_path).to eq question_path(question)
-        expect(page).not_to have_content t('common.button.ready')
-
-        within '.social-footer' do
-          expect(page).to have_content 'Test answer'
-        end
-
-      end
+    within '.social-footer' do
+      click_on t('common.button.edit')
     end
 
-    context 'answers not belongs to user', js: true do
-      given!(:answer) { create(:answer, question: question, user: second_user)}
+    within_frame 0 do
+      first('.bootsy_text_area').set('Test answer')
+    end
+    click_on t('common.button.ready')
 
-      scenario 'not sees link to edit', js: true do
-        visit question_path(question)
+    expect(current_path).to eq question_path(question)
+    expect(page).not_to have_content t('common.button.ready')
 
-        within '.social-footer' do
-          expect(page).to_not have_content t('common.button.edit')
-        end
-      end
+    within '.social-footer' do
+      expect(page).to have_content 'Test answer'
+    end
+  end
 
+
+  scenario 'sees link to edit answer v3' do
+    create(:answer, question: question, user: user)
+    sign_in user
+
+    visit question_path(question)
+
+    within '.social-footer' do
+      expect(page).to have_content t('common.button.edit')
+    end
+  end
+
+  scenario 'can edit his answer', js: true do
+    create(:answer, question: question, user: user)
+    sign_in user
+
+    visit question_path(question)
+
+    within '.social-footer' do
+      click_on t('common.button.edit')
     end
 
+    within_frame 0 do
+      first('.bootsy_text_area').set('Test answer')
+    end
+    click_on t('common.button.ready')
+
+    expect(current_path).to eq question_path(question)
+    expect(page).not_to have_content t('common.button.ready')
+
+    within '.social-footer' do
+      expect(page).to have_content 'Test answer'
+    end
+  end
+
+  scenario 'not sees link to edit' do
+    create(:answer, question: question, user: second_user)
+
+    sign_in user
+
+    visit question_path(question)
+
+    within '.social-footer' do
+      expect(page).to_not have_content t('common.button.edit')
+    end
   end
 end
