@@ -5,7 +5,7 @@ nav.navbar-default.navbar-static-side role="navigation"
        .dropdown.profile-element
          a.dropdown-toggle
           span.clear
-           strong.font-bold Example user
+           strong.font-bold = current_user.email if user_signed_in?
           span.text-muted.text-xs-block Example menu
        .logo-element SF
      li class="#{'active' if current_page?(root_path)}"

@@ -33,7 +33,7 @@ feature 'Edit answer', %q{
     end
 
     within_frame 0 do
-      first('.bootsy_text_area').set('Test answer')
+      find('.bootsy_text_area', match: :first).set('Test answer')
     end
     click_on t('common.button.ready')
 
@@ -70,7 +70,7 @@ feature 'Edit answer', %q{
   end
 
 
-  scenario 'sees link to edit answer v3' do
+  scenario 'sees link to edit answer v3', js: true do
     create(:answer, question: question, user: user)
     sign_in user
 
@@ -104,7 +104,7 @@ feature 'Edit answer', %q{
     end
   end
 
-  scenario 'not sees link to edit' do
+  scenario 'not sees link to edit', js: true do
     create(:answer, question: question, user: second_user)
 
     sign_in user

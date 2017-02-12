@@ -1,8 +1,17 @@
+require 'selenium-webdriver'
+
 RSpec.configure do |config|
   config.include AcceptanceHelper, type: :feature
+  config.include WaitForAjax, type: :feature
   config.include I18nMacros, type: :feature
 
-  Capybara.javascript_driver = :webkit
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, :browser => :firefox)
+  end
+
+  Capybara.javascript_driver = :selenium
+
+  #Capybara.javascript_driver = :webkit
 
   config.use_transactional_fixtures = false
 
@@ -29,5 +38,4 @@ end
 
 Capybara::Webkit.configure do |config|
   config.block_unknown_urls
-  config.timeout = 5
 end
