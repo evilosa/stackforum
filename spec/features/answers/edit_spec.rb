@@ -10,7 +10,7 @@ feature 'Edit answer', %q{
   given(:second_user) { create(:user) }
   given!(:question) { create(:question) }
 
-  scenario 'Unauthenticated user not sees edit link for answers' do
+  scenario 'Unauthenticated user not sees edit link for answers', js: true do
     create(:answer, question: question, user: user)
     create(:answer, question: question, user: second_user)
 
@@ -21,12 +21,12 @@ feature 'Edit answer', %q{
     end
   end
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     before do
       sign_in user
     end
 
-    context 'answers belongs to user' do
+    context 'answers belongs to user', js: true do
       given!(:answer) { create(:answer, question: question, user: user) }
 
       scenario 'sees link to edit answer', js: true do
@@ -59,10 +59,10 @@ feature 'Edit answer', %q{
       end
     end
 
-    context 'answers not belongs to user' do
+    context 'answers not belongs to user', js: true do
       given!(:answer) { create(:answer, question: question, user: second_user)}
 
-      scenario 'not sees link to edit' do
+      scenario 'not sees link to edit', js: true do
         visit question_path(question)
 
         within '.social-footer' do
