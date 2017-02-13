@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :questions do
-    resources :answers
+    resources :answers do
+      patch 'best'
+    end
     patch 'update_body'
   end
 

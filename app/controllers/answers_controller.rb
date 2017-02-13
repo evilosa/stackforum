@@ -16,6 +16,11 @@ class AnswersController < ApplicationController
     @answer.update(answer_params)
   end
 
+  def best
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:answer_id])
+  end
+
   def destroy
     @answer = @question.answers.find(params[:id])
     @answer.destroy

@@ -13,7 +13,7 @@
     - if user_signed_in?
       .btn-group
         - if current_user.author_of?(@question)
-          a.btn.btn-white.btn-xs
+          = link_to question_answer_best_path(@question, answer), remote: true, method: :patch, class: 'btn btn-white btn-xs', id: 'set-best', data: { question_id: @question.id, answer_id: answer.id }
             i.fa.fa-check = t('common.button.best')
         - if current_user.author_of?(answer)
           = link_to edit_question_answer_path(@question, answer), remote: true, class: 'btn btn-white btn-xs', id: 'edit-answer', data: { toggle: 'modal', question_id: @question.id, answer_id: answer.id , target: '#edit-answer-form' }
