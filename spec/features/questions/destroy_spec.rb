@@ -14,25 +14,30 @@ feature 'Delete question', %q{
 
     visit question_path(question)
 
-    first('#remove_question').click
+    within '.social-action' do
+      first('#remove-question').click
+    end
+
     expect(page).to have_content t('common.messages.questions.destroy')
     expect(current_path).to eq questions_path
   end
 
-  scenario 'Not question owner tries to remove question' do
+  scenario 'Not question owner not sees delete link' do
     other_user = create(:user)
     sign_in(other_user)
 
     visit question_path(question)
 
-    first('#remove_question').click
-    expect(page).to have_content t('common.errors.not_allow')
+    within '.social-action' do
+      expect(page).not_to have_content t('common.button.delete')
+    end
   end
 
-  scenario 'Unauthenticated user tries to remove question' do
+  scenario 'Unauthenticated user not sees delete link' do
     visit question_path(question)
 
-    first('#remove_question').click
-    expect(page).to have_content t('devise.failure.unauthenticated')
+    within '.social-action' do
+      expect(page).not_to have_content t('common.button.delete')
+    end
   end
 end

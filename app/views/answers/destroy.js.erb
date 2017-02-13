@@ -2,7 +2,7 @@
   console.log('Was an error in deletion');
 
   <% @answer.errors.full_messages.each do |message| %>
-  toastr["error"]("<%= message %>", "Ошибка");
+  toastr["error"]("<%= j message %>", "Ошибка");
   <% end %>
 
 <% else %>

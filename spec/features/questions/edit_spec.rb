@@ -33,7 +33,7 @@ feature 'Edit question', %q{
         end
       end
 
-      scenario 'can edit body' do
+      scenario 'can edit body', js: true do
         within '.social-action' do
           find('#edit-question', match: :first).click
         end

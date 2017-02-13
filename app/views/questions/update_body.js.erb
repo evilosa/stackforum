@@ -1,0 +1,13 @@
+<% if @question.errors.any? %>
+console.log('Was an error');
+
+<% @question.errors.full_messages.each do |message| %>
+  console.log("<%= j message %>");
+  toastr["error"]("<%= j message %>", "Ошибка");
+<% end %>
+
+<% else %>
+  //console.log("debug: Update answer");
+  $('#question-body').html('<%= j @question.body.html_safe %>');
+  $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='';
+<% end %>

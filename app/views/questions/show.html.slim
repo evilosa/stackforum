@@ -7,7 +7,11 @@
     .col-lg-12
       .social-feed-box
         .social-action.pull-right
-          = link_to t('common.button.delete'), @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-primary btn-xs', id: 'remove_question'
+          - if user_signed_in? && current_user.author_of?(@question)
+            = link_to edit_question_path(@question), remote: true, class: 'btn btn-white btn-xs', id: 'edit-question', data: { toggle: 'modal', question_id: @question.id, target: '#edit-answer-form' }
+              i.fa.fa-edit = t('common.button.edit')
+            = link_to @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs', id: 'remove-question'
+              i.fa.fa-remove = t('common.button.delete')
         .social-avatar
           a.pull-left
             img src="#{image_path('a1.jpg')}"
@@ -15,7 +19,7 @@
             a = "#{@question.user.email} - #{@question.title}"
             small.text-muted = @question.created_at
         .social-body
-          p = @question.body.html_safe
+          p#question-body = @question.body.html_safe
           .btn-group
             button.btn.btn-white.btn-xs
               i.fa.fa-thumbs-up Like this!

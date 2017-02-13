@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :edit, :update, :destroy]
+  before_action :load_question, only: [:show, :edit, :destroy]
 
   def index
     @questions = Question.all
@@ -26,12 +26,9 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def update
-    if @question.update(question_params)
-      redirect_to @question
-    else
-      render :edit
-    end
+  def update_body
+    @question = Question.find(params[:question_id])
+    @question.update(body: question_params[:body])
   end
 
   def destroy
