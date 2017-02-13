@@ -42,7 +42,7 @@ feature 'Delete answer for question', %q{
 
         answer = question.answers.first
         find('#remove_answer', match: :first).click
-        page.driver.browser.switch_to.alert.accept
+        accept_alert
         expect(page).to_not have_content(answer.body)
         expect(current_path).to eq question_path(question)
       end

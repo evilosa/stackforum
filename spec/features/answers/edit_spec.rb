@@ -28,23 +28,26 @@ feature 'Edit answer', %q{
 
     visit question_path(question)
 
+    #save_screenshot('/home/dv1/development/stackforum/log/img0.png')
+
     within '.social-footer' do
-      click_on t('common.button.edit')
+      find('#edit-answer', match: :first).click
     end
 
-    within_frame 0 do
-      find('.bootsy_text_area', match: :first).set('Test answer')
-    end
-    click_on t('common.button.ready')
+    sleep 1
 
-    using_wait_time 10 do
-      within '.social-footer' do
-        expect(page).to have_content 'Test answer'
-      end
+    page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test answer';")
+
+    #save_screenshot('/home/dv1/development/stackforum/log/img2.png')
+
+    page.find('#ready-button', match: :first).click()
+
+    within '.social-footer' do
+      expect(page).to have_content 'Test answer'
     end
+
     expect(current_path).to eq question_path(question)
     expect(page).not_to have_content t('common.button.ready')
-
   end
 
   scenario 'sees link to edit answer', js: true do

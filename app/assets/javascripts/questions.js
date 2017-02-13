@@ -6,4 +6,5 @@ document.addEventListener("turbolinks:load", function() {
         $('.edit-form form').attr("method", "post");
         $('.edit-form form').attr("action", "/questions/" + $('#new-answer').data('questionId') + "/answers");
     });
+
 });

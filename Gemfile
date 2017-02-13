@@ -30,6 +30,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
+  gem 'poltergeist'
 end
 
 group :development do

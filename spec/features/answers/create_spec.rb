@@ -16,9 +16,10 @@ feature 'Write answer for question', %q{
 
     click_on t('common.button.answer.add_new')
 
-    within_frame 0 do
-      find('.bootsy_text_area', match: :first).set('Test answer')
-    end
+    sleep 1
+
+    page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test answer';")
+
     click_on t('common.button.ready')
 
     expect(current_path).to eq question_path(question)
@@ -26,6 +27,7 @@ feature 'Write answer for question', %q{
     within '.social-footer' do
       expect(page).to have_content 'Test answer'
     end
+
   end
 
   scenario 'Unauthenticated user tries create answer for the question', js: true do

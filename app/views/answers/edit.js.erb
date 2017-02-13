@@ -1,3 +1,4 @@
+//console.log("debug: User edit answer");
 $('.edit-form form').attr("method", "patch");
 $('.edit-form form').attr("action", "/questions/<%= @question.id %>/answers/<%= @answer.id %>" );
 $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='<%= j @answer.body.html_safe %>';

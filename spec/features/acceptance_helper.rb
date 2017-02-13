@@ -1,20 +1,22 @@
 require 'selenium-webdriver'
+require 'capybara/webkit/matchers'
+require 'capybara/poltergeist'
 
 RSpec.configure do |config|
   config.include AcceptanceHelper, type: :feature
   config.include I18nMacros, type: :feature
-  config.include WaitForAjax, type: :feature
   config.include Warden::Test::Helpers, type: :feature
+  config.include Capybara::Webkit::RspecMatchers, type: :feature
 
-  #Capybara.register_driver :selenium do |app|
-  #  Capybara::Selenium::Driver.new(app, :browser => :firefox)
-  #end
+  Capybara.register_driver :poltergeist do |app|
+    # Set to log all javascript console messages to file
+    Capybara::Poltergeist::Driver.new(app, js_errors: false, phantomjs_logger: File.open('log/test_phantomjs.log', 'a'))
+  end
 
-  Capybara.javascript_driver = :selenium
+  #Capybara.javascript_driver = :selenium
+  Capybara.javascript_driver = :poltergeist
 
-  #Capybara.javascript_driver = :webkit
   Capybara.default_max_wait_time = 10
-
   config.use_transactional_fixtures = false
 
   config.before(:suite) do

@@ -2,10 +2,12 @@
 console.log('Was an error');
 
 <% @answer.errors.full_messages.each do |message| %>
-toastr["error"]("<%= message %>", "Ошибка");
+  console.log("<%= message %>");
+  toastr["error"]("<%= message %>", "Ошибка");
 <% end %>
 
 <% else %>
+  //console.log("debug: Update answer");
   $('*[data-answer-id="<%= @answer.id %>"]').replaceWith('<%= j render 'questions/answer', answer: @answer %>');
   $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='';
 <% end %>

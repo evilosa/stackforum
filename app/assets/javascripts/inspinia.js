@@ -5,8 +5,7 @@
  *
  */
 
-
-$(document).ready(function () {
+document.addEventListener("turbolinks:load", function() {
 
     // Add body-small class if window less than 768px
     if ($(this).width() < 769) {
@@ -183,7 +182,7 @@ $(window).bind("resize", function () {
 
 // Local Storage functions
 // Set proper body class and plugins based on user configuration
-$(document).ready(function () {
+document.addEventListener("turbolinks:load", function() {
     if (localStorageSupport()) {
 
         var collapse = localStorage.getItem("collapse_menu");
