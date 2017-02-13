@@ -52,7 +52,7 @@ feature 'Edit answer', %q{
 
   scenario 'sees link to edit answer', js: true do
     create(:answer, question: question, user: user)
-    login_as(user, scope: :user)
+    login_as(user, scope: :user, run_callbacks: false)
 
     visit question_path(question)
 
@@ -64,7 +64,7 @@ feature 'Edit answer', %q{
   scenario 'not sees link to edit', js: true do
     create(:answer, question: question, user: second_user)
 
-    login_as(user, scope: :user)
+    login_as(user, scope: :user, run_callbacks: false)
 
     visit question_path(question)
 

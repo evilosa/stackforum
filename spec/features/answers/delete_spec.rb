@@ -7,7 +7,7 @@ feature 'Delete answer for question', %q{
 } do
 
   given!(:user) { create(:user) }
-  given(:second_user) { create(:user) }
+  given!(:second_user) { create(:user) }
   given!(:question) { create(:question) }
 
   scenario 'Unauthenticated user not sees edit link for answers' do
@@ -23,7 +23,7 @@ feature 'Delete answer for question', %q{
 
   describe 'Authenticated user', js: true do
     before do
-      login_as(user, scope: :user)
+      login_as(user, scope: :user, run_callbacks: false)
     end
 
     context 'Answer belongs to user' do

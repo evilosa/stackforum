@@ -10,7 +10,7 @@ feature 'Write answer for question', %q{
   given!(:question) { create(:question_with_answers) }
 
   scenario 'Authenticated user create answer for the question', js: true do
-    login_as(user, scope: :user)
+    login_as(user, scope: :user, run_callbacks: false)
 
     visit question_path(question)
 
