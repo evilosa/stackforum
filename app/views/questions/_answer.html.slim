@@ -8,16 +8,18 @@
   a.pull-left
     img src="#{image_path('a2.jpg')}"
   .media-body
-    a = answer.user.email
-    br = answer.body.html_safe
+    a class="#{answer.best ? 'badge badge-primary' : ''}" = answer.user.email
     - if user_signed_in?
-      .btn-group
+      .btn-group.pull-right
         - if current_user.author_of?(@question)
-          = link_to question_best_answer_path(@question, answer_id: answer), remote: true, method: :patch, class: 'btn btn-white btn-xs', id: 'best-answer', data: { question_id: @question.id, answer_id: answer.id }
-            i.fa.fa-check = t('common.button.best')
+          - unless answer.best?
+            = link_to question_best_answer_path(@question, answer_id: answer), remote: true, method: :patch, class: 'btn btn-white btn-xs', id: 'best-answer', data: { question_id: @question.id, answer_id: answer.id }
+              i.fa.fa-check = t('common.button.best')
         - if current_user.author_of?(answer)
           = link_to edit_question_answer_path(@question, answer), remote: true, class: 'btn btn-white btn-xs', id: 'edit-answer', data: { toggle: 'modal', question_id: @question.id, answer_id: answer.id , target: '#edit-answer-form' }
             i.fa.fa-edit = t('common.button.edit')
           = link_to question_answer_path(@question, answer), id: 'remove_answer', method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
             i.fa.fa-trash = t('common.button.delete')
+    br = answer.body.html_safe
     small.text-muted = answer.created_at
+.hr-line-dashed

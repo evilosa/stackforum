@@ -29,8 +29,9 @@ class QuestionsController < ApplicationController
   def best_answer
     @question = Question.find(params[:question_id])
     @new_best_answer = @question.answers.where(id: params[:answer_id]).first
-    @old_best_answer = @question.answers.where('best = 1')
-    @asdf = 23
+    @old_best_answer = @question.answers.where('best = true')
+    @old_best_answer.update(best: false) unless @old_best_answer.nil?
+    @new_best_answer.update(best: true)
   end
 
   def update_body
