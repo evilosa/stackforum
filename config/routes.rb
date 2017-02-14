@@ -3,10 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :questions do
-    resources :answers do
-      patch 'best'
-    end
+    resources :answers
     patch 'update_body'
+    patch 'best_answer'
   end
 
   root to: 'questions#index'

@@ -25,6 +25,10 @@ feature 'Set best answer', %q{
     end
 
     describe 'as question owner' do
+      given(:answer1) { create(:answer, question: question) }
+      given(:answer2) { create(:answer, question: question) }
+      given(:answer3) { create(:answer, question: question) }
+
       before do
         visit question_path(question)
       end
@@ -37,9 +41,10 @@ feature 'Set best answer', %q{
 
       scenario 'set best answer for his question' do
         within '.social-footer' do
-          find('#edit-question', match: :first).click
+          find('#best-answer')[1].click
         end
 
+        expect(current_path).to eq question_path(question)
 
       end
 
