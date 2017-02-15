@@ -1,5 +1,0 @@
-//console.log("debug: User edit question");
-$('.edit-form form').attr("method", "patch");
-$('.edit-form form').attr("action", "/questions/<%= @question.id %>/update_body" );
-$('.bootsy_text_area')[0].name = "question[body]"
-$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='<%= j @question.body.html_safe %>';

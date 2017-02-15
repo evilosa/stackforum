@@ -16,10 +16,11 @@
             = link_to question_best_answer_path(@question, answer_id: answer), remote: true, method: :patch, class: 'btn btn-white btn-xs', id: 'best-answer', data: { question_id: @question.id, answer_id: answer.id }
               i.fa.fa-check = t('common.button.best')
         - if current_user.author_of?(answer)
-          = link_to edit_question_answer_path(@question, answer), remote: true, class: 'btn btn-white btn-xs', id: 'edit-answer', data: { toggle: 'modal', question_id: @question.id, answer_id: answer.id , target: '#edit-answer-form' }
+          a.btn.btn-white.btn-xs#edit-answer data-toggle='modal' data-question-id="#{@question.id}" data-answer-id="#{answer.id}" data-target='#edit-answer-form'
             i.fa.fa-edit = t('common.button.edit')
           = link_to question_answer_path(@question, answer), id: 'remove_answer', method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
             i.fa.fa-trash = t('common.button.delete')
-    br = answer.body.html_safe
+    br
+      #answer-body data-answer-id="#{answer.id}" = answer.body.html_safe
     small.text-muted = answer.created_at
-.hr-line-dashed
+  .hr-line-dashed

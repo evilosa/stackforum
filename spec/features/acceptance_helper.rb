@@ -11,6 +11,9 @@ RSpec.configure do |config|
   Capybara.register_driver :poltergeist do |app|
     # Set to log all javascript console messages to file
     Capybara::Poltergeist::Driver.new(app, js_errors: false, phantomjs_logger: File.open('log/test_phantomjs.log', 'a'))
+
+    # Set to log all javascript console messages to STDOUT
+    #Capybara::Poltergeist::Driver.new(app, js_errors: false)
   end
 
   #Capybara.javascript_driver = :selenium

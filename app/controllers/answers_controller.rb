@@ -1,15 +1,12 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question
-  before_action :set_answer, only: [:edit, :update]
+  before_action :set_answer, only: [:update]
 
   def create
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
     @answer.save
-  end
-
-  def edit
   end
 
   def update

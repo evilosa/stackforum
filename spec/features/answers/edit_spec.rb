@@ -28,21 +28,20 @@ feature 'Edit answer', %q{
 
       visit question_path(question)
 
-      #save_screenshot('/home/dv1/development/stackforum/log/img0.png')
-
+      sleep 1
       within '.social-footer' do
         find('#edit-answer', match: :first).click
       end
 
       sleep 1
       page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test answer';")
-
       find('#ready-button', match: :first).click()
 
+      sleep 1
       within '.social-footer' do
         expect(page).to have_content 'Test answer'
       end
-
+      #save_screenshot('/home/dv1/development/stackforum/log/img3.png')
       expect(current_path).to eq question_path(question)
       expect(page).not_to have_content t('common.button.ready')
     end

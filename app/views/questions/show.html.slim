@@ -8,7 +8,9 @@
       .social-feed-box
         .social-action.pull-right
           - if user_signed_in? && current_user.author_of?(@question)
-            = link_to edit_question_path(@question), remote: true, class: 'btn btn-white btn-xs', id: 'edit-question', data: { toggle: 'modal', question_id: @question.id, target: '#edit-answer-form' }
+            a.btn.btn-white.btn-xs#edit-question data-toggle='modal' data-target='#edit-answer-form' data-question-id="#{@question.id}"
+              i.fa.fa-edit = t('common.button.edit')
+            /= link_to edit_question_path(@question), remote: true, class: 'btn btn-white btn-xs', id: 'edit-question', data: { toggle: 'modal', question_id: @question.id, target: '#edit-answer-form' }
               i.fa.fa-edit = t('common.button.edit')
             = link_to @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs', id: 'remove-question'
               i.fa.fa-remove = t('common.button.delete')
