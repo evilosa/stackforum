@@ -1,4 +1,5 @@
 RSpec.describe AnswersController, type: :controller do
+  let!(:user) { create(:user) }
   let!(:question) { create(:question) }
   let!(:answer_valid_params) { {answer: attributes_for(:answer), question_id: question} }
   let!(:answer_invalid_params) { {answer: attributes_for(:answer, :invalid), question_id: question} }
@@ -10,10 +11,13 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'POST #create authenticated' do
-    sign_in_user
+    before do
+      login_as(user, scope: :user)
+    end
 
     context 'with valid attributes' do
       it 'save new answer for the question in the database' do
+        question.reload
         expect { create_post.call }.to change(question.answers, :count).by(1)
       end
 

@@ -8,7 +8,7 @@ feature 'Set best answer', %q{
 
   given!(:user) { create(:user) }
   given!(:second_user) { create(:user) }
-  given!(:question) { create(:question_with_answers, user: user) }
+  given!(:question) { create(:question, user: user) }
   given!(:other_user_question) { create(:question_with_answers, user: second_user) }
 
   scenario 'Unauthenticated user not sees link to set best answers' do
@@ -25,11 +25,10 @@ feature 'Set best answer', %q{
     end
 
     describe 'as question owner' do
-      given(:answer1) { create(:answer, question: question) }
-      given(:answer2) { create(:answer, question: question) }
-      given(:answer3) { create(:answer, question: question) }
-
       before do
+        create(:answer, question: question)
+        create(:answer, question: question)
+        create(:answer, question: question)
         visit question_path(question)
       end
 
@@ -39,16 +38,33 @@ feature 'Set best answer', %q{
         end
       end
 
-      scenario 'set best answer for his question' do
+      scenario 'set best answer for the question', js: true do
+        assert_selector('#best-answer', count: 3)
         within '.social-footer' do
-          find('#best-answer')[1].click
+          find('#best-answer', match: :first).click
         end
 
         expect(current_path).to eq question_path(question)
-
+        expect(page).to have_css('.badge-primary')
+        assert_selector('#best-answer', count: 2)
       end
 
-      scenario 'change best answer for his question'
+      scenario 'change best answer for his question', js: true do
+        assert_selector('#best-answer', count: 3)
+        within '.social-footer' do
+          find('#best-answer', match: :first).click
+        end
+
+        expect(current_path).to eq question_path(question)
+        expect(page).to have_css('.badge-primary')
+        assert_selector('#best-answer', count: 2)
+        within '.social-footer' do
+          find('#best-answer', match: :first).click
+        end
+        assert_selector('#best-answer', count: 2)
+        expect(current_path).to eq question_path(question)
+        expect(page).to have_css('.badge-primary')
+      end
     end
 
     describe 'not as question owner' do

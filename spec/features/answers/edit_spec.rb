@@ -35,10 +35,7 @@ feature 'Edit answer', %q{
       end
 
       sleep 1
-
       page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test answer';")
-
-      #save_screenshot('/home/dv1/development/stackforum/log/img2.png')
 
       find('#ready-button', match: :first).click()
 
