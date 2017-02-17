@@ -55,13 +55,16 @@ feature 'Set best answer', %q{
           find('#best-answer', match: :first).click
         end
 
+        sleep 1
         expect(current_path).to eq question_path(question)
         expect(page).to have_css('.badge-primary')
         assert_selector('#best-answer', count: 2)
+
         within '.social-footer' do
           find('#best-answer', match: :first).click
         end
         assert_selector('#best-answer', count: 2)
+
         expect(current_path).to eq question_path(question)
         expect(page).to have_css('.badge-primary')
       end

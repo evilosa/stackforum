@@ -3,7 +3,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   let!(:update_body) do
     Proc.new do |body = 'new body'|
-      patch :update_body, params: { question_id: question.id, question: { body: body} , format: :js }
+      patch :update_body, params: { id: question, question: { body: body} , format: :js }
     end
   end
 

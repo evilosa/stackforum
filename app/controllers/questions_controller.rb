@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :update, :destroy]
+  before_action :load_question, only: [:show, :best_answer, :update_body, :update, :destroy]
 
   def index
     @questions = Question.all
@@ -24,11 +24,7 @@ class QuestionsController < ApplicationController
   end
 
   def best_answer
-    @question = Question.find(params[:question_id])
-    @new_best_answer = @question.answers.where(id: params[:answer_id]).first
-    @old_best_answer = @question.answers.where('best = true')
-    @old_best_answer.update(best: false) unless @old_best_answer.nil?
-    @new_best_answer.update(best: true)
+    @question.best_answer!(params)
   end
 
   def update
@@ -36,7 +32,6 @@ class QuestionsController < ApplicationController
   end
 
   def update_body
-    @question = Question.find(params[:question_id])
     @question.update(body: question_params[:body])
     render :update_body
   end
