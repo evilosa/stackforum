@@ -9,7 +9,7 @@ feature 'Edit question', %q{
   given!(:user) { create(:user) }
   given!(:second_user) { create(:user) }
   given!(:question) { create(:question, user: user) }
-  given!(:other_user_question) { create(:question, user: second_user) }
+  given!(:second_user_question) { create(:question, user: second_user) }
 
   scenario 'Unauthenticated user not see link to edit question' do
     visit question_path(question)
@@ -54,7 +54,7 @@ feature 'Edit question', %q{
 
     describe 'not as the question owner' do
       before do
-        visit question_path(other_user_question)
+        visit question_path(second_user_question)
       end
 
       scenario 'not sees link to edit' do
