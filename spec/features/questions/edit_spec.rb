@@ -11,12 +11,6 @@ feature 'Edit question', %q{
   given!(:question) { create(:question, user: user) }
   given!(:second_user_question) { create(:question, user: second_user) }
 
-  scenario 'Unauthenticated user not see link to edit question' do
-    visit question_path(question)
-
-    expect(page).not_to have_content t('common.button.edit')
-  end
-
   describe 'Authenticated user' do
     before do
       login_as(user, scope: :user, run_callbacks: false)
@@ -62,6 +56,14 @@ feature 'Edit question', %q{
           expect(page).not_to have_content t('common.button.edit')
         end
       end
+    end
+  end
+
+  describe 'Not authenticated user' do
+    scenario 'not see link to edit question' do
+      visit question_path(question)
+
+      expect(page).not_to have_content t('common.button.edit')
     end
   end
 end
