@@ -57,7 +57,7 @@ feature 'Edit answer', %q{
     end
   end
 
-  scenario 'not sees link to edit', js: true do
+  scenario 'not sees link to edit second user answer', js: true do
     create(:answer, question: question, user: second_user)
 
     login_as(user, scope: :user, run_callbacks: false)
