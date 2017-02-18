@@ -14,6 +14,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with valid attributes' do
       it 'save new answer for the question in the database' do
+        question.reload
         expect { create_post.call }.to change(question.answers, :count).by(1)
       end
 

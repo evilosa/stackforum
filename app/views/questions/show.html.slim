@@ -7,7 +7,13 @@
     .col-lg-12
       .social-feed-box
         .social-action.pull-right
-          = link_to t('common.button.delete'), @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-primary btn-xs', id: 'remove_question'
+          - if user_signed_in? && current_user.author_of?(@question)
+            a.btn.btn-white.btn-xs#edit-question data-toggle='modal' data-target='#edit-answer-form' data-question-id="#{@question.id}"
+              i.fa.fa-edit = t('common.button.edit')
+            /= link_to edit_question_path(@question), remote: true, class: 'btn btn-white btn-xs', id: 'edit-question', data: { toggle: 'modal', question_id: @question.id, target: '#edit-answer-form' }
+              i.fa.fa-edit = t('common.button.edit')
+            = link_to @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs', id: 'remove-question'
+              i.fa.fa-remove = t('common.button.delete')
         .social-avatar
           a.pull-left
             img src="#{image_path('a1.jpg')}"
@@ -15,7 +21,7 @@
             a = "#{@question.user.email} - #{@question.title}"
             small.text-muted = @question.created_at
         .social-body
-          p = @question.body.html_safe
+          p#question-body = @question.body.html_safe
           .btn-group
             button.btn.btn-white.btn-xs
               i.fa.fa-thumbs-up Like this!
@@ -25,13 +31,34 @@
               i.fa.fa-share Share
         .social-footer
           = render 'answers'
-        - if user_signed_in?
+        .modal-footer
+          - if user_signed_in?
+            button.btn.btn-primary.pull-right#new-answer data-toggle="modal" data-target="#edit-answer-form" data-question-id="#{@question.id}" = t('common.button.answer.add_new')
+          - else
+            = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
+
+/.ibox.float-e-margins.animated.bounceInRight.hidden#edit-answer-form2
+  .edit-form
+    = form_for [@question, @answer], remote: true, method: :post do |f|
+      .ibox-title
+        h5 Edit answer
+      .ibox-content
+        = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
+        .modal-footer
+          button type="button" class="btn btn-white" data-dismiss="modal" Close
+          = f.submit t('common.button.ready'), class: 'btn btn-primary', data: {toggle: 'modal', target: '#edit-answer-form'}, id: 'ready-button'
+
+.modal.inmodal#edit-answer-form tabindex="-1" role="dialog" aria-hidden="true"
+  .modal-dialog
+    .modal-content.animated.bounceInRight
+      .modal-header
+        h4.modal-title Введите данные
+      .edit-form
+        = form_for [@question, @answer], remote: true, method: :post do |f|
           .ibox
             .ibox-content
-              = form_for [@question, @answer], remote: true, method: :post, class: 'form' do |f|
-                .form-group
-                  = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
-                br
-                = f.submit t('common.button.question.answer'), class: 'btn btn-primary pull-right'
-        - else
-          = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
+              .form-group
+                = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
+          .modal-footer
+            button type="button" class="btn btn-white" data-dismiss="modal" Close
+            = f.submit t('common.button.ready'), class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-answer-form' }, id: 'ready-button'

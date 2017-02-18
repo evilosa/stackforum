@@ -1,3 +1,5 @@
+require_relative '../acceptance_helper'
+
 feature 'Register user', %q{
   In order to be able to create question and get answer
   As an guest

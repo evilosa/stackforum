@@ -1,3 +1,5 @@
+require_relative '../acceptance_helper'
+
 feature 'Delete answer for question', %q{
   In order to remove bad answer for the question
   As an answer owner
@@ -5,32 +7,59 @@ feature 'Delete answer for question', %q{
 } do
 
   given!(:user) { create(:user) }
-  given(:question) { create(:question_with_owner_answers, user: user) }
+  given!(:second_user) { create(:user) }
+  given!(:question) { create(:question) }
 
-  scenario 'Owner tries to remove the answer' do
-    sign_in(user)
+  scenario 'Unauthenticated user not sees edit link for answers' do
+    create(:answer, question: question, user: user)
+    create(:answer, question: question, user: second_user)
+
     visit question_path(question)
 
-    first('#remove_answer').click
-    expect(page).to have_content t('common.messages.answers.destroy')
-    expect(current_path).to eq question_path(question)
+    within '.social-footer' do
+      expect(page).to_not have_content t('common.button.delete')
+    end
   end
 
-  scenario 'Not answer owner tries to remove the answer' do
-    other_user = create(:user)
-    sign_in(other_user)
+  describe 'Authenticated user', js: true do
+    before do
+      login_as(user, scope: :user, run_callbacks: false)
+    end
 
-    visit question_path(question)
+    context 'Answer belongs to user' do
+      given!(:answer) { create(:answer, question: question, user: user) }
 
-    first('#remove_answer').click
+      scenario 'sees link to remove' do
+        visit question_path(question)
 
-    expect(page).to have_content t('common.errors.not_allow')
-  end
+        within '.social-footer' do
+          expect(page).to have_content t('common.button.delete')
+        end
+      end
 
-  scenario 'Unauthenticated user tries to remove the answer' do
-    visit question_path(question)
+      scenario 'can remove his answer' do
+        visit question_path(question)
 
-    first('#remove_answer').click
-    expect(page).to have_content t('devise.failure.unauthenticated')
+        answer = question.answers.first
+        find('#remove_answer', match: :first).click
+        accept_alert
+        expect(page).to_not have_content(answer.body)
+        expect(current_path).to eq question_path(question)
+      end
+
+    end
+
+    context 'answers not belongs to user' do
+      given!(:answer) { create(:answer, question: question, user: second_user)}
+
+      scenario 'not sees link to remove' do
+        visit question_path(question)
+
+        within '.social-footer' do
+          expect(page).to_not have_content t('common.button.delete')
+        end
+      end
+    end
+
   end
 end

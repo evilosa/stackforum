@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :questions do
-    resource :answers, shallow: true
+    resources :answers
+    patch 'update_body', on: :member
+    patch 'best_answer', on: :member
   end
 
   root to: 'questions#index'

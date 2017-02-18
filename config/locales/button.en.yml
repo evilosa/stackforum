@@ -1,0 +1,20 @@
+en:
+  common:
+    button:
+      sign_in: 'Sign in'
+      sign_up: 'Sign up'
+      log_in: 'Log in'
+      register: 'Register'
+      log_out: 'Log out'
+      create: 'Create'
+      open: 'View'
+      edit: 'Edit'
+      delete: 'Remove'
+      best: 'Best'
+      ready: 'Ready'
+      question:
+        add_new: 'Ask question'
+        answer: 'Answer'
+      answer:
+        add_new: 'Answer'
+        edit: 'Edit answer'

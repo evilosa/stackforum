@@ -1,0 +1,20 @@
+ru:
+  common:
+    button:
+      sign_in: 'Войти'
+      sign_up: 'Зарегистрироваться'
+      log_in: 'Войти'
+      register: 'Зарегистрировать'
+      log_out: 'Выйти'
+      create: 'Создать'
+      open: 'Открыть'
+      edit: 'Изменить'
+      delete: 'Удалить'
+      best: 'Лучший'
+      ready: 'Готово'
+      question:
+        add_new: 'Задать вопрос'
+        answer: 'Ответить'
+      answer:
+        add_new: 'Ответить'
+        edit: 'Изменить ответ'

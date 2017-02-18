@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim-rails'
 gem 'devise'
 gem 'bootsy'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -27,6 +28,9 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'poltergeist'
 end
 
 group :development do
@@ -40,7 +44,6 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rails-controller-testing'
   gem 'capybara'
-  gem 'capybara-webkit'
   gem 'launchy'
 end
 

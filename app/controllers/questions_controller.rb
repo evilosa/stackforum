@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :edit, :update, :destroy]
+  before_action :load_question, only: [:show, :best_answer, :update_body, :update, :destroy]
 
   def index
     @questions = Question.all
@@ -14,9 +14,6 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.new
   end
 
-  def edit
-  end
-
   def create
     @question = current_user.questions.new(question_params)
     if @question.save
@@ -26,12 +23,17 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def best_answer
+    @question.best_answer!(params)
+  end
+
   def update
-    if @question.update(question_params)
-      redirect_to @question
-    else
-      render :edit
-    end
+    @question.update(question_params) if current_user.author_of?(@question)
+  end
+
+  def update_body
+    @question.update(body: question_params[:body])
+    render :update_body
   end
 
   def destroy

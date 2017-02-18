@@ -1,3 +1,5 @@
+require_relative '../acceptance_helper'
+
 feature 'View questions list', %q{
   In order to find community questions
   As an any user
