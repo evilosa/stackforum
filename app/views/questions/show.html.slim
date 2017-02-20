@@ -4,7 +4,7 @@
 
 .wrapper.wrapper-content.animated.fadeInRight
   .row
-    .col-lg-10
+    .col-lg-12
       .social-feed-box
         .social-action.pull-right
           - if user_signed_in? && current_user.author_of?(@question)
@@ -19,14 +19,25 @@
             a = "#{@question.user.email} - #{@question.title}"
             small.text-muted = @question.created_at
         .social-body
-          p#question-body = @question.body.html_safe
-          .btn-group
-            button.btn.btn-white.btn-xs
-              i.fa.fa-thumbs-up Like this!
-            button.btn.btn-white.btn-xs
-              i.fa.fa-thumbs-down Dislike this!
-            button.btn.btn-white.btn-xs
-              i.fa.fa-share Share
+          .row
+            .col-md-9
+              p#question-body = @question.body.html_safe
+              .btn-group
+                button.btn.btn-white.btn-xs
+                  i.fa.fa-thumbs-up Like this!
+                button.btn.btn-white.btn-xs
+                  i.fa.fa-thumbs-down Dislike this!
+                button.btn.btn-white.btn-xs
+                  i.fa.fa-share Share
+            .col-md-3
+              .small.text-right
+                h5 Files:
+                - @question.attachments.each do |a|
+                  /= link_to a.file.identifier, a.file.url
+                  div
+                    i.fa.fa-file
+                    = link_to " #{a.file.identifier}", a.file.url
+                    i.fa.fa-remove
         .social-footer
           = render 'answers'
         .modal-footer
@@ -35,10 +46,8 @@
           - else
             = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
     .col-lg-2
-      ul
-        - @question.attachments.each do |a|
-          li
-            = link_to a.file.identifier, a.file.url
+      .wrapper.wrapper-content
+
 
 .modal.inmodal#edit-answer-form tabindex="-1" role="dialog" aria-hidden="true"
   .modal-dialog
