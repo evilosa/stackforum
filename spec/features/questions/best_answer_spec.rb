@@ -63,6 +63,7 @@ feature 'Set best answer', %q{
         within '.social-footer' do
           find('#best-answer', match: :first).click
         end
+        sleep 1
         assert_selector('#best-answer', count: 2)
 
         expect(current_path).to eq question_path(question)

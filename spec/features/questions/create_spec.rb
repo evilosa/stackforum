@@ -9,7 +9,7 @@ feature 'Create question', %q{
   given(:user) { create(:user) }
 
   scenario 'Authenticated user creates question' do
-    sign_in(user)
+    login_as(user, scope: :user)
 
     visit questions_path
     click_on t('common.button.question.add_new')

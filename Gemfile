@@ -21,6 +21,7 @@ gem 'slim-rails'
 gem 'devise'
 gem 'bootsy'
 gem 'jquery-turbolinks'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'byebug', platform: :mri
