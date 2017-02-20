@@ -39,18 +39,8 @@
     .col-lg-2
       ul
         - @question.attachments.each do |a|
-          li = a.file.file.filename
-
-/.ibox.float-e-margins.animated.bounceInRight.hidden#edit-answer-form2
-  .edit-form
-    = form_for [@question, @answer], remote: true, method: :post do |f|
-      .ibox-title
-        h5 Edit answer
-      .ibox-content
-        = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
-        .modal-footer
-          button type="button" class="btn btn-white" data-dismiss="modal" Close
-          = f.submit t('common.button.ready'), class: 'btn btn-primary', data: {toggle: 'modal', target: '#edit-answer-form'}, id: 'ready-button'
+          li
+            = link_to a.file.identifier, a.file.url
 
 .modal.inmodal#edit-answer-form tabindex="-1" role="dialog" aria-hidden="true"
   .modal-dialog
