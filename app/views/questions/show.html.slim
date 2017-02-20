@@ -33,7 +33,6 @@
               .small.text-right
                 h5 Files:
                 - @question.attachments.each do |a|
-                  /= link_to a.file.identifier, a.file.url
                   div
                     i.fa.fa-file
                     = link_to " #{a.file.identifier}", a.file.url
@@ -62,9 +61,10 @@
                 = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
               p Attachments:
               p
-                = f.fields_for :attachments do |at_form|
-                  = at_form.label :file
-                  = at_form.file_field :file
+                = f.fields_for :attachments do |attachment|
+                  = render 'attachment_fields', f: attachment
+                .links
+                  = link_to_add_association 'add file', f, :attachments
           .modal-footer
             button type="button" class="btn btn-white" data-dismiss="modal" Close
             = f.submit t('common.button.ready'), class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-answer-form' }, id: 'ready-button'
