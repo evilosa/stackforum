@@ -4,7 +4,7 @@ class Question < ApplicationRecord
 
   belongs_to :user
 
-  accepts_nested_attributes_for :attachments#, reject_if: :all_blank
+  accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
 
   validates :title, :body, :user_id, presence: true
 

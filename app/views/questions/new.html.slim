@@ -16,8 +16,9 @@
             = f.bootsy_area :body, class: 'form-control', rows: 12
           p Attachments:
           p
-            = f.fields_for :attachments do |at_form|
-              = at_form.label :file
-              = at_form.file_field :file
+            = f.fields_for :attachments do |attachment|
+              = render 'attachment_fields', f: attachment
+            .links
+              = link_to_add_association 'add file', f, :attachments
           .modal-footer
             = f.submit t('common.button.create'), class: 'btn btn-primary pull-right'
