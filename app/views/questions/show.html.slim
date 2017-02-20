@@ -59,12 +59,12 @@
             .ibox-content
               .form-group
                 = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
-              p Attachments:
-              p
+              .form-group
+                = f.label t('common.titles.attachments')
                 = f.fields_for :attachments do |attachment|
                   = render 'attachment_fields', f: attachment
                 .links
-                  = link_to_add_association 'add file', f, :attachments
+                  = link_to_add_association t('common.button.attachment.add'), f, :attachments, class: 'btn btn-primary'
           .modal-footer
             button type="button" class="btn btn-white" data-dismiss="modal" Close
             = f.submit t('common.button.ready'), class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-answer-form' }, id: 'ready-button'

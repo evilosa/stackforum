@@ -12,6 +12,11 @@ en:
       delete: 'Remove'
       best: 'Best'
       ready: 'Ready'
+      attachment:
+        add: 'Add file'
+        change: 'Change file'
+        select: 'Select file'
+        remove: 'Remove file'
       question:
         add_new: 'Ask question'
         answer: 'Answer'

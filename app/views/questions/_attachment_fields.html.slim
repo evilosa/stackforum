@@ -1,5 +1,9 @@
-.nested-fields
-  .field
-    = f.label :file
+.fileinput.fileinput-new.input-group data-provides='fileinput'
+  .form-control data-trigger='fileinput'
+    i.fa.fa-file.fileinput-exists
+    span.fileinput-filename
+  span.input-group-addon.btn.btn-default.btn-file
+    span.fileinput-new = t('common.button.attachment.select')
+    span.fileinput-exists = t('common.button.attachment.change')
     = f.file_field :file
-  = link_to_remove_association 'remove file', f
+  = link_to_remove_association t('common.button.attachment.remove'), f, class: 'input-group-addon btn btn-default fileinput-exists', data: { dismiss: 'fileinput' }

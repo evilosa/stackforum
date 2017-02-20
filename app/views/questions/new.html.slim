@@ -14,11 +14,11 @@
           .form-group
             = f.label :body
             = f.bootsy_area :body, class: 'form-control', rows: 12
-          p Attachments:
-          p
+          .form-group
+            = f.label t('common.titles.attachments')
             = f.fields_for :attachments do |attachment|
               = render 'attachment_fields', f: attachment
             .links
-              = link_to_add_association 'add file', f, :attachments
+              = link_to_add_association t('common.button.attachment.add'), f, :attachments, class: 'btn btn-primary'
           .modal-footer
             = f.submit t('common.button.create'), class: 'btn btn-primary pull-right'

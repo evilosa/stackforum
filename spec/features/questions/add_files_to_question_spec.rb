@@ -18,7 +18,7 @@ feature 'Add files to question', %q{
     fill_in t('activerecord.attributes.question.title'), with: 'Test question'
     fill_in t('activerecord.attributes.question.body'), with: 'text text'
 
-    attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+    attach_file 'question[attachments_attributes][0][file]', "#{Rails.root}/spec/spec_helper.rb"
     click_on t('common.button.create')
 
     expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'

@@ -19,3 +19,5 @@
 .idea
 /config/database.yml
 /public/uploads/
+/custom_plan.rb
+/zeus.json

@@ -63,7 +63,9 @@ feature 'Edit question', %q{
     scenario 'not see link to edit question' do
       visit question_path(question)
 
-      expect(page).not_to have_content t('common.button.edit')
+      within '.social-action' do
+        expect(page).not_to have_content t('common.button.edit')
+      end
     end
   end
 end

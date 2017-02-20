@@ -9,6 +9,7 @@ ru:
     titles:
       new_user_session: 'Вход в систему'
       new_user_registration: 'Регистрация пользователя'
+      attachments: 'Файлы'
       pages:
         main: 'Главная'
         questions: 'Вопросы'
