@@ -22,6 +22,7 @@ gem 'devise'
 gem 'bootsy'
 gem 'jquery-turbolinks'
 gem 'carrierwave'
+gem 'remotipart'
 
 group :development, :test do
   gem 'byebug', platform: :mri

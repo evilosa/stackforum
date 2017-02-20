@@ -16,12 +16,6 @@ class AnswersController < ApplicationController
   def destroy
     @answer = @question.answers.find(params[:id])
     @answer.destroy
-    #if current_user.author_of?(@answer)
-    #  @answer.destroy
-    #  redirect_to @question, notice: t('common.messages.answers.destroy')
-    #else
-    #  redirect_to @question, notice: t('common.errors.not_allow')
-    #end
   end
 
   private
@@ -35,6 +29,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:question_id, :body, :best, :user_id)
+    params.require(:answer).permit(:question_id, :body, :best, :user_id, attachments_attributes: [:id, :file, :_destroy])
   end
 end

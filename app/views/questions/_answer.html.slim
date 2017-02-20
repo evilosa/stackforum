@@ -21,6 +21,10 @@
           = link_to question_answer_path(@question, answer), id: 'remove_answer', method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
             i.fa.fa-trash = t('common.button.delete')
     br
-      #answer-body data-answer-id="#{answer.id}" = answer.body.html_safe
+    #answer-body data-answer-id="#{answer.id}" = answer.body.html_safe
+    ul
+      - answer.attachments.each do |a|
+        li
+          = link_to a.file.identifier, a.file.url
     small.text-muted = answer.created_at
   .hr-line-dashed

@@ -19,6 +19,5 @@
             = f.fields_for :attachments do |at_form|
               = at_form.label :file
               = at_form.file_field :file
-
           .modal-footer
             = f.submit t('common.button.create'), class: 'btn btn-primary pull-right'

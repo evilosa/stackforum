@@ -10,8 +10,6 @@
           - if user_signed_in? && current_user.author_of?(@question)
             a.btn.btn-white.btn-xs#edit-question data-toggle='modal' data-target='#edit-answer-form' data-question-id="#{@question.id}"
               i.fa.fa-edit = t('common.button.edit')
-            /= link_to edit_question_path(@question), remote: true, class: 'btn btn-white btn-xs', id: 'edit-question', data: { toggle: 'modal', question_id: @question.id, target: '#edit-answer-form' }
-              i.fa.fa-edit = t('common.button.edit')
             = link_to @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs', id: 'remove-question'
               i.fa.fa-remove = t('common.button.delete')
         .social-avatar
@@ -53,6 +51,11 @@
             .ibox-content
               .form-group
                 = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
+              p Attachments:
+              p
+                = f.fields_for :attachments do |at_form|
+                  = at_form.label :file
+                  = at_form.file_field :file
           .modal-footer
             button type="button" class="btn btn-white" data-dismiss="modal" Close
             = f.submit t('common.button.ready'), class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-answer-form' }, id: 'ready-button'
