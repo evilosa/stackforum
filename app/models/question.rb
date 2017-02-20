@@ -4,6 +4,8 @@ class Question < ApplicationRecord
 
   belongs_to :user
 
+  accepts_nested_attributes_for :attachments#, reject_if: :all_blank
+
   validates :title, :body, :user_id, presence: true
 
   def best_answer!(params)

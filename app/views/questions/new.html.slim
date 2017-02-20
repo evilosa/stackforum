@@ -14,6 +14,11 @@
           .form-group
             = f.label :body
             = f.bootsy_area :body, class: 'form-control', rows: 12
-          = f.submit t('common.button.create'), class: 'btn btn-primary pull-right'
-          br
-          br
+          p Attachments:
+          p
+            = f.fields_for :attachments do |at_form|
+              = at_form.label :file
+              = at_form.file_field :file
+
+          .modal-footer
+            = f.submit t('common.button.create'), class: 'btn btn-primary pull-right'

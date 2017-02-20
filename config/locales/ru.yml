@@ -63,6 +63,10 @@ ru:
       messages:
         record_invalid: 'Запись недействительна'
       models:
+        attachment:
+          attributes:
+            question:
+              required: 'Обязателен'
         answer:
           attributes:
             question:

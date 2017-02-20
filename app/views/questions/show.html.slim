@@ -4,7 +4,7 @@
 
 .wrapper.wrapper-content.animated.fadeInRight
   .row
-    .col-lg-12
+    .col-lg-10
       .social-feed-box
         .social-action.pull-right
           - if user_signed_in? && current_user.author_of?(@question)
@@ -36,6 +36,10 @@
             button.btn.btn-primary.pull-right#new-answer data-toggle="modal" data-target="#edit-answer-form" data-question-id="#{@question.id}" = t('common.button.answer.add_new')
           - else
             = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
+    .col-lg-2
+      ul
+        - @question.attachments.each do |a|
+          li = a.file.file.filename
 
 /.ibox.float-e-margins.animated.bounceInRight.hidden#edit-answer-form2
   .edit-form
