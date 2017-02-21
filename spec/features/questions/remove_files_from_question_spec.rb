@@ -7,41 +7,34 @@ feature 'Remove files from question', %q{
   I'd like to be able to remove files
 } do
 
-  use_selenium_driver
+  use_selenium_webdriver
 
-  given!(:file) { create(:attachment) }
   given!(:user) { create(:user) }
-  given!(:question) { create(:question, user: user, attachments: [file]) }
+  given!(:file) { create(:attachment) }
+  given!(:question) { create(:question, attachments: [file], user: user) }
 
   describe 'Authenticated user' do
-
     describe 'as question''s owner' do
-      background do
+      before do
         login_as(user, scope: :user, run_callbacks: false)
         visit question_path(question)
       end
 
-      scenario 'can see link ro remove file' do
-        expect(page).to have_link('#remove-file')
-      end
-
       scenario 'can remove file', js: true do
         find('#remove-file', match: :first).click()
-
-        expect(page).not_to have_content file.file_name
+        expect(page).not_to have_content 'spec_helper.rb'
       end
     end
 
     describe 'as not question''s owner' do
-      let!(:second_user) { create(:user) }
-
       before do
+        second_user = create(:user)
         login_as(second_user, scope: :user, run_callbacks: false)
         visit question_path(question)
       end
 
       scenario 'can not see link to remove file' do
-        expect(page).not_to have_link('#remove-file')
+        expect(page).not_to have_link('remove-file')
       end
     end
 
@@ -49,7 +42,8 @@ feature 'Remove files from question', %q{
 
   describe 'Not authenticated user' do
     scenario 'can not see link to remove file' do
-      expect(page).not_to have_link('#remove-file')
+      visit question_path(question)
+      expect(page).not_to have_link('remove-file')
     end
   end
 

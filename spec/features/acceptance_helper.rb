@@ -9,12 +9,6 @@ RSpec.configure do |config|
   config.include Capybara::Webkit::RspecMatchers, type: :feature
   config.extend SeleniumMacros, type: :feature
 
-  # Selenium
-  #Capybara.register_driver :selenium do |app|
-  #  Capybara::Selenium::Driver.new(app, browser: :firefox)
-  #end
-  #Capybara.javascript_driver = :selenium
-
   # Poltergeist
   Capybara.register_driver :poltergeist do |app|
     # Set to log all javascript console messages to file
