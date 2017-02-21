@@ -5,9 +5,7 @@ feature 'Add files to question', %q{
   In order to illustrate my question
   As an question's author
   I'd like to be able to attach files
-} do
-
-  use_selenium_webdriver
+}, driver: :selenium do
 
   given(:user) { create(:user) }
 
