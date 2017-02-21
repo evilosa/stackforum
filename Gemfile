@@ -32,8 +32,8 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'capybara-webkit'
-  gem 'selenium-webdriver'
-  gem 'poltergeist'
+  gem 'selenium-webdriver', require: false
+  gem 'poltergeist', require: false
 end
 
 group :development do

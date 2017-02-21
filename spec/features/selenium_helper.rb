@@ -1,6 +1,5 @@
 require 'selenium-webdriver'
 require 'capybara/webkit/matchers'
-require 'capybara/poltergeist'
 
 RSpec.configure do |config|
   config.include AcceptanceHelper, type: :feature
@@ -9,20 +8,10 @@ RSpec.configure do |config|
   config.include Capybara::Webkit::RspecMatchers, type: :feature
 
   # Selenium
-  #Capybara.register_driver :selenium do |app|
-  #  Capybara::Selenium::Driver.new(app, browser: :firefox)
-  #end
-  #Capybara.javascript_driver = :selenium
-
-  # Poltergeist
-  Capybara.register_driver :poltergeist do |app|
-    # Set to log all javascript console messages to file
-    Capybara::Poltergeist::Driver.new(app, js_errors: false, phantomjs_logger: File.open('log/test_phantomjs.log', 'a'))
-
-    # Set to log all javascript console messages to STDOUT
-    #Capybara::Poltergeist::Driver.new(app, js_errors: false)
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :selenium)
   end
-  Capybara.javascript_driver = :poltergeist
+  Capybara.javascript_driver = :selenium
 
   # Other settings
   config.use_transactional_fixtures = false
