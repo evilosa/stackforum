@@ -1,4 +1,4 @@
-require_relative '../selenium_helper'
+require_relative '../acceptance_helper'
 
 feature 'Add files to question', %q{
 
@@ -6,14 +6,12 @@ feature 'Add files to question', %q{
   As an question's author
   I'd like to be able to attach files
 } do
-  describe 'dfdf' do
-    before(:all) do
-      Capybara.register_driver :selenium do |app|
-        Capybara::Selenium::Driver.new(app, browser: :firefox)
-      end
-      Capybara.javascript_driver = :selenium
-      Capybara.current_driver = :selenium
-    end
+
+  use_selenium_webdriver
+    #before(:all) do
+    #  Capybara.javascript_driver = :selenium
+    #  Capybara.current_driver = :selenium
+    #end
 
     given(:user) { create(:user) }
 
@@ -50,8 +48,9 @@ feature 'Add files to question', %q{
       expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/2/spec_helper.rb'
     end
 
-    after(:all) do
-      Capybara.use_default_driver
-    end
-  end
+    #after(:all) do
+    #  Capybara.current_driver = :poltergeist
+    #  Capybara.javascript_driver = :poltergeist
+    #end
+
 end

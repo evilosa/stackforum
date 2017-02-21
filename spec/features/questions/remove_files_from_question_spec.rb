@@ -7,9 +7,11 @@ feature 'Remove files from question', %q{
   I'd like to be able to remove files
 } do
 
-  given(:file) { create(:attachment) }
-  given(:user) { create(:user) }
-  given(:question) { create(:question, user: user, attachments: [file]) }
+  use_selenium_driver
+
+  given!(:file) { create(:attachment) }
+  given!(:user) { create(:user) }
+  given!(:question) { create(:question, user: user, attachments: [file]) }
 
   describe 'Authenticated user' do
 

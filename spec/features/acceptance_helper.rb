@@ -7,6 +7,7 @@ RSpec.configure do |config|
   config.include I18nMacros, type: :feature
   config.include Warden::Test::Helpers, type: :feature
   config.include Capybara::Webkit::RspecMatchers, type: :feature
+  config.extend SeleniumMacros, type: :feature
 
   # Selenium
   #Capybara.register_driver :selenium do |app|
@@ -23,6 +24,7 @@ RSpec.configure do |config|
     #Capybara::Poltergeist::Driver.new(app, js_errors: false)
   end
   Capybara.javascript_driver = :poltergeist
+  Capybara.current_driver = :poltergeist
 
   # Other settings
   config.use_transactional_fixtures = false
