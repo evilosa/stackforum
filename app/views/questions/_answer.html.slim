@@ -26,11 +26,13 @@
       .col-md-9
         #answer-body data-answer-id="#{answer.id}" = answer.body.html_safe
       .col-md-3
-        .small.text-right
+        .small.text-right#answer-files-body
           h5 Files:
           - answer.attachments.each do |a|
-            div
+            div data-attachment-id="#{a.id}"
               i.fa.fa-file
               = link_to " #{a.file.identifier}", a.file.url
-              i.fa.fa-remove
+              - if user_signed_in? && current_user.author_of?(a.attachable)
+                = link_to attachment_path(a), method: :delete, remote: true, id: 'remove-file'
+                  i.fa.fa-remove
   .hr-line-dashed

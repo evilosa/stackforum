@@ -5,7 +5,7 @@ feature 'Add files to answer', %q{
   In order to illustrate my answer
   As an authenticated user
   I'd like to be able to attach files
-} do
+}, driver: :selenium do
 
   given(:user) { create(:user) }
   given(:question) { create(:question) }
