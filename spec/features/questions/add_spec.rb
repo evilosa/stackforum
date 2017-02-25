@@ -5,7 +5,9 @@ feature 'Add files to question', %q{
   In order to illustrate my question
   As an question's author
   I'd like to be able to attach files
-}, driver: :selenium do
+} do
+
+  use_selenium_webdriver!
 
   given(:user) { create(:user) }
 
@@ -19,11 +21,12 @@ feature 'Add files to question', %q{
     page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test body';")
 
     inputs = all('.select-file')
-    inputs[0].set("#{Rails.root}/spec/spec_helper.rb")
+    inputs[0].set("#{Rails.root}/spec/support/test_file.dat")
 
     click_on t('common.button.create')
 
-    expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
+    save_and_open_page
+    expect(page).to have_link 'test_file.dat', href: '/uploads/attachment/file/1/test_file.dat'
   end
 
   scenario 'User adds some files when asks question', js: true do
@@ -33,13 +36,13 @@ feature 'Add files to question', %q{
     click_on t('common.button.attachment.add')
 
     inputs = all('.select-file')
-    inputs[0].set("#{Rails.root}/spec/spec_helper.rb")
-    inputs[1].set("#{Rails.root}/spec/spec_helper.rb")
+    inputs[0].set("#{Rails.root}/spec/support/test_file.dat")
+    inputs[1].set("#{Rails.root}/spec/support/test_file.dat")
 
     click_on t('common.button.create')
 
-    expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
-    expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/2/spec_helper.rb'
+    expect(page).to have_link 'test_file.dat', href: '/uploads/attachment/file/1/test_file.dat'
+    expect(page).to have_link 'test_file.dat', href: '/uploads/attachment/file/2/test_file.dat'
   end
 
 end

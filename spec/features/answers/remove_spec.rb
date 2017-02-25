@@ -7,7 +7,7 @@ feature 'Remove files from question', %q{
   I'd like to be able to remove files
 } do
 
-  use_selenium_webdriver
+  use_selenium_webdriver!
 
   given!(:user) { create(:user) }
   given!(:file) { create(:attachment) }
@@ -22,9 +22,10 @@ feature 'Remove files from question', %q{
       end
 
       scenario 'can remove file', js: true do
+        expect(page).to have_content 'test_file.dat'
         within '#answer-files-body' do
           first('#remove-file').click()
-          expect(page).not_to have_content 'spec_helper.rb'
+          expect(page).not_to have_content 'test_file.dat'
         end
       end
     end
