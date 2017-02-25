@@ -1,4 +1,5 @@
 //= require toastr/toastr.min.js
+//= require jasny/jasny-bootstrap.min.js
 
 document.addEventListener("turbolinks:load", function() {
 

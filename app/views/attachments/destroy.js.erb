@@ -1,0 +1,10 @@
+<% if @attachment.errors.any? %>
+console.log('Was an error in deletion');
+
+<% @attachment.errors.full_messages.each do |message| %>
+toastr["error"]("<%= j message %>", "Ошибка");
+<% end %>
+
+<% else %>
+$('*[data-attachment-id="<%= @attachment.id %>"]').remove();
+<% end %>

@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.remotipart
+//= require cocoon
 //= require bootstrap-sprockets
 //= require metisMenu/jquery.metisMenu.js
 //= require pace/pace.min.js

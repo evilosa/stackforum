@@ -12,6 +12,11 @@ ru:
       delete: 'Удалить'
       best: 'Лучший'
       ready: 'Готово'
+      attachment:
+        add: 'Добавить файл'
+        change: 'Изменить файл'
+        select: 'Выбор файла'
+        remove: 'Удалить файл'
       question:
         add_new: 'Задать вопрос'
         answer: 'Ответить'

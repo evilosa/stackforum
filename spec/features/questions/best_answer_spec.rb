@@ -11,15 +11,7 @@ feature 'Set best answer', %q{
   given!(:question) { create(:question, user: user) }
   given!(:second_user_question) { create(:question_with_answers, user: second_user) }
 
-  scenario 'Unauthenticated user not sees link to set best answers' do
-    visit question_path(question)
-
-    within '.social-footer' do
-      expect(page).not_to have_content t('common.button.best')
-    end
-  end
-
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     before do
       login_as(user, scope: :user, run_callbacks: false)
     end
@@ -63,6 +55,7 @@ feature 'Set best answer', %q{
         within '.social-footer' do
           find('#best-answer', match: :first).click
         end
+        sleep 1
         assert_selector('#best-answer', count: 2)
 
         expect(current_path).to eq question_path(question)
@@ -79,6 +72,16 @@ feature 'Set best answer', %q{
         within '.social-footer' do
           expect(page).not_to have_content t('common.button.best')
         end
+      end
+    end
+  end
+
+  describe 'Not authenticated user', js: true do
+    scenario 'not sees link to set best answers' do
+      visit question_path(question)
+
+      within '.social-footer' do
+        expect(page).not_to have_content t('common.button.best')
       end
     end
   end

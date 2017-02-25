@@ -21,6 +21,18 @@
           = link_to question_answer_path(@question, answer), id: 'remove_answer', method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
             i.fa.fa-trash = t('common.button.delete')
     br
-      #answer-body data-answer-id="#{answer.id}" = answer.body.html_safe
     small.text-muted = answer.created_at
+    .row
+      .col-md-9
+        #answer-body data-answer-id="#{answer.id}" = answer.body.html_safe
+      .col-md-3
+        .small.text-right#answer-files-body
+          h5 Files:
+          - answer.attachments.each do |a|
+            div data-attachment-id="#{a.id}"
+              i.fa.fa-file
+              = link_to " #{a.file.identifier}", a.file.url
+              - if user_signed_in? && current_user.author_of?(a.attachable)
+                = link_to attachment_path(a), method: :delete, remote: true, id: 'remove-file'
+                  i.fa.fa-remove
   .hr-line-dashed
