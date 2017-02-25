@@ -27,7 +27,7 @@ feature 'Add files to answer', %q{
 
     expect(current_path).to eq question_path(question)
     expect(page).not_to have_content t('common.button.ready')
-    expect(page).to have_link 'test_file.dat', href: '/uploads/attachment/file/1/test_file.dat'
+    expect(page).to have_link 'test_file.dat'
     within '.social-footer' do
       expect(page).to have_content 'Test answer'
     end

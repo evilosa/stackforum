@@ -22,10 +22,10 @@ feature 'Remove files from question', %q{
       end
 
       scenario 'can remove file', js: true do
-        expect(page).to have_content 'test_file.dat'
+        expect(page).to have_link 'test_file.dat'
         within '#answer-files-body' do
           first('#remove-file').click()
-          expect(page).not_to have_content 'test_file.dat'
+          expect(page).not_to have_link 'test_file.dat'
         end
       end
     end

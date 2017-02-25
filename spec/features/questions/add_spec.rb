@@ -25,8 +25,7 @@ feature 'Add files to question', %q{
 
     click_on t('common.button.create')
 
-    save_and_open_page
-    expect(page).to have_link 'test_file.dat', href: '/uploads/attachment/file/1/test_file.dat'
+    expect(page).to have_link 'test_file.dat'
   end
 
   scenario 'User adds some files when asks question', js: true do
