@@ -7,7 +7,6 @@ RSpec.configure do |config|
   config.include I18nMacros, type: :feature
   config.include Warden::Test::Helpers, type: :feature
   config.include Capybara::Webkit::RspecMatchers, type: :feature
-  config.extend SeleniumMacros, type: :feature
 
   # Poltergeist
   Capybara.register_driver :poltergeist do |app|
@@ -20,32 +19,6 @@ RSpec.configure do |config|
   Capybara.javascript_driver = :poltergeist
   Capybara.current_driver = :poltergeist
 
-  # Other settings
-  config.use_transactional_fixtures = false
-
-  config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each, js: true) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-    Warden.test_reset!
-    if Rails.env.test?
-      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads"])
-    end
-  end
 end
 
 Capybara::Webkit.configure do |config|
