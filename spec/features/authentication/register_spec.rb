@@ -25,7 +25,7 @@ feature 'Register user', %q{
     fill_user.call(user)
 
     expect(page).to have_content t('devise.registrations.signed_up')
-    expect(current_path).to eq root_path
+    expect(page).to have_current_path root_path
   end
 
   scenario 'Guest tries to register with invalid password confirmation' do
@@ -33,7 +33,7 @@ feature 'Register user', %q{
     fill_user.call(user, user.password.reverse)
 
     expect(page).to have_content t('activerecord.errors.models.user.attributes.password_confirmation.confirmation')
-    expect(current_path).to eq user_registration_path
+    expect(page).to have_current_path user_registration_path
   end
 
   scenario 'User tries to register with taken email' do
@@ -41,6 +41,6 @@ feature 'Register user', %q{
     fill_user.call(user)
 
     expect(page).to have_content t('activerecord.errors.models.user.attributes.email.taken')
-    expect(current_path).to eq user_registration_path
+    expect(page).to have_current_path user_registration_path
   end
 end

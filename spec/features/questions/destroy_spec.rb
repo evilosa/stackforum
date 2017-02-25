@@ -19,7 +19,7 @@ feature 'Delete question', %q{
     end
 
     expect(page).to have_content t('common.messages.questions.destroy')
-    expect(current_path).to eq questions_path
+    expect(page).to have_current_path questions_path
   end
 
   scenario 'Not question owner not sees delete link' do

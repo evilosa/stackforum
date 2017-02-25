@@ -12,7 +12,7 @@ feature 'User sign in', %q{
     sign_in(user)
 
     expect(page).to have_content t('devise.sessions.signed_in')
-    expect(current_path).to eq root_path
+    expect(page).to have_current_path root_path
   end
 
   scenario 'Unregistered user try to sign in' do
@@ -22,7 +22,7 @@ feature 'User sign in', %q{
     click_button t('common.button.log_in')
 
     expect(page).to have_content t('devise.failure.invalid', authentication_keys: t('activerecord.attributes.user.email'))
-    expect(current_path).to eq new_user_session_path
+    expect(page).to have_current_path new_user_session_path
   end
 
 end

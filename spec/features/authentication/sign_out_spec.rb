@@ -13,7 +13,7 @@ feature 'User sign out', %q{
 
     click_on t('common.button.log_out')
     expect(page).to have_content t('devise.sessions.signed_out')
-    expect(current_path).to eq root_path
+    expect(page).to have_current_path root_path
     expect(page).to have_content t('common.button.sign_in')
     expect(page).to have_content t('common.button.sign_up')
   end
