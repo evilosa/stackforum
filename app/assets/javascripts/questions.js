@@ -35,4 +35,13 @@ document.addEventListener("turbolinks:load", function() {
         var selector = '#answer-body[data-answer-id="' + this.dataset.answerId + '"]';
         $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML=$(selector)[0].innerHTML;
     });
+
+    // Voting
+    $('a#question-upvote').on('ajax:success', function (e, data, status, xhr) {
+        $('div#question-score')[0].innerText = xhr.responseJSON.score;
+    });
+
+    $('a#question-downvote').on('ajax:success', function (e, data, status, xhr) {
+        $('div#question-score')[0].innerText = xhr.responseJSON.score;
+    });
 });

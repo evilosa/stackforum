@@ -7,7 +7,7 @@ module Votable
   end
 
   def upvote!(user)
-    return if upvoted?(user)
+    return if user.author_of?(self) || upvoted?(user)
 
     vote = votes.where(user: user).first_or_initialize
     vote.status = :upvote
@@ -15,7 +15,7 @@ module Votable
   end
 
   def downvote!(user)
-    return if downvoted?(user)
+    return if user.author_of?(self) || downvoted?(user)
 
     vote = votes.where(user: user).first_or_initialize
     vote.status = :downvote

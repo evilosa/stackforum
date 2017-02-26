@@ -24,10 +24,10 @@
               p#question-body = @question.body.html_safe
               .btn-group.pull-left
                 .vote-actions
-                  a
+                  = link_to upvote_question_path(@question), method: :patch, remote: true, data: { type: :json }, id: 'question-upvote'
                     i.fa.fa-chevron-up
-                  div = @question.score
-                  a
+                  div#question-score = @question.score
+                  = link_to downvote_question_path(@question), method: :patch, remote: true, data: { type: :json }, id: 'question-downvote'
                     i.fa.fa-chevron-down
             .col-md-3
               .small.text-right
