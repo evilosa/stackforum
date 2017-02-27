@@ -24,9 +24,9 @@ feature 'Vote for question', %q{
 
       scenario 'can not vote', js: true do
         first('a#question-upvote').click
-        expect(page.first('div#question-score').text).to eq '0'
+        expect(first('div#question-score')).to have_text('0', exact: true)
         first('a#question-downvote').click
-        expect(page.first('div#question-score').text).to eq '0'
+        expect(first('div#question-score')).to have_text('0', exact: true)
       end
     end
 
