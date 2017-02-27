@@ -2,6 +2,7 @@
 //= require jasny/jasny-bootstrap.min.js
 
 document.addEventListener("turbolinks:load", function() {
+//$(document).on('turbolinks:load',  function () {
 
     function updateForm(params) {
         $('.edit-form form').attr("method", params.method);
@@ -39,6 +40,13 @@ document.addEventListener("turbolinks:load", function() {
     // Voting
     $('a#question-upvote').on('ajax:success', function (e, data, status, xhr) {
         $('div#question-score')[0].innerText = xhr.responseJSON.score;
+    });
+
+    $('a#question-upvote').on('ajax:error', function (e, xhr, status, error) {
+        if (xhr.status == 401) {
+            toastr["error"](xhr.responseJSON.error, "Ошибка");
+            $(location).attr('href', '/users/sign_in');
+        };
     });
 
     $('a#question-downvote').on('ajax:success', function (e, data, status, xhr) {

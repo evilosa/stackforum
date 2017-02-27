@@ -54,12 +54,18 @@ feature 'Vote for question', %q{
         first('a#question-downvote').click
         expect(page.first('div#question-score')).to have_text('-1', exact: true)
         first('a#question-upvote').click
-        expect(page.first('div#question-score')).to have_text('-1', exact: true)
+        expect(page.first('div#question-score')).to have_text('1', exact: true)
       end
     end
   end
 
   describe 'Not authenticated user' do
-    scenario 'redirect to sign in'
+    before do
+      visit question_path(question)
+    end
+    scenario 'redirect to sign in', js: true do
+      first('a#question-upvote').click
+      expect(page).to have_current_path new_user_session_path
+    end
   end
 end
