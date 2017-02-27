@@ -8,7 +8,11 @@ describe 'Votable' do
 
     model do
       include Votable
+
+      def user
+      end
     end
+
   end
 
   let!(:user1) { create(:user) }

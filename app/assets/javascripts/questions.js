@@ -38,6 +38,7 @@ document.addEventListener("turbolinks:load", function() {
     });
 
     // Voting
+    // Question upvote
     $('a#question-upvote').on('ajax:success', function (e, data, status, xhr) {
         $('div#question-score')[0].innerText = xhr.responseJSON.score;
     });
@@ -49,7 +50,39 @@ document.addEventListener("turbolinks:load", function() {
         };
     });
 
+    // Question downvote
     $('a#question-downvote').on('ajax:success', function (e, data, status, xhr) {
         $('div#question-score')[0].innerText = xhr.responseJSON.score;
+    });
+
+    $('a#question-downvote').on('ajax:error', function (e, xhr, status, error) {
+        if (xhr.status == 401) {
+            toastr["error"](xhr.responseJSON.error, "Ошибка");
+            $(location).attr('href', '/users/sign_in');
+        };
+    });
+
+    // Answer upvote
+    $('a#answer-upvote').on('ajax:success', function (e, data, status, xhr) {
+        $('div#answer-score')[0].innerText = xhr.responseJSON.score;
+    });
+
+    $('a#answer-upvote').on('ajax:error', function (e, xhr, status, error) {
+        if (xhr.status == 401) {
+            toastr["error"](xhr.responseJSON.error, "Ошибка");
+            $(location).attr('href', '/users/sign_in');
+        };
+    });
+
+    // Answer downvote
+    $('a#answer-downvote').on('ajax:success', function (e, data, status, xhr) {
+        $('div#answer-score')[0].innerText = xhr.responseJSON.score;
+    });
+
+    $('a#answer-downvote').on('ajax:error', function (e, xhr, status, error) {
+        if (xhr.status == 401) {
+            toastr["error"](xhr.responseJSON.error, "Ошибка");
+            $(location).attr('href', '/users/sign_in');
+        };
     });
 });

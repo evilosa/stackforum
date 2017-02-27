@@ -1,9 +1,9 @@
 .social-comment data-answer-id="#{answer.id}"
   .vote-actions.pull-left
-    = link_to upvote_question_answer_path(@question, answer), method: :patch, remote: true, id: 'answer-upvote'
+    = link_to upvote_question_answer_path(@question, answer), method: :patch, remote: true, data: { type: :json }, id: 'answer-upvote'
       i.fa.fa-chevron-up
-    div = answer.score
-    = link_to downvote_question_answer_path(@question, answer), method: :patch, remote: true, id: 'answer-downvote'
+    div#answer-score = answer.score
+    = link_to downvote_question_answer_path(@question, answer), method: :patch, remote: true, data: { type: :json }, id: 'answer-downvote'
       i.fa.fa-chevron-down
   a.pull-left
     img src="#{image_path('a2.jpg')}"
