@@ -38,23 +38,23 @@ feature 'Vote for question', %q{
 
       scenario 'can upvote just one time', js: true do
         first('a#question-upvote').click
-        expect(first('div#question-score').text).to eq '1'
+        expect(first('div#question-score')).to have_text('1', exact: true)
         first('a#question-upvote').click
-        expect(first('div#question-score').text).to eq '1'
+        expect(first('div#question-score')).to have_text('1', exact: true)
       end
 
       scenario 'can downvote just one time', js: true do
         first('a#question-downvote').click
-        expect(page.first('div#question-score').text).to eq '-1'
+        expect(page.first('div#question-score')).to have_text('-1', exact: true)
         first('a#question-downvote').click
-        expect(page.first('div#question-score').text).to eq '-1'
+        expect(page.first('div#question-score')).to have_text('-1', exact: true)
       end
 
       scenario 'can change vote', js: true do
         first('a#question-downvote').click
-        expect(page.first('div#question-score').text).to eq '-1'
+        expect(page.first('div#question-score')).to have_text('-1', exact: true)
         first('a#question-upvote').click
-        expect(page.first('div#question-score').text).to eq '1'
+        expect(page.first('div#question-score')).to have_text('-1', exact: true)
       end
     end
   end
