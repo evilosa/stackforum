@@ -30,11 +30,11 @@ module Voted
     render "#{controller_name}/#{action}", layout: false
   end
 
-  def model_klass
+  def model_class
     controller_name.classify.constantize
   end
 
   def set_votable
-    @votable = model_klass.find(params[:id])
+    @votable = model_class.find(params[:id])
   end
 end

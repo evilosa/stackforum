@@ -1,6 +1,7 @@
 require 'selenium-webdriver'
 require 'capybara/webkit/matchers'
 require 'capybara/poltergeist'
+require 'puma'
 
 RSpec.configure do |config|
   config.include AcceptanceHelper, type: :feature
@@ -19,6 +20,8 @@ RSpec.configure do |config|
   Capybara.javascript_driver = :poltergeist
   Capybara.current_driver = :poltergeist
 
+  # Puma server
+  Capybara.server = :puma
 end
 
 Capybara::Webkit.configure do |config|

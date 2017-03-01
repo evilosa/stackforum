@@ -55,6 +55,8 @@ feature 'Vote for question', %q{
         expect(page.first('div#question-score')).to have_text('-1', exact: true)
         first('a#question-upvote').click
         expect(page.first('div#question-score')).to have_text('1', exact: true)
+        first('a#question-downvote').click
+        expect(page.first('div#question-score')).to have_text('-1', exact: true)
       end
     end
   end
