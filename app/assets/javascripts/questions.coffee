@@ -17,4 +17,14 @@ $ ->
       method: "post",
       action: "/questions/" + $('#new-answer').data('questionId') + "/answers",
       bodyName: "answer[body]"
-    }))
+    })
+  )
+
+  $('#edit-question').on('click', () ->
+    updateForm({
+      method: "patch",
+      action: "/questions/" + $('#edit-question').data('questionId') +"/update_body",
+      bodyName: "question[body]"
+    })
+    $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML=$('#question-body').html()
+  )
