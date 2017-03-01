@@ -14,4 +14,7 @@
  *= require style
  *= require iCheck/custom.css
  *= require bootsy
+ *= require questions
+ *= require custom
+ *= require style
  */

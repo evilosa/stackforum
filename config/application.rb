@@ -25,5 +25,7 @@ module Stackforum
     end
 
     config.i18n.default_locale = :ru
+
+    config.action_cable.disable_request_forgery_protection = false
   end
 end

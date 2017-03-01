@@ -6,9 +6,10 @@ html
     meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     title
       | Stackforum
-    = stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css")
+    /= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css")
     = stylesheet_link_tag    'application', media: 'all' , 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = action_cable_meta_tag
     = csrf_meta_tags
   body.mini-navbar
     #wrapper
@@ -28,5 +29,5 @@ html
 
         = render 'layouts/footer'
 
-      = javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js")
+      /= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js")
       = yield :javascript
