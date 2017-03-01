@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :best_answer, :update_body, :update, :destroy]
 
+  include Voted
+
   def index
     @questions = Question.all
   end
@@ -54,6 +56,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, :user_id, :bootsy_image_gallery_id, attachments_attributes: [:id, :file, :_destroy])
+    params.require(:question).permit(:title, :body, :user_id, :bootsy_image_gallery_id, attachments_attributes: [:id, :file, :_destroy], votes_attributes: [:id, :_destroy])
   end
 end

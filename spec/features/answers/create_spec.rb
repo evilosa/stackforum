@@ -22,7 +22,7 @@ feature 'Write answer for question', %q{
 
     click_on t('common.button.ready')
 
-    expect(current_path).to eq question_path(question)
+    expect(page).to have_current_path question_path(question)
     expect(page).not_to have_content t('common.button.ready')
     within '.social-footer' do
       expect(page).to have_content 'Test answer'

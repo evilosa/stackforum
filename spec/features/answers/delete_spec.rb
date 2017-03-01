@@ -44,7 +44,7 @@ feature 'Delete answer for question', %q{
         find('#remove_answer', match: :first).click
         accept_alert
         expect(page).to_not have_content(answer.body)
-        expect(current_path).to eq question_path(question)
+        expect(page).to have_current_path question_path(question)
       end
 
     end

@@ -22,13 +22,13 @@
           .row
             .col-md-9
               p#question-body = @question.body.html_safe
-              .btn-group
-                button.btn.btn-white.btn-xs
-                  i.fa.fa-thumbs-up Like this!
-                button.btn.btn-white.btn-xs
-                  i.fa.fa-thumbs-down Dislike this!
-                button.btn.btn-white.btn-xs
-                  i.fa.fa-share Share
+              .btn-group.pull-left
+                .vote-actions
+                  = link_to upvote_question_path(@question), method: :patch, remote: true, data: { type: :json }, id: 'question-upvote'
+                    i.fa.fa-chevron-up
+                  div#question-score = @question.score
+                  = link_to downvote_question_path(@question), method: :patch, remote: true, data: { type: :json }, id: 'question-downvote'
+                    i.fa.fa-chevron-down
             .col-md-3
               .small.text-right
                 h5 Files:
@@ -46,9 +46,6 @@
             button.btn.btn-primary.pull-right#new-answer data-toggle="modal" data-target="#edit-answer-form" data-question-id="#{@question.id}" = t('common.button.answer.add_new')
           - else
             = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
-    .col-lg-2
-      .wrapper.wrapper-content
-
 
 .modal.inmodal#edit-answer-form tabindex="-1" role="dialog" aria-hidden="true"
   .modal-dialog
