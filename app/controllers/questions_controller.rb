@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :best_answer, :update_body, :update, :destroy]
+  after_action :publish_question, only: [:create]
 
   include Voted
 
@@ -53,6 +54,18 @@ class QuestionsController < ApplicationController
 
   def load_question
     @question = Question.find(params[:id])
+  end
+
+  def publish_question
+    return if @question.errors.any?
+
+    ActionCable.server.broadcast(
+      'questions',
+      ApplicationController.render(
+         partial: 'questions/question',
+         locals: { question: @question }
+      )
+    )
   end
 
   def question_params

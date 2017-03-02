@@ -23,6 +23,7 @@ gem 'bootsy'
 gem 'carrierwave'
 gem 'remotipart'
 gem 'cocoon'
+gem 'sprockets', '3.6.3'
 gem 'skim'
 gem 'gon'
 

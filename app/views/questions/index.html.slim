@@ -13,7 +13,6 @@
             thead
               tr
                 td Title
-            tbody
+            tbody#questions-list
               - @questions.each do |question|
-                tr
-                  td = link_to question.title, question_path(question)
+                = render question

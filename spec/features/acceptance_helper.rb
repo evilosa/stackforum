@@ -19,6 +19,7 @@ RSpec.configure do |config|
   end
   Capybara.javascript_driver = :poltergeist
   Capybara.current_driver = :poltergeist
+  Capybara.default_driver = :poltergeist
 
   # Puma server
   Capybara.server = :puma
