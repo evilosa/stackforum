@@ -16,7 +16,7 @@ $ ->
       $(location).attr('href', '/users/sign_in')
 
   $('a#answer-upvote').on 'ajax:success', (e, data, status, xhr) ->
-    $('div#answer-score')[0].innerText = xhr.responseJSON.score
+    $("div#answer-score[data-answer-id='#{this.dataset.answerId}']")[0].innerText = xhr.responseJSON.score
 
   $('a#answer-upvote').on 'ajax:error', (e, xhr, status, error) ->
     if (xhr.status == 401)
@@ -24,7 +24,7 @@ $ ->
       $(location).attr('href', '/users/sign_in')
 
   $('a#answer-downvote').on 'ajax:success', (e, data, status, xhr) ->
-    $('div#answer-score')[0].innerText = xhr.responseJSON.score
+    $("div#answer-score[data-answer-id='#{this.dataset.answerId}']")[0].innerText = xhr.responseJSON.score
 
   $('a#answer-downvote').on 'ajax:error', (e, xhr, status, error) ->
     if (xhr.status == 401)

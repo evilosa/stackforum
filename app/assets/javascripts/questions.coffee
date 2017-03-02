@@ -12,10 +12,10 @@ $ ->
     editForm.attr("action", params.action)
     $('.bootsy_text_area')[0].name = params.bodyName
 
-  newAnswerBtn.on 'click', () ->
+  $(document).on 'click', '#new-answer', () ->
     updateForm({
       method: "post",
-      action: "/questions/#{newAnswerBtn.data('questionId')}/answers",
+      action: "/questions/#{$('#new-answer').data('questionId')}/answers",
       bodyName: "answer[body]"
     })
 
@@ -28,10 +28,10 @@ $ ->
     selector = '#answer-body[data-answer-id="' + this.dataset.answerId + '"]'
     $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML=$(selector)[0].innerHTML
 
-  editQuestionBtn.on 'click', () ->
+  $(document).on 'click', '#edit-question', () ->
     updateForm({
       method: "patch",
-      action: "/questions/#{editQuestionBtn.data('questionId')}/update_body",
+      action: "/questions/#{$('#edit-question').data('questionId')}/update_body",
       bodyName: "question[body]"
     })
     $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML=$('#question-body').html()
