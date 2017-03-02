@@ -10,6 +10,7 @@ html
     = stylesheet_link_tag    'application', media: 'all' , 'data-turbolinks-track' => 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
+    = Gon::Base.render_data
     = csrf_meta_tags
   body.mini-navbar
     #wrapper

@@ -11,6 +11,7 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
     @answer.save
+    gon.answer_body = @answer.body
   end
 
   def update
@@ -41,7 +42,8 @@ class AnswersController < ApplicationController
 
     ActionCable.server.broadcast(
        "question_#{@question.id}",
-       'answer created'
+       answer: @answer,
+       question: @question
     )
   end
 end

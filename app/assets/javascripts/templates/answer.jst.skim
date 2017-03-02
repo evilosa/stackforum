@@ -1,0 +1,10 @@
+.social-comment data-answer-id="#{@answer.id}"
+  .vote-actions.pull-left
+    = @safe JST["templates/answer_upvote"](answer: @answer, question: @question)
+    div#answer-score data-answer-id="#{@answer.id}" = @answer.score
+    = @safe JST["templates/answer_downvote"](answer: @answer, question: @question)
+
+  a.pull-left
+
+  .media-body
+    a class="#{@answer.best ? 'badge badge-primary' : ''}" email

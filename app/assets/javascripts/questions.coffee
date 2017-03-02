@@ -57,6 +57,7 @@ question_channel = ->
       ,
       received: (data) ->
         console.log data
+        $('.social-footer').append(JST["templates/answer"](data))
       ,
       disconnected: ->
         console.log 'disconnected question id'

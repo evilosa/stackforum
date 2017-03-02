@@ -1,0 +1,2 @@
+a id="answer-upvote" href="/questions/#{@question.id}/answers/#{@answer.id}/upvote" data-method="patch" data-remote="true" data-type="json" data-answer-id="#{@answer.id}"
+  i.fa.fa-chevron-up
