@@ -4,7 +4,7 @@ feature 'Write answer for question', %q{
   In order to answer for the question
   As an authenticated user
   I want to be able to create answer
-}, driver: :selenium do
+} do
 
   given!(:user) { create(:user) }
   given!(:question) { create(:question_with_answers) }

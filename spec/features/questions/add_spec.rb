@@ -5,7 +5,7 @@ feature 'Add files to question', %q{
   In order to illustrate my question
   As an question's author
   I'd like to be able to attach files
-}, driver: :selenium do
+}, driver: :webkit do
 
   given(:user) { create(:user) }
 
@@ -18,8 +18,11 @@ feature 'Add files to question', %q{
     fill_in t('activerecord.attributes.question.title'), with: 'Test question'
     page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test body';")
 
-    inputs = all('.select-file')
-    inputs[0].set("#{Rails.root}/spec/support/test_file.dat")
+    #sleep 5
+    #inputs = all('.select-file')
+    #expect(page).to have_input('select-file')
+    #save_and_open_page
+    find('input[type="file"]').set("#{Rails.root}/spec/support/test_file.dat")
 
     click_on t('common.button.create')
 
@@ -32,6 +35,7 @@ feature 'Add files to question', %q{
 
     click_on t('common.button.attachment.add')
 
+    sleep 1
     inputs = all('.select-file')
     inputs[0].set("#{Rails.root}/spec/support/test_file.dat")
     inputs[1].set("#{Rails.root}/spec/support/test_file.dat")

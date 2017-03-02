@@ -32,6 +32,7 @@ feature 'Edit question', %q{
           find('#edit-question', match: :first).click
         end
 
+        sleep 1
         page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test edit question';")
 
         find('#ready-button', match: :first).click()

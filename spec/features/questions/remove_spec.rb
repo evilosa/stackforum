@@ -5,7 +5,7 @@ feature 'Remove files from question', %q{
   In order to correct my question
   As an question's author
   I'd like to be able to remove files
-}, driver: :selenium do
+} do
 
   given!(:user) { create(:user) }
   given!(:file) { create(:attachment) }

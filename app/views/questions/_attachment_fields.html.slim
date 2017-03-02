@@ -5,5 +5,5 @@
   span.input-group-addon.btn.btn-default.btn-file
     span.fileinput-new = t('common.button.attachment.select')
     span.fileinput-exists = t('common.button.attachment.change')
-    = f.file_field :file, class: 'select-file'
+    = f.file_field :file, class: 'select-file', id: 'select-file'
   = link_to_remove_association t('common.button.attachment.remove'), f, class: 'input-group-addon btn btn-default fileinput-exists', data: { dismiss: 'fileinput' }
