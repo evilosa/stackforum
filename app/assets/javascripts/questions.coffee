@@ -36,10 +36,32 @@ $ ->
     })
     $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML=$('#question-body').html()
 
-  App.cable.subscriptions.create('QuestionsChannel', {
-    connected: ->
-      @perform 'follow'
-    ,
-    received: (data) ->
-      $('#questions-list').append(data)
-  })
+question_channel = ->
+  App.cable.subscriptions.unsubscribe
+
+  if (window.location.pathname == '/questions')
+    App.cable.subscriptions.create('QuestionsChannel', {
+      connected: ->
+        @perform 'follow'
+      ,
+      received: (data) ->
+        $('#questions-list').append(data)
+      ,
+      disconnected: ->
+        console.log 'disconnected questions'
+    })
+  else
+    App.cable.subscriptions.create({channel: 'QuestionsChannel', id: $('.social-body').data('questionId')},
+      connected: ->
+        @perform 'follow_question'
+      ,
+      received: (data) ->
+        console.log data
+      ,
+      disconnected: ->
+        console.log 'disconnected question id'
+    )
+
+#$(document).ready(question_channel)
+$(document).on('turbolinks:load', question_channel)
+#$(document).on('page:update', question_channel)

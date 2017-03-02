@@ -18,7 +18,7 @@
           .media-body
             a = "#{@question.user.email} - #{@question.title}"
             small.text-muted = @question.created_at
-        .social-body
+        .social-body data-question-id="#{@question.id}"
           .row
             .col-md-9
               p#question-body = @question.body.html_safe

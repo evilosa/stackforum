@@ -3,6 +3,8 @@ class AnswersController < ApplicationController
   before_action :set_question
   before_action :set_answer, only: [:update]
 
+  after_action :publish_answer, only: [:create]
+
   include Voted
 
   def create
@@ -32,5 +34,14 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:question_id, :body, :best, :user_id, attachments_attributes: [:id, :file, :_destroy])
+  end
+
+  def publish_answer
+    return if @answer.errors.any?
+
+    ActionCable.server.broadcast(
+       "question_#{@question.id}",
+       'answer created'
+    )
   end
 end
