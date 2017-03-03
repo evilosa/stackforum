@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   after_action :publish_question, only: [:create]
 
   include Voted
+  include Commented
 
   def index
     @questions = Question.all
