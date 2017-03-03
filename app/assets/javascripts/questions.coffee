@@ -60,7 +60,8 @@ question_channel = ->
 
         switch data.action
           when 'create_answer' then append_answer(data)
-          when 'create_comment' then append_comment(data)
+          when 'create_question_comment' then append_question_comment(data)
+          when 'create_answer_comment' then append_answer_comment(data)
       ,
       disconnected: ->
         console.log 'disconnected question id'
@@ -68,9 +69,15 @@ question_channel = ->
 
 append_answer = (data) ->
   $('.social-footer').append(JST["templates/answer/answer"](data))
+  $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='';
 
-append_comment = (data) ->
-  $('.comments[data-answer-id="', data.answer.id, '"]').append(JST["templates/answer/answer"](data))
+append_question_comment = (data) ->
+  $('.comments[data-question-id="' + data.owner_id + '"]').append(JST["templates/comments/comment"](data))
+  $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='';
+
+append_answer_comment = (data) ->
+  $('.comments[data-answer-id="' + data.owner_id + '"]').append(JST["templates/comments/comment"](data))
+  $('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='';
 
 #$(document).ready(question_channel)
 $(document).on('turbolinks:load', question_channel)

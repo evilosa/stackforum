@@ -1,6 +1,6 @@
 .social-comment data-answer-id="#{@comment.id}"
   .media-body
-    a = @user_email
+    a = @comment_email
     - if gon.user_id == @comment.user_id
       .btn-group.pull-right
         /- if current_user.author_of?(comment)

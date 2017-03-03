@@ -12,6 +12,8 @@
               i.fa.fa-edit = t('common.button.edit')
             = link_to @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs', id: 'remove-question'
               i.fa.fa-remove = t('common.button.delete')
+            a.btn.btn-white.btn-xs#new-question-comment data-toggle='modal' data-question-id="#{@question.id}" data-target='#edit-answer-form'
+              i.fa.fa-comment = t('common.button.comment')
         .social-avatar
           a.pull-left
             img src="#{image_path('a1.jpg')}"
@@ -19,6 +21,7 @@
             a = "#{@question.user.email} - #{@question.title}"
             small.text-muted = @question.created_at
         .social-body data-question-id="#{@question.id}"
+          / Body
           .row
             .col-md-9
               p#question-body = @question.body.html_safe
@@ -31,6 +34,7 @@
                     i.fa.fa-chevron-down
             .col-md-3
               .small.text-right
+                / Attachment
                 h5 Files:
                 - @question.attachments.each do |a|
                   div data-attachment-id="#{a.id}"
@@ -39,6 +43,11 @@
                     - if user_signed_in? && current_user.author_of?(a.attachable)
                       = link_to attachment_path(a), method: :delete, remote: true, id: 'remove-file'
                         i.fa.fa-remove
+          / Comments
+          .comments data-question-id="#{@question.id}"
+            h5 Comments:
+            - @question.comments.each do |comment|
+              = render 'questions/comment', comment: comment
         .social-footer
           = render 'answers'
         .modal-footer
