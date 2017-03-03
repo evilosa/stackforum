@@ -12,6 +12,7 @@
               i.fa.fa-edit = t('common.button.edit')
             = link_to @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs', id: 'remove-question'
               i.fa.fa-remove = t('common.button.delete')
+          - if user_signed_in?
             a.btn.btn-white.btn-xs#new-question-comment data-toggle='modal' data-question-id="#{@question.id}" data-target='#edit-answer-form'
               i.fa.fa-comment = t('common.button.comment')
         .social-avatar
