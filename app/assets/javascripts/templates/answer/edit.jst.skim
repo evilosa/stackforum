@@ -1,0 +1,2 @@
+a.btn.btn-white.btn-xs#edit-answer href="/questions/#{@question.id}/answers/#{@answer.id}" data-question-id="#{@question.id}" data-answer-id="#{@answer.id}" data-toggle="modal" data-target="#edit-answer-form"
+  i.fa.fa-edit = I18n.t('common.button.edit')

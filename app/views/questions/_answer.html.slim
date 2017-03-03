@@ -5,8 +5,6 @@
     div#answer-score data-answer-id="#{answer.id}" = answer.score
     = link_to downvote_question_answer_path(@question, answer), method: :patch, remote: true, data: { type: :json, answer_id: answer.id }, id: 'answer-downvote'
       i.fa.fa-chevron-down
-  a.pull-left
-    img src="#{image_path('a2.jpg')}"
   .media-body
     a class="#{answer.best ? 'badge badge-primary' : ''}" = answer.user.email
     - if user_signed_in?

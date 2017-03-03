@@ -1,0 +1,2 @@
+a.btn.btn-white.btn-xs id="remove_answer" href="/questions/#{@question.id}/answers/#{@answer.id}" data-method="delete" data-remote="true" data-answer-id="#{@answer.id}" data-confirm="Вы уверены?"
+  i.fa.fa-trash #{I18n.t('common.button.delete')}

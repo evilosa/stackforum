@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
   def show
     @answer = Answer.new
     @answer.attachments.build
+    gon.question_id = @question.id
   end
 
   def new

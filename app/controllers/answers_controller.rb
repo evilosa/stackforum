@@ -11,7 +11,6 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
     @answer.save
-    gon.answer_body = @answer.body
   end
 
   def update
@@ -40,10 +39,15 @@ class AnswersController < ApplicationController
   def publish_answer
     return if @answer.errors.any?
 
+    attachments = []
+    @answer.attachments.each { |a| attachments << { id: a.id, name: a.file.identifier, url: a.file.url } }
     ActionCable.server.broadcast(
        "question_#{@question.id}",
        answer: @answer,
-       question: @question
+       answer_score: @answer.score,
+       attachments: attachments,
+       question: @question,
+       email: @answer.user.email
     )
   end
 end
