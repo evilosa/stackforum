@@ -57,11 +57,20 @@ question_channel = ->
       ,
       received: (data) ->
         console.log data
-        $('.social-footer').append(JST["templates/answer/answer"](data))
+
+        switch data.action
+          when 'create_answer' then append_answer(data)
+          when 'create_comment' then append_comment(data)
       ,
       disconnected: ->
         console.log 'disconnected question id'
     )
+
+append_answer = (data) ->
+  $('.social-footer').append(JST["templates/answer/answer"](data))
+
+append_comment = (data) ->
+  $('.comments[data-answer-id="', data.answer.id, '"]').append(JST["templates/answer/answer"](data))
 
 #$(document).ready(question_channel)
 $(document).on('turbolinks:load', question_channel)

@@ -44,6 +44,7 @@ class AnswersController < ApplicationController
     @answer.attachments.each { |a| attachments << { id: a.id, name: a.file.identifier, url: a.file.url } }
     ActionCable.server.broadcast(
        "question_#{@question.id}",
+       action: 'create_answer',
        answer: @answer,
        answer_score: @answer.score,
        attachments: attachments,

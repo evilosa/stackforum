@@ -3,7 +3,7 @@ module Commented
 
   included do
     before_action :set_commentable, only: [:comment, :edit_comment]
-    after_action :publish_comment, only: [:create]
+    after_action :publish_comment, only: [:comment]
 
     def comment
       @comment = @commentable.comments.new(comment_params)
@@ -51,10 +51,14 @@ module Commented
   def publish_comment
     return if @comment.nil? || @comment.errors.any?
 
+    question_id = @commentable.instance_of?(Question) ? @commentable.id : @commentable.question_id
+
     ActionCable.server.broadcast(
-        "questions_#{@commentable.id}",
-        body: @comment.body,
-        comment_author: @comment.user_id
+        "question_#{question_id}",
+        action: 'create_comment',
+        comment: @comment,
+        question_id: question_id,
+        comment_email: @comment.user.email
     )
   end
 end
