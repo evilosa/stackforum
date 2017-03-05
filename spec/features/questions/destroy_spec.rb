@@ -18,8 +18,14 @@ feature 'Delete question', %q{
       first('#remove-question').click
     end
 
+<<<<<<< c4fe4db3a272aabfc643a524544c45d9659a05ad
     expect(page).to have_content t('common.messages.questions.destroy')
     expect(page).to have_current_path questions_path
+=======
+    expect(page).to have_content t('flash.actions.destroy.notice', resource_name: t('activerecord.models.question.one'))
+    expect(current_path).to eq questions_path
+    expect(page).not_to have_content question.title
+>>>>>>> Refactor question controller.
   end
 
   scenario 'Not question owner not sees delete link' do

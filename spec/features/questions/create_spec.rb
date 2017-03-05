@@ -15,10 +15,16 @@ feature 'Create question', %q{
     click_on t('common.button.question.add_new')
     expect(page).to have_current_path new_question_path
     fill_in t('activerecord.attributes.question.title'), with: 'Test question'
+<<<<<<< c4fe4db3a272aabfc643a524544c45d9659a05ad
     page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test question';")
+=======
+
+    page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test question';")
+
+>>>>>>> Refactor question controller.
     click_on t('common.button.create')
 
-    expect(page).to have_content t('common.messages.questions.create')
+    expect(page).to have_content t('flash.actions.create.notice', resource_name: t('activerecord.models.question.one'))
   end
 
   context 'multiple sessions' do

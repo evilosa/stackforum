@@ -23,10 +23,14 @@ gem 'bootsy'
 gem 'carrierwave'
 gem 'remotipart'
 gem 'cocoon'
+<<<<<<< c4fe4db3a272aabfc643a524544c45d9659a05ad
 gem 'sprockets', '3.6.3'
 gem 'skim'
 gem 'gon'
 gem 'i18n-js', '>= 3.0.0.rc11'
+=======
+gem 'responders'
+>>>>>>> Refactor question controller.
 
 group :development, :test do
   gem 'byebug', platform: :mri
