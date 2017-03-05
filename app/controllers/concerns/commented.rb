@@ -51,23 +51,11 @@ module Commented
   def publish_comment
     return if @comment.nil? || @comment.errors.any?
 
-    action = case @commentable
-               when Question then
-                 question_id = @commentable.id
-                 'create_question_comment'
-               when Answer then
-                 question_id = @commentable.question_id
-                 'create_answer_comment'
-               else
-                 'create_comment'
-             end
+    comment = CommentPresenter.new(@comment).as('publish')
 
     ActionCable.server.broadcast(
-        "question_#{question_id}",
-        action: action,
-        owner_id: @commentable.id,
-        comment: @comment,
-        comment_email: @comment.user.email
+        "question_#{comment[:question_id]}",
+        comment
     )
   end
 end

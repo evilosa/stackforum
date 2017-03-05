@@ -40,16 +40,10 @@ class AnswersController < ApplicationController
   def publish_answer
     return if @answer.errors.any?
 
-    attachments = []
-    @answer.attachments.each { |a| attachments << { id: a.id, name: a.file.identifier, url: a.file.url } }
+    answer = AnswerPresenter.new(@answer).as('publish')
     ActionCable.server.broadcast(
        "question_#{@question.id}",
-       action: 'create_answer',
-       answer: @answer,
-       answer_score: @answer.score,
-       attachments: attachments,
-       question: @question,
-       email: @answer.user.email
+       answer
     )
   end
 end
