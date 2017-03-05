@@ -1,0 +1,14 @@
+.social-comment data-answer-id="#{@comment.id}"
+  .media-body
+    a = @comment_email
+    - if gon.user_id == @comment.user_id
+      .btn-group.pull-right
+        /- if current_user.author_of?(comment)
+          a.btn.btn-white.btn-xs#edit-comment data-toggle='modal' data-target='#edit-answer-form'
+            i.fa.fa-edit = t('common.button.edit')
+    br
+    small.text-muted = @comment.created_at
+    .row
+      .col-md-12
+        #comment-body data-answer-id="#{@comment.id}" = @safe @comment.body
+  .hr-line-dashed

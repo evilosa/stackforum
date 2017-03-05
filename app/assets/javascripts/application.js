@@ -11,9 +11,9 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.remotipart
+//= require action_cable
 //= require cocoon
 //= require bootstrap-sprockets
 //= require metisMenu/jquery.metisMenu.js
@@ -22,4 +22,10 @@
 //= require iCheck/icheck.min.js
 //= require bootsy
 //= require turbolinks
+//= require i18n
+//= require i18n/translations
 //= require_tree .
+
+I18n.defaultLocale = "en"
+I18n.locale = "ru"
+I18n.currentLocale()

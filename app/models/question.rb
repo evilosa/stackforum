@@ -1,6 +1,7 @@
 class Question < ApplicationRecord
   include Attachable
   include Votable
+  include Commentable
 
   has_many :answers
 

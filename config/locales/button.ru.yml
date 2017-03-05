@@ -12,6 +12,7 @@ ru:
       delete: 'Удалить'
       best: 'Лучший'
       ready: 'Готово'
+      comment: 'Комменировать'
       attachment:
         add: 'Добавить файл'
         change: 'Изменить файл'

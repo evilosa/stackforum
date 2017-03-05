@@ -1,12 +1,10 @@
 .social-comment data-answer-id="#{answer.id}"
   .vote-actions.pull-left
-    = link_to upvote_question_answer_path(@question, answer), method: :patch, remote: true, data: { type: :json }, id: 'answer-upvote'
+    = link_to upvote_question_answer_path(@question, answer), method: :patch, remote: true, data: { type: :json, answer_id: answer.id }, id: 'answer-upvote'
       i.fa.fa-chevron-up
-    div#answer-score = answer.score
-    = link_to downvote_question_answer_path(@question, answer), method: :patch, remote: true, data: { type: :json }, id: 'answer-downvote'
+    div#answer-score data-answer-id="#{answer.id}" = answer.score
+    = link_to downvote_question_answer_path(@question, answer), method: :patch, remote: true, data: { type: :json, answer_id: answer.id }, id: 'answer-downvote'
       i.fa.fa-chevron-down
-  a.pull-left
-    img src="#{image_path('a2.jpg')}"
   .media-body
     a class="#{answer.best ? 'badge badge-primary' : ''}" = answer.user.email
     - if user_signed_in?
@@ -20,6 +18,8 @@
             i.fa.fa-edit = t('common.button.edit')
           = link_to question_answer_path(@question, answer), id: 'remove_answer', method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs'
             i.fa.fa-trash = t('common.button.delete')
+        a.btn.btn-white.btn-xs#new-answer-comment data-toggle='modal' data-question-id="#{@question.id}" data-answer-id="#{answer.id}" data-target='#edit-answer-form'
+          i.fa.fa-comment = t('common.button.comment')
     br
     small.text-muted = answer.created_at
     .row
@@ -35,4 +35,7 @@
               - if user_signed_in? && current_user.author_of?(a.attachable)
                 = link_to attachment_path(a), method: :delete, remote: true, id: 'remove-file'
                   i.fa.fa-remove
+    .comments data-answer-id="#{answer.id}"
+      - answer.comments.each do |comment|
+        = render 'questions/comment', comment: comment
   .hr-line-dashed

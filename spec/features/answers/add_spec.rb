@@ -18,15 +18,13 @@ feature 'Add files to answer', %q{
   scenario 'User adds file when asks question', js: true do
     click_on t('common.button.answer.add_new')
 
-    sleep 1
     page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test answer';")
 
-    page.attach_file 'answer_attachments_attributes_0_file', "#{Rails.root}/spec/support/test_file.dat", visible: false
+    find('input[type="file"]').set("#{Rails.root}/spec/support/test_file.dat")
 
     click_on t('common.button.ready')
 
     expect(page).to have_current_path question_path(question)
-    expect(page).not_to have_button t('common.button.ready')
     expect(page).to have_link 'test_file.dat'
     within '.social-footer' do
       expect(page).to have_content 'Test answer'

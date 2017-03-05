@@ -1,0 +1,2 @@
+a.btn.btn-white.btn-xs#best-answer href="/questions/#{@question.id}/best_answer?answer_id=#{@answer.id}" data-remote="true" data-method="patch" data-question-id="#{@question.id}" data-answer-id="#{@answer.id}"
+  i.fa.fa-check = I18n.t('common.button.best')

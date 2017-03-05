@@ -1,0 +1,33 @@
+.social-comment data-answer-id="#{@answer.id}"
+  .vote-actions.pull-left
+    = @safe JST["templates/answer/upvote"](answer: @answer, question: @question)
+    div#answer-score data-answer-id="#{@answer.id}" = @answer_score
+    = @safe JST["templates/answer/downvote"](answer: @answer, question: @question)
+
+  .media-body
+    a class="#{@answer.best ? 'badge badge-primary' : ''}" = @email
+    - if gon.user_id == @answer.user_id
+      .btn-group.pull-right
+        / Set best answer link
+        - if gon.user_id == @question.user_id && !@answer.best
+          = @safe JST["templates/answer/best"](answer: @answer, question: @question)
+        / User is answer owner?
+        - if gon.user_id == @answer.user_id
+          = @safe JST["templates/answer/edit"](answer: @answer, question: @question)
+          = @safe JST["templates/answer/remove"](answer: @answer, question: @question)
+    br
+    small.text-muted = @answer.created_at
+    .row
+      .col-md-9
+        #answer-body data-answer-id="#{@answer.id}" = @safe @answer.body
+      .col-md-3
+        .small.text-right#answer-files-body
+          h5 Files:
+          - for file in @attachments
+            div data-attachment-id="#{file.id}"
+              i.fa.fa-file
+              a href="#{file.url}" = file.name
+              - if gon.user_id == @answer.user_id
+                a#remove-file href="/attachments/#{file.id}" data-remote="true" data-method="delete"
+                  i.fa.fa-remove
+  .hr-line-dashed

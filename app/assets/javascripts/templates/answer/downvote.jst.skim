@@ -1,0 +1,2 @@
+a id="answer-downvote" href="/questions/#{@question.id}/answers/#{@answer.id}/downvote" data-method="patch" data-remote="true" data-type="json" data-answer-id="#{@answer.id}"
+  i.fa.fa-chevron-down
