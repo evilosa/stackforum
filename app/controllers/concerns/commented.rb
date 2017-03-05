@@ -54,7 +54,7 @@ module Commented
     comment = CommentPresenter.new(@comment).as('publish')
 
     ActionCable.server.broadcast(
-        "question_#{comment[:question_id]}",
+        "question_#{comment[:question_id]}_comments",
         comment
     )
   end

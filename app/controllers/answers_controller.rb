@@ -42,7 +42,7 @@ class AnswersController < ApplicationController
 
     answer = AnswerPresenter.new(@answer).as('publish')
     ActionCable.server.broadcast(
-       "question_#{@question.id}",
+       "question_#{@question.id}_answers",
        answer
     )
   end
