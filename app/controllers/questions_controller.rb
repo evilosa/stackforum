@@ -10,7 +10,11 @@ class QuestionsController < ApplicationController
   before_action :build_answer, only: [:show]
 
   respond_to :html
+<<<<<<< c6ee6c2cf7ad4a4a2224713a8a05d274036023a9
 >>>>>>> Refactor question controller.
+=======
+  respond_to :js, only: [:best_answer, :update_body]
+>>>>>>> Refactor attachment, question controller.
 
   def index
     respond_with (@questions = Question.all)
@@ -35,7 +39,7 @@ class QuestionsController < ApplicationController
   end
 
   def best_answer
-    @question.best_answer!(params)
+    respond_with @question.best_answer!(params)
   end
 
   def update
@@ -46,8 +50,7 @@ class QuestionsController < ApplicationController
   end
 
   def update_body
-    @question.update(body: question_params[:body])
-    render :update_body
+    respond_with @question.update(body: question_params[:body])
   end
 
   def destroy
