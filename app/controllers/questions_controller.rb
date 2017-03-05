@@ -1,33 +1,23 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :best_answer, :update_body, :update, :destroy]
-<<<<<<< c4fe4db3a272aabfc643a524544c45d9659a05ad
+  before_action :build_answer, only: [:show]
   after_action :publish_question, only: [:create]
 
   include Voted
   include Commented
-=======
-  before_action :build_answer, only: [:show]
+
 
   respond_to :html
-<<<<<<< c6ee6c2cf7ad4a4a2224713a8a05d274036023a9
->>>>>>> Refactor question controller.
-=======
   respond_to :js, only: [:best_answer, :update_body]
->>>>>>> Refactor attachment, question controller.
 
   def index
     respond_with (@questions = Question.all)
   end
 
   def show
-<<<<<<< c4fe4db3a272aabfc643a524544c45d9659a05ad
-    @answer = Answer.new
-    @answer.attachments.build
     gon.question_id = @question.id
-=======
     respond_with @question
->>>>>>> Refactor question controller.
   end
 
   def new
@@ -63,7 +53,6 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
-<<<<<<< c4fe4db3a272aabfc643a524544c45d9659a05ad
   def publish_question
     return if @question.errors.any?
 
@@ -74,10 +63,10 @@ class QuestionsController < ApplicationController
          locals: { question: @question }
       )
     )
-=======
+  end
+
   def build_answer
     @answer = @question.answers.build
->>>>>>> Refactor question controller.
   end
 
   def question_params
