@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
   include Voted
   include Commented
 
-
   respond_to :html
   respond_to :js, only: [:best_answer, :update_body]
 
@@ -33,10 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if current_user.author_of?(@question)
-      @question.update(question_params)
-      respond_with @question
-    end
+    respond_with @question.update(question_params) if current_user.author_of?(@question)
   end
 
   def update_body
