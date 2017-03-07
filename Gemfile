@@ -28,6 +28,8 @@ gem 'skim'
 gem 'gon'
 gem 'i18n-js', '>= 3.0.0.rc11'
 gem 'responders'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'byebug', platform: :mri

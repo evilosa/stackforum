@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302164248) do
+ActiveRecord::Schema.define(version: 20170307195234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
-    t.integer  "question_id",                 null: false
-    t.text     "body",                        null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "question_id", null: false
+    t.text     "body",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
-    t.boolean  "best",        default: false
+    t.boolean  "best"
     t.index ["question_id", "best"], name: "index_answers_on_question_id_and_best", unique: true, where: "best", using: :btree
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
@@ -60,6 +60,15 @@ ActiveRecord::Schema.define(version: 20170302164248) do
     t.index ["commentable_id", "commentable_type", "user_id"], name: "index_commentable_for_user", using: :btree
     t.index ["commentable_id", "commentable_type"], name: "index_commentable_search", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
   end
 
   create_table "questions", force: :cascade do |t|
@@ -101,4 +110,5 @@ ActiveRecord::Schema.define(version: 20170302164248) do
     t.index ["votable_type", "status", "user_id"], name: "index_votes_on_votable_type_and_status_and_user_id", using: :btree
   end
 
+  add_foreign_key "identities", "users"
 end
