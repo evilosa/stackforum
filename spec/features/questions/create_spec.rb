@@ -4,7 +4,7 @@ feature 'Create question', %q{
   In order to get answer from community
   As an authenticated user
   I want to be able to ask questions
-} do
+}, driver: :webkit do
 
   given(:user) { create(:user) }
 
@@ -18,7 +18,7 @@ feature 'Create question', %q{
     page.execute_script("$('.wysihtml5-sandbox')[0].contentWindow.document.body.innerHTML='Test question';")
     click_on t('common.button.create')
 
-    expect(page).to have_content t('common.messages.questions.create')
+    expect(page).to have_content t('flash.actions.create.notice', resource_name: t('activerecord.models.question.one'))
   end
 
   context 'multiple sessions' do

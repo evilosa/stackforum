@@ -27,6 +27,7 @@ gem 'sprockets', '3.6.3'
 gem 'skim'
 gem 'gon'
 gem 'i18n-js', '>= 3.0.0.rc11'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug', platform: :mri

@@ -1,7 +1,10 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question
-  before_action :set_answer, only: [:update]
+  before_action :set_answer, only: [:update, :destroy]
+
+  respond_to :js
+  respond_to :json, only: :create
 
   after_action :publish_answer, only: [:create]
 
@@ -9,18 +12,15 @@ class AnswersController < ApplicationController
   include Commented
 
   def create
-    @answer = @question.answers.new(answer_params)
-    @answer.user = current_user
-    @answer.save
+    respond_with (@answer = @question.answers.create(answer_params))
   end
 
   def update
-    @answer.update(answer_params)
+    respond_with @answer.update(answer_params)
   end
 
   def destroy
-    @answer = @question.answers.find(params[:id])
-    @answer.destroy
+    respond_with @answer.destroy
   end
 
   private
@@ -30,11 +30,11 @@ class AnswersController < ApplicationController
   end
 
   def set_answer
-    @answer = Answer.find(params[:id])
+    @answer = @question.answers.find(params[:id])
   end
 
   def answer_params
-    params.require(:answer).permit(:question_id, :body, :best, :user_id, attachments_attributes: [:id, :file, :_destroy])
+    params.require(:answer).permit(:question_id, :body, :best, :user_id, attachments_attributes: [:id, :file, :_destroy]).merge(user: current_user)
   end
 
   def publish_answer

@@ -1,55 +1,46 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :best_answer, :update_body, :update, :destroy]
+  before_action :build_answer, only: [:show]
   after_action :publish_question, only: [:create]
 
   include Voted
   include Commented
 
+  respond_to :html
+  respond_to :js, only: [:best_answer, :update_body]
+
   def index
-    @questions = Question.all
+    respond_with (@questions = Question.all)
   end
 
   def show
-    @answer = Answer.new
-    @answer.attachments.build
     gon.question_id = @question.id
+    respond_with @question
   end
 
   def new
-    @question = current_user.questions.new
-    @question.attachments.build
+    respond_with (@question = current_user.questions.new)
   end
 
   def create
-    @question = current_user.questions.new(question_params)
-    if @question.save
-      redirect_to @question, notice: t('common.messages.questions.create')
-    else
-      render :new
-    end
+    respond_with (@question = current_user.questions.create(question_params))
   end
 
   def best_answer
-    @question.best_answer!(params)
+    respond_with @question.best_answer!(params)
   end
 
   def update
-    @question.update(question_params) if current_user.author_of?(@question)
+    respond_with @question.update(question_params) if current_user.author_of?(@question)
   end
 
   def update_body
-    @question.update(body: question_params[:body])
-    render :update_body
+    respond_with @question.update(body: question_params[:body])
   end
 
   def destroy
-    if current_user.author_of?(@question)
-      @question.destroy
-      redirect_to questions_path, notice: t('common.messages.questions.destroy')
-    else
-      redirect_to @question, notice: t('common.errors.not_allow')
-    end
+    respond_with (@question.destroy) if current_user.author_of?(@question)
   end
 
   private
@@ -68,6 +59,10 @@ class QuestionsController < ApplicationController
          locals: { question: @question }
       )
     )
+  end
+
+  def build_answer
+    @answer = @question.answers.build
   end
 
   def question_params
