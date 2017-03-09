@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
 
   has_many :questions
   has_many :answers
@@ -16,7 +16,11 @@ class User < ApplicationRecord
     identity = Identity.where(provider: auth.provider, uid: auth.uid.to_s).first
     return identity.user if identity
 
-    email = auth.info[:email]
+    if auth.key?('info') && auth.info.key?('email')
+      email = auth.info[:email]
+    else
+      email = "#{auth.uid.to_s}@stackforum.com"
+    end
     user = User.where(email: email).first
 
     unless user

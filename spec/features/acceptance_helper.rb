@@ -9,6 +9,7 @@ RSpec.configure do |config|
   config.include I18nMacros, type: :feature
   config.include Warden::Test::Helpers, type: :feature
   config.include Capybara::Webkit::RspecMatchers, type: :feature
+  config.include OmniauthMacros, type: :feature
 
   # Poltergeist
   Capybara.register_driver :poltergeist do |app|
@@ -25,6 +26,8 @@ RSpec.configure do |config|
   # Puma server
   Capybara.server = :puma
 end
+
+OmniAuth.config.test_mode = true
 
 Capybara::Webkit.configure do |config|
   #config.block_unknown_urls
