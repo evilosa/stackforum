@@ -1,6 +1,8 @@
 ru:
   common:
     hello: 'Добро пожаловать'
+    input:
+      new_email: 'Введите email пользователя'
     actions:
       list: 'Список'
       new: 'Создание'

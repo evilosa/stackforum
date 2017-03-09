@@ -41,6 +41,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'poltergeist'
+  gem 'letter_opener'
 end
 
 group :development do

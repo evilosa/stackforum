@@ -1,0 +1,12 @@
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .ibox
+      .ibox-title
+        h5 = t('common.input.new_email')
+      .ibox-content
+        = form_tag update_email_omniauth_path
+          .form-group
+            = label_tag 'email'
+            = email_field_tag 'email', '', class: 'form-control'
+          .modal-footer
+            = submit_tag t('common.button.ready'), class: 'btn btn-primary pull-right'

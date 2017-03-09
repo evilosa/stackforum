@@ -11,13 +11,24 @@ feature 'Facebook oauth', %q{
       visit new_user_session_path
     end
 
-    it 'can sign in with oauth' do
+    it 'can register with oauth' do
       expect(page).to have_content t('common.authentication.sign_with_provider', provider: 'Facebook')
 
       mock_facebook_auth_hash('test@stackforum.com')
 
       click_link t('common.authentication.sign_with_provider', provider: 'Facebook')
       expect(page).to have_content('test@stackforum.com')
+
+      expect(page).to have_content t('common.button.log_out')
+    end
+
+    it 'existed user can sign in' do
+      user = create(:user, confirmed_at: Time.now)
+      user.identities.create(provider: 'facebook', uid: '123456')
+
+      mock_facebook_auth_hash(user.email)
+      click_link t('common.authentication.sign_with_provider', provider: 'Facebook')
+      expect(page).to have_content user.email
 
       expect(page).to have_content t('common.button.log_out')
     end
