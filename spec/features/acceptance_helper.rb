@@ -2,6 +2,7 @@ require 'selenium-webdriver'
 require 'capybara/webkit/matchers'
 require 'capybara/poltergeist'
 require 'puma'
+require 'capybara/email/rspec'
 
 RSpec.configure do |config|
   config.include AcceptanceHelper, type: :feature

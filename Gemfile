@@ -55,6 +55,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'with_model'
+  gem 'capybara-email'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
