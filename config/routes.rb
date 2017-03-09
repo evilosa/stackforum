@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resource :omniauth, only: [:show] do
     post 'update_email', on: :member
+    get 'confirm_email', on: :member
   end
 
   root to: 'questions#index'

@@ -6,18 +6,42 @@ class User < ApplicationRecord
 
   has_many :questions
   has_many :answers
-  has_many :identities
+  has_many :identities, dependent: :destroy
 
   def author_of?(object)
     self == object.user
   end
 
   def create_identity(auth)
-    identities.create(provider: auth.provider, uid: auth.uid.to_s)
+    identities.create(provider: auth[:provider], uid: auth[:uid].to_s)
   end
 
   def email_confirmed?(auth)
     email != "#{auth.provider}_#{auth.uid}@stackforum.com"
+  end
+
+  def self.confirm_oauth_email(auth)
+    User.transaction do
+      # Возможны две ситуации
+      user = User.find_by_email(auth[:email])
+      if user
+        # 1. Пользователь с новым email уже существует в базе
+        # Нам нужно найти его, задать ему идентити и удалить временного
+        temp_user = User.find_by_email(auth[:temp_email])
+        if temp_user && temp_user.confirmation_token == auth[:confirmation_token]
+          user.create_identity(auth)
+          temp_user.destroy
+        end
+      else
+        # 2. Пользователя с таким email не существует,
+        # меняем почту у временного
+        temp_user = User.find_by_email(auth[:temp_email])
+        if temp_user && temp_user.confirmation_token == auth[:confirmation_token]
+          temp_user.email = auth[:email]
+          temp_user.save
+        end
+      end
+    end
   end
 
   def self.find_for_oauth(auth)
@@ -33,6 +57,7 @@ class User < ApplicationRecord
       password = Devise.friendly_token[0, 20]
       user = User.new(email: email, password: password, password_confirmation: password)
       user.skip_confirmation!
+      user.confirmation_token = Devise.token_generator.generate(User, :confirmation_token)
       user.save
     end
 
