@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+
   resources :questions, concerns: [:votable, :commentable] do
     resources :answers, concerns: [:votable, :commentable]
     patch 'update_body', on: :member
@@ -23,6 +24,11 @@ Rails.application.routes.draw do
   end
 
   resources :attachments, only: [:destroy]
+
+  resource :omniauth, only: [:show] do
+    post 'update_email', on: :member
+    get 'confirm_email', on: :member
+  end
 
   root to: 'questions#index'
 end

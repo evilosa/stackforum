@@ -1,0 +1,16 @@
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .ibox
+      .ibox-title
+        h5 = t('common.input.new_email')
+      .ibox-content
+        = form_tag update_email_omniauth_path
+          = hidden_field_tag 'provider', params[:provider]
+          = hidden_field_tag 'uid', params[:uid]
+          = hidden_field_tag 'temp_email', params[:temp_email]
+          = hidden_field_tag 'confirmation_token', params[:confirmation_token]
+          .form-group
+            = label_tag 'email'
+            = email_field_tag 'email', '', class: 'form-control'
+          .modal-footer
+            = submit_tag t('common.button.ready'), class: 'btn btn-primary pull-right'

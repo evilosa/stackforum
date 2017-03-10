@@ -1,6 +1,8 @@
 en:
   common:
     hello: 'Hello world'
+    input:
+      new_email: 'Input user email'
     actions:
       list: 'List'
       new: 'Create'

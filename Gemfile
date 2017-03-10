@@ -28,6 +28,9 @@ gem 'skim'
 gem 'gon'
 gem 'i18n-js', '>= 3.0.0.rc11'
 gem 'responders'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -38,6 +41,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'poltergeist'
+  gem 'letter_opener'
 end
 
 group :development do
@@ -53,6 +57,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'with_model'
+  gem 'capybara-email'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
