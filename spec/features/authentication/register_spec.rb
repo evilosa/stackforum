@@ -24,8 +24,11 @@ feature 'Register user', %q{
     user = build(:user)
     fill_user.call(user)
 
-    expect(page).to have_content t('devise.registrations.signed_up')
-    expect(page).to have_current_path root_path
+    open_email(user.email)
+    current_email.click_link 'Confirm my account'
+
+    expect(page).to have_content t('devise.confirmations.confirmed')
+    expect(page).to have_current_path new_user_session_path
   end
 
   scenario 'Guest tries to register with invalid password confirmation' do
