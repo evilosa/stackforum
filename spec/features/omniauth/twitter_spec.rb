@@ -17,9 +17,17 @@ feature 'Twitter oauth', %q{
       mock_twitter_auth_hash
 
       click_link t('common.authentication.sign_with_provider', provider: 'Twitter')
-      expect(page).to have_current_path omniauth_path
+      expect(page).to have_current_path(omniauth_path, only_path: true)
 
-      expect(page).to have_content('123456@stackforum.com')
+      fill_in('email', with: 'test@stackforum.com')
+      click_on t('common.button.ready')
+
+      open_email('test@stackforum.com')
+      current_email.click_link 'Confirm email'
+
+      expect(page).to have_current_path root_path
+
+      expect(page).to have_content('test@stackforum.com')
 
       expect(page).to have_content t('common.button.log_out')
     end

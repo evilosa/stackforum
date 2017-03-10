@@ -24,6 +24,7 @@ RSpec.configure do |config|
   Capybara.default_driver = :poltergeist
 
   # Puma server
+  Capybara.server_port = 3100
   Capybara.server = :puma
 end
 
