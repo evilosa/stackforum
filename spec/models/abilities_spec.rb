@@ -53,10 +53,30 @@ describe Ability do
     it { should be_able_to :create, Comment }
 
     # Attachment
-    let(:attachment) { create(:attachment, user: user) }
-    let(:attachment_second_user) { create(:attachment, user: second_user) }
+    let(:attachment) { create(:attachment, attachable: answer) }
+    let(:attachment_second_user) { create(:attachment, attachable: answer_second_user) }
 
-    #it { should be_able_to :create, Attachment }
+    it { should be_able_to :create, Attachment }
+    it { should be_able_to :destroy, attachment, user: user }
+    it { should_not be_able_to :destroy, attachment_second_user, user: user }
+
+    # Vote
+    context 'Vote' do
+      it { should be_able_to :create, Vote.new(votable: question_second_user) }
+      it { should_not be_able_to :create, Vote.new(votable: question) }
+
+      it { should be_able_to :create, Vote.new(votable: answer_second_user) }
+      it { should_not be_able_to :create, Vote.new(votable: answer) }
+
+      it { should be_able_to :update, Vote.new(votable: question_second_user) }
+      it { should_not be_able_to :update, Vote.new(votable: question) }
+
+      it { should be_able_to :update, Vote.new(votable: answer_second_user) }
+      it { should_not be_able_to :update, Vote.new(votable: answer) }
+
+      it { should be_able_to :destroy, Vote.new(votable: answer), user: user }
+      it { should_not be_able_to :destroy, Vote.new(votable: answer_second_user), user: user }
+    end
 
     # Manage all
     it { should_not be_able_to :manage, :all }

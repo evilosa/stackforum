@@ -10,6 +10,8 @@ class QuestionsController < ApplicationController
   respond_to :html
   respond_to :js, only: [:best_answer, :update_body]
 
+  authorize_resource
+
   def index
     respond_with (@questions = Question.all)
   end
