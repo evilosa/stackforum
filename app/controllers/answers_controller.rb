@@ -11,6 +11,8 @@ class AnswersController < ApplicationController
   include Voted
   include Commented
 
+  authorize_resource
+
   def create
     respond_with (@answer = @question.answers.create(answer_params))
   end
