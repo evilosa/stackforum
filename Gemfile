@@ -44,6 +44,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'letter_opener'
+  gem 'json_spec'
 end
 
 group :development do
