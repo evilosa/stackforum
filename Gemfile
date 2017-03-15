@@ -32,6 +32,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancancan'
+gem 'doorkeeper'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -43,6 +44,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'poltergeist'
   gem 'letter_opener'
+  gem 'json_spec'
 end
 
 group :development do
