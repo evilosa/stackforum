@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Question API' do
-  describe 'GET /index' do
+  describe 'GET #index' do
     context 'unauthorized' do
       it 'returns 401 status if there is no access_token' do
         get '/api/v1/questions', params: { format: :json }
@@ -33,28 +33,12 @@ describe 'Question API' do
         expect(response.body).to have_json_size(2)
       end
 
-      it 'question contains attributes' do
+      it 'question from the list contains attributes' do
         expect(parsed_response['id']).to eq(question.id)
         expect(parsed_response['title']).to eq(question.title)
         expect(parsed_response['body']).to eq(question.body)
         expect(parsed_response['created_at'].to_json).to eq question.created_at.to_json
         expect(parsed_response['updated_at'].to_json).to eq question.updated_at.to_json
-      end
-
-      context 'answers' do
-
-        let(:parsed_answer) { parsed_response['answers'][0]}
-
-        it 'included in  question object' do
-          expect(parsed_response['answers'].size).to eq 1
-        end
-
-        it 'answer contains attributes' do
-          expect(parsed_answer['id']).to eq(answer.id)
-          expect(parsed_answer['body']).to eq(answer.body)
-          expect(parsed_answer['created_at'].to_json).to eq answer.created_at.to_json
-          expect(parsed_answer['updated_at'].to_json).to eq answer.updated_at.to_json
-        end
       end
     end
   end
