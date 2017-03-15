@@ -33,6 +33,9 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancancan'
 gem 'doorkeeper'
+gem 'active_model_serializers'
+gem 'oj'
+gem 'oj_mimic_json'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -45,6 +48,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'letter_opener'
   gem 'json_spec'
+  gem 'json_matchers'
 end
 
 group :development do

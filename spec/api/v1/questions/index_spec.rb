@@ -16,10 +16,16 @@ describe 'Question API' do
 
     context 'authorized' do
       let(:access_token) { create(:access_token) }
-      let(:questions) { create_list(:question, 2) }
+      let!(:questions) { create_list(:question, 2) }
+      let!(:question) { questions.first }
+      let!(:answer) { create(:answer, question: question) }
+      let(:parsed_response) { JSON.parse(response.body)[0] }
+
+      before do
+        get '/api/v1/questions', params: { format: :json, access_token: access_token.token }
+      end
 
       it 'returns 200 status code' do
-        get '/api/v1/questions', params: { format: :json, access_token: access_token.token }
         expect(response).to be_success
       end
 
@@ -28,14 +34,27 @@ describe 'Question API' do
       end
 
       it 'question contains attributes' do
-        question = questions.first
-        parsed_response = JSON.parse(response.body)[0]
-
         expect(parsed_response['id']).to eq(question.id)
         expect(parsed_response['title']).to eq(question.title)
         expect(parsed_response['body']).to eq(question.body)
         expect(parsed_response['created_at'].to_json).to eq question.created_at.to_json
         expect(parsed_response['updated_at'].to_json).to eq question.updated_at.to_json
+      end
+
+      context 'answers' do
+
+        let(:parsed_answer) { parsed_response['answers'][0]}
+
+        it 'included in  question object' do
+          expect(parsed_response['answers'].size).to eq 1
+        end
+
+        it 'answer contains attributes' do
+          expect(parsed_answer['id']).to eq(answer.id)
+          expect(parsed_answer['body']).to eq(answer.body)
+          expect(parsed_answer['created_at'].to_json).to eq answer.created_at.to_json
+          expect(parsed_answer['updated_at'].to_json).to eq answer.updated_at.to_json
+        end
       end
     end
   end
