@@ -48,7 +48,6 @@ group :development, :test do
   gem 'poltergeist'
   gem 'letter_opener'
   gem 'json_spec'
-  gem 'json_matchers'
 end
 
 group :development do
