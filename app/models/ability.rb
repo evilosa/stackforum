@@ -50,6 +50,8 @@ class Ability
     can :destroy, Vote do |vote|
       vote.votable.user == user
     end
+
+    can :me, User
   end
 
   def admin_abilities

@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :answers
   has_many :identities, dependent: :destroy
 
+  scope :without, ->(user) { where.not(id: user) }
+
   def author_of?(object)
     self == object.user
   end
