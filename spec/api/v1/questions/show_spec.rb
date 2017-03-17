@@ -8,6 +8,8 @@ describe 'Question API' do
     let!(:attachment) { create(:attachment, attachable: question) }
     let!(:comment) { create(:comment, commentable: question) }
     let(:parsed_response) { JSON.parse(response.body) }
+    let(:parsed_attachment) { parsed_response['attachments'][0]}
+    let(:parsed_comments) { parsed_response['comments'][0]}
 
     it_behaves_like 'API authenticable'
 
@@ -26,34 +28,8 @@ describe 'Question API' do
         expect(parsed_response['updated_at'].to_json).to eq question.updated_at.to_json
       end
 
-      context 'attachments' do
-        let(:parsed_attachment) { parsed_response['attachments'][0]}
-
-        it 'included in question object' do
-          expect(parsed_response['attachments'].size).to eq 1
-        end
-
-        it 'contains attributes' do
-          expect(parsed_attachment['id']).to eq(attachment.id)
-          expect(parsed_attachment['name']).to eq(attachment.file.identifier)
-          expect(parsed_attachment['url']).to eq(attachment.file.url)
-        end
-      end
-
-      context 'comments' do
-        let(:parsed_comments) { parsed_response['comments'][0]}
-
-        it 'included in question object' do
-          expect(parsed_response['comments'].size).to eq 1
-        end
-
-        it 'contains attributes' do
-          expect(parsed_comments['id']).to eq(comment.id)
-          expect(parsed_comments['body']).to eq(comment.body)
-          expect(parsed_comments['created_at'].to_json).to eq comment.created_at.to_json
-          expect(parsed_comments['updated_at'].to_json).to eq comment.updated_at.to_json
-        end
-      end
+      it_behaves_like 'API attachable'
+      it_behaves_like 'API commentable'
     end
   end
 
