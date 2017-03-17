@@ -9,26 +9,14 @@ describe 'Answers API' do
     let!(:comment) { create(:comment, commentable: answer) }
     let(:parsed_response) { JSON.parse(response.body) }
 
-    context 'unauthorized' do
-      it 'returns 401 status if there is no access_token' do
-        get "/api/v1/questions/#{question.id}/answers/#{answer.id}", params: { format: :json }
-        expect(response.status).to eq 401
-      end
-
-      it 'returns 401 status if access_token is invalid' do
-        get "/api/v1/questions/#{question.id}/answers/#{answer.id}", params: { format: :json, access_token: '1234' }
-        expect(response.status).to eq 401
-      end
-    end
+    it_behaves_like 'API authenticable'
 
     context 'authorized' do
       before do
-        get "/api/v1/questions/#{question.id}/answers/#{answer.id}", params: { format: :json, access_token: access_token.token }
+        do_request(access_token: access_token.token)
       end
 
-      it 'returns 200 status code' do
-        expect(response).to be_success
-      end
+      it_behaves_like 'API successable'
 
       it 'answer contains attributes' do
         expect(parsed_response['id']).to eq(answer.id)
@@ -66,5 +54,9 @@ describe 'Answers API' do
         end
       end
     end
+  end
+
+  def do_request(params = {})
+    get "/api/v1/questions/#{question.id}/answers/#{answer.id}", params: { format: :json }.merge(params)
   end
 end
