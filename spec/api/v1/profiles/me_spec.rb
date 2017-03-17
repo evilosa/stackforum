@@ -11,6 +11,8 @@ describe 'Profile API' do
     context 'authorized' do
       before { do_request(access_token: access_token.token) }
 
+      it_behaves_like 'API successable'
+
       it 'contain attributes' do
         expect(parsed_response['id']).to eq(me.id)
         expect(parsed_response['email']).to eq(me.email)

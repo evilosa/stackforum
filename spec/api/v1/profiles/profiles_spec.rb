@@ -11,6 +11,8 @@ describe 'Profile API' do
     context 'authorized' do
       before { do_request(access_token: access_token.token) }
 
+      it_behaves_like 'API successable'
+
       it 'contains users' do
         expect(response.body).to be_json_eql(other_users.to_json)
       end
