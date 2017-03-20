@@ -4,17 +4,7 @@ describe 'Question API' do
   describe 'GET #create' do
     let(:access_token) { create(:access_token) }
 
-    context 'unauthorized' do
-      it 'returns 401 status if there is no access_token' do
-        post '/api/v1/questions/', params: { question: attributes_for(:question), format: :json }
-        expect(response.status).to eq 401
-      end
-
-      it 'returns 401 status if access_token is invalid' do
-        post '/api/v1/questions/', params: { question: attributes_for(:question), format: :json, access_token: '1234' }
-        expect(response.status).to eq 401
-      end
-    end
+    it_behaves_like 'API authenticable'
 
     context 'authorized' do
       let(:valid_params) { { question: attributes_for(:question), format: :json, access_token: access_token.token} }
@@ -27,10 +17,8 @@ describe 'Question API' do
       end
 
       context 'with valid attributes' do
-        it 'returns 200 status code' do
-          create_question.call
-          expect(response).to be_success
-        end
+        before { create_question.call }
+        it_behaves_like 'API successable'
 
         it 'save question in database' do
           expect{ create_question.call }.to change(Question, :count).by(1)
@@ -48,5 +36,9 @@ describe 'Question API' do
         end
       end
     end
+  end
+
+  def do_request(params = {}, question = attributes_for(:question))
+    post '/api/v1/questions/', params: { format: :json }.merge(params).merge(question: question)
   end
 end
