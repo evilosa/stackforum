@@ -1,4 +1,7 @@
 require 'rails_helper'
+require 'sidekiq/testing'
+
+Sidekiq::Testing.fake!
 
 RSpec.describe DailyDigestJob, type: :job do
   let(:users) { create_list(:user, 2) }
