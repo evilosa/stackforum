@@ -1,0 +1,5 @@
+h2 Hi! There are all new questions:
+ul
+  - @questions.each do |question|
+    li
+      = link_to question.title, question_url(question)
