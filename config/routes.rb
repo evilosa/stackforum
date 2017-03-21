@@ -16,9 +16,16 @@ Rails.application.routes.draw do
     end
   end
 
+  concern :subscribable do
+    member do
+      post :subscribe
+      delete :unsubscribe
+    end
+  end
+
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
-  resources :questions, concerns: [:votable, :commentable] do
+  resources :questions, concerns: [:votable, :commentable, :subscribable] do
     resources :answers, concerns: [:votable, :commentable]
     patch 'update_body', on: :member
     patch 'best_answer', on: :member

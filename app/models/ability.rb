@@ -23,6 +23,8 @@ class Ability
     can :update, [Question, Answer], user: user
     can :destroy, [Question, Answer], user: user
     can :comment, [Question, Answer]
+    can :subscribe, [Question]
+    can :unsubscribe, [Question]
 
     can :best_answer, Question, user: user
     can :update_body, Question, user: user

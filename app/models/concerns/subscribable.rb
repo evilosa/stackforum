@@ -5,6 +5,10 @@ module Subscribable
     has_many :subscriptions, as: :subscribable, dependent: :delete_all
   end
 
+  def subscribed?(user)
+    subscriptions.where(user: user).present?
+  end
+
   def subscribe!(user)
     subscription = subscriptions.where(user: user).first_or_initialize
     subscription.save
