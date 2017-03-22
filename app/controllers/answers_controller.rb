@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
   respond_to :js
   respond_to :json, only: :create
 
-  after_action :publish_answer, only: [:create]
+  after_action :publish_answer, :notify_subscribers, only: [:create]
 
   include Voted
   include Commented
@@ -47,5 +47,11 @@ class AnswersController < ApplicationController
        "question_#{@question.id}_answers",
        answer
     )
+  end
+
+  def notify_subscribers
+    return if @answer.errors.any?
+
+    SubscriptionJob.perform_later(@answer)
   end
 end

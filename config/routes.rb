@@ -1,5 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   use_doorkeeper
+
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
 
   concern :votable do

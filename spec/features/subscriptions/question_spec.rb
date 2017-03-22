@@ -3,7 +3,7 @@ require_relative '../acceptance_helper'
 feature 'Create subscriptions for the question', %q{
   In order to subscribe for the question
   As an user
-  I'd like to be able to create subscription
+  I'd like to be able to create subscription.rb
 }, driver: :webkit do
 
   given!(:user) { create(:user) }
