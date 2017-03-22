@@ -4,7 +4,7 @@ feature 'Create comments for the question', %q{
   In order to comment question
   As an user
   I'd like to be able to create comment
-}, driver: :webkit do
+}, driver: :selenium do
 
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
