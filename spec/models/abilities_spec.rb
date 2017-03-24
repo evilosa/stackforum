@@ -60,6 +60,12 @@ describe Ability do
     it { should be_able_to :destroy, attachment, user: user }
     it { should_not be_able_to :destroy, attachment_second_user, user: user }
 
+    # Subscription
+    let(:subscription) { create(:subscription, user: user, subscribable: question) }
+
+    it { should be_able_to :create, Subscription }
+    it { should be_able_to :destroy, subscription, user: user}
+
     # Vote
     context 'Vote' do
       it { should be_able_to :create, Vote.new(votable: question_second_user) }

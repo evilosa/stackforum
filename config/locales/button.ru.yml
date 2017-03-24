@@ -3,6 +3,7 @@ ru:
     button:
       sign_in: 'Войти'
       sign_up: 'Зарегистрироваться'
+      back: 'Назад'
       log_in: 'Войти'
       register: 'Зарегистрировать'
       log_out: 'Выйти'
@@ -13,6 +14,8 @@ ru:
       best: 'Лучший'
       ready: 'Готово'
       comment: 'Комменировать'
+      subscribe: 'Подписаться'
+      unsubscribe: 'Отписаться'
       attachment:
         add: 'Добавить файл'
         change: 'Изменить файл'

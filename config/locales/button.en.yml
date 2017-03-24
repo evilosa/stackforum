@@ -3,6 +3,7 @@ en:
     button:
       sign_in: 'Sign in'
       sign_up: 'Sign up'
+      back: 'Back'
       log_in: 'Log in'
       register: 'Register'
       log_out: 'Log out'
@@ -13,6 +14,8 @@ en:
       best: 'Best'
       ready: 'Ready'
       comment: 'Comment'
+      subscribe: 'Subscribe'
+      unsubscribe: 'Unsubscribe'
       attachment:
         add: 'Add file'
         change: 'Change file'

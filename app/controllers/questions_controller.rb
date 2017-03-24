@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
 
   include Voted
   include Commented
+  include Subscribed
 
   respond_to :html
   respond_to :js, only: [:best_answer, :update_body]

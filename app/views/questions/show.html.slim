@@ -15,6 +15,12 @@
           - if user_signed_in?
             a.btn.btn-white.btn-xs#new-question-comment data-toggle='modal' data-question-id="#{@question.id}" data-target='#edit-answer-form'
               i.fa.fa-comment = t('common.button.comment')
+            - if @question.subscribed?(current_user)
+              = link_to unsubscribe_question_path(@question), method: :delete, class: 'btn btn-white btn-xs', id: 'unsubscribe-question'
+                i.fa.fa-comment = t('common.button.unsubscribe')
+            - else
+              = link_to subscribe_question_path(@question), method: :post, class: 'btn btn-white btn-xs', id: 'subscribe-question'
+                i.fa.fa-comment = t('common.button.subscribe')
         .social-avatar
           a.pull-left
             img src="#{image_path('a1.jpg')}"

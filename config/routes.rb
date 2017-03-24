@@ -1,5 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   use_doorkeeper
+
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
 
   concern :votable do
@@ -16,9 +23,16 @@ Rails.application.routes.draw do
     end
   end
 
+  concern :subscribable do
+    member do
+      post :subscribe
+      delete :unsubscribe
+    end
+  end
+
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
-  resources :questions, concerns: [:votable, :commentable] do
+  resources :questions, concerns: [:votable, :commentable, :subscribable] do
     resources :answers, concerns: [:votable, :commentable]
     patch 'update_body', on: :member
     patch 'best_answer', on: :member
