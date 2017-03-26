@@ -6,6 +6,7 @@ default: &default
 development:
   <<: *default
   database: sf_development
+  password: wY16DRcV
 
 test:
   <<: *default
