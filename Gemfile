@@ -40,6 +40,7 @@ gem 'sidekiq'
 gem 'whenever'
 gem 'mysql2', '~> 0.3.18', :platform => :ruby
 gem 'thinking-sphinx'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug', platform: :mri

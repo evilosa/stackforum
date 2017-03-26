@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     get 'confirm_email', on: :member
   end
 
+  resource :search, only: [:show]
+
   namespace :api do
     namespace :v1 do
       resource :profiles do

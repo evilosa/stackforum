@@ -8,6 +8,7 @@ en:
       new: 'Create'
       edit: 'Edit'
       show: 'View'
+      search: 'Search'
     titles:
       new_user_session: 'Log in'
       new_user_registration: 'Sign up'
