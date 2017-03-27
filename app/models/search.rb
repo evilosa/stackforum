@@ -14,7 +14,7 @@ class Search
               end
 
     if classes.present?
-      ThinkingSphinx.search(ThinkingSphinx::Query.escape(query), classes: classes, page: page, per_page: 20)
+      ThinkingSphinx.search(ThinkingSphinx::Query.escape(query), classes: classes, page: page, per_page: 5)
     end
   end
 end

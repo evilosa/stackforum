@@ -1,0 +1,8 @@
+- if results.empty?
+  p No matches
+- else
+  ul
+    - results.each do |result|
+      li
+        = render "searches/#{result.model_name.to_s.downcase}", result: result
+    = will_paginate results

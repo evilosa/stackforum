@@ -17,6 +17,6 @@
         .ibox-title
           p Результаты
         .ibox-content
-          - @results.each do |result|
-            = render result
+            .row
+              = render 'searches/search', results: @results if @results
 
