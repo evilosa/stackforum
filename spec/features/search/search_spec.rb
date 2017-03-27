@@ -1,3 +1,4 @@
+require_relative '../acceptance_helper'
 require_relative '../sphinx_helper'
 
 # For this test works, you must:
@@ -11,7 +12,7 @@ require_relative '../sphinx_helper'
 # sudo -u user_name psql db_name
 #
 # Set db user password:
-# ALTER USER "user_name" WITH PASSWORD 'new_password';
+# ALTER USER "user_name" WITH PASSWORD 'wY16DRcV';
 #
 # Set db user password to config/database.yml, example:
 # password: wY16DRcV
@@ -24,7 +25,7 @@ feature 'Search', %q{
   In order to find question, answer, comment, user
   As an any user
   I want to be able to search these by text parts
-} do
+}, driver: :poltergeist do
 
   given!(:question) { create(:question) }
   given!(:answer) { create(:answer) }
@@ -35,10 +36,16 @@ feature 'Search', %q{
 
   before do
     index
-    visit search_path
+    visit root_path
   end
 
-  scenario 'search question', sphinx: true
+  scenario 'search question', sphinx: true do
+    fill_in 'top-search', with: question.title
+    page.execute_script("$('#search-form').submit()")
+
+    expect(page).to have_content question.body
+  end
+
   scenario 'search answer', sphinx: true
   scenario 'search comment for the question', sphinx: true
   scenario 'search comment for the answer', sphinx: true

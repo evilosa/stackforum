@@ -45,7 +45,10 @@ Rails.application.routes.draw do
     get 'confirm_email', on: :member
   end
 
-  resource :search, only: [:show]
+  scope :search do
+    get '' => 'searches#index', as: 'search'
+    get 'results' => 'searches#show', as: 'search_results'
+  end
 
   namespace :api do
     namespace :v1 do

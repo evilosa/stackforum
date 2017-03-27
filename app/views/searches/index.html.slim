@@ -1,0 +1,31 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    h2 Поиск
+    ol.breadcrumb
+      li
+        = link_to t('common.titles.pages.main'), root_path
+  .col-lg-2
+
+= flash[:error].join('<br>').html_safe unless flash[:error].nil?
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox
+        .ibox-title
+        .ibox-content
+          = form_tag search_results_path, id: 'search-form', method: :get
+            .row
+              .col-sm-8
+                = hidden_field_tag('page', '1')
+                input type="text" placeholder="Search for something..." name="text" id="top-search" class="form-control"
+              .col-sm-4
+                select.form-control name="scope"
+                  option value="all" Везде
+                  option value="question" В вопросах
+                  option value="answer" В ответах
+                  option value="comment" В комментариях
+                  option value="user" В пользователях
+            .row
+              .col-sm-12
+                = submit_tag 'Найти', class: 'btn btn-primary'
