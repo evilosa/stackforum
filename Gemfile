@@ -41,6 +41,7 @@ gem 'whenever'
 gem 'mysql2', '~> 0.3.18', :platform => :ruby
 gem 'thinking-sphinx'
 gem 'will_paginate'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 group :development, :test do
   gem 'byebug', platform: :mri
