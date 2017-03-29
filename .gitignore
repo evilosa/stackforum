@@ -23,3 +23,6 @@
 /zeus.json
 /public/javascripts/i18n.js
 /public/javascripts/translations.js
+
+/config/*.sphinx.conf
+/db/sphinx

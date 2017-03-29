@@ -1,0 +1,22 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-lg-10
+    h2 Результаты поиска
+    ol.breadcrumb
+      li
+        = link_to t('common.titles.pages.main'), root_path
+      li.active
+        strong Результат
+  .col-lg-2
+
+= flash[:error].join('<br>').html_safe unless flash[:error].nil?
+
+.wrapper.wrapper-content.animated.fadeInRight
+  .row
+    .col-lg-12
+      .ibox
+        .ibox-title
+          p Результаты
+        .ibox-content
+            .row
+              = render 'searches/search', results: @results if @results
+

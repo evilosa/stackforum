@@ -16,3 +16,7 @@ nav.navbar-default.navbar-static-side role="navigation"
        = link_to questions_path
         i.fa.fa-question
         span.nav-label Questions
+     li class="#{'active' if current_page?(search_path)}"
+       = link_to search_path
+         i.fa.fa-search
+         span.nav-label Search
