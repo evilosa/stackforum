@@ -21,8 +21,7 @@
 /public/uploads/
 /custom_plan.rb
 /zeus.json
-/public/javascripts/i18n.js
-/public/javascripts/translations.js
 
 /config/*.sphinx.conf
 /db/sphinx
+/public/javascripts/

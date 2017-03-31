@@ -41,6 +41,8 @@ gem 'whenever'
 gem 'mysql2', '~> 0.3.18', :platform => :ruby
 gem 'thinking-sphinx'
 gem 'will_paginate'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem 'therubyracer'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -60,6 +62,11 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-sidekiq', require: false
 end
 
 group :test do

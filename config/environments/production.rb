@@ -38,6 +38,7 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
+  config.action_cable.allowed_request_origins = [ "http://#{ENV['PRODUCTION_HOST']}" ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -83,4 +84,18 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Email
+  config.action_mailer.default_url_options = { host: ENV['PRODUCTION_HOST'] }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.mail.ru',
+      port: 465,
+      user_name: ENV['PRODUCTION_USER_NAME_SMTP'],
+      password: ENV['PRODUCTION_USER_PASSWORD_SMTP'],
+      authentication: :plain,
+      enable_starttls_auto: true,
+      openssl_verify_mode: 'none',
+      tls: true
+  }
 end
