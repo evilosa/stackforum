@@ -124,6 +124,7 @@ GEM
     doorkeeper (4.2.5)
       railties (>= 4.2)
     dotenv (2.2.0)
+    dotenv-deployment (0.0.2)
     dotenv-rails (2.2.0)
       dotenv (= 2.2.0)
       railties (>= 3.2, < 5.1)
@@ -403,6 +404,7 @@ DEPENDENCIES
   database_cleaner
   devise
   doorkeeper
+  dotenv-deployment
   dotenv-rails
   factory_girl_rails
   faker
