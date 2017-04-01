@@ -89,13 +89,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: ENV['PRODUCTION_HOST'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.mail.ru',
-      port: 465,
-      user_name: ENV['PRODUCTION_USER_NAME_SMTP'],
-      password: ENV['PRODUCTION_USER_PASSWORD_SMTP'],
-      authentication: :plain,
-      enable_starttls_auto: true,
-      openssl_verify_mode: 'none',
-      tls: true
+      :address => 'smtp.mail.ru',
+      :port => 465,
+      :user_name => ENV['PRODUCTION_USER_NAME_SMTP'],
+      :password => ENV['PRODUCTION_USER_PASSWORD_SMTP'],
+      :authentication => :plain,
+      :enable_starttls_auto => true,
+      :openssl_verify_mode => 'none',
+      :tls => true
   }
 end
