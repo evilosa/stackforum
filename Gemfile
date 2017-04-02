@@ -44,6 +44,7 @@ gem 'will_paginate'
 gem 'dotenv-rails'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'therubyracer'
+gem 'capistrano-dotenv-tasks', require: false
 
 group :development, :test do
   gem 'byebug', platform: :mri
