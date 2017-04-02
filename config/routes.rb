@@ -63,5 +63,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'questions#index', via: :head
+  root to: 'questions#index'
 end
