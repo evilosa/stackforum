@@ -10,6 +10,7 @@ require 'capistrano/sidekiq'
 require 'whenever/capistrano'
 require 'capistrano/dotenv/tasks'
 require 'thinking_sphinx/capistrano'
+require 'capistrano3/unicorn'
 
 # Load the SCM plugin appropriate to your project:
 #
