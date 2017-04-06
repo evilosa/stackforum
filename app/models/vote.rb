@@ -4,5 +4,5 @@ class Vote < ApplicationRecord
   validates :status, presence: true
 
   belongs_to :user
-  belongs_to :votable, polymorphic: true
+  belongs_to :votable, polymorphic: true, touch: true
 end

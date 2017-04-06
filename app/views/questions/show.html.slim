@@ -1,85 +1,86 @@
-= render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.view')}
+- cache @question
+  = render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.view')}
 
-= flash[:error].join('<br>').html_safe unless flash[:error].nil?
+  = flash[:error].join('<br>').html_safe unless flash[:error].nil?
 
-.wrapper.wrapper-content.animated.fadeInRight
-  .row
-    .col-lg-12
-      .social-feed-box
-        .social-action.pull-right
-          - if user_signed_in? && current_user.author_of?(@question)
-            a.btn.btn-white.btn-xs#edit-question data-toggle='modal' data-target='#edit-answer-form' data-question-id="#{@question.id}"
-              i.fa.fa-edit = t('common.button.edit')
-            = link_to @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs', id: 'remove-question'
-              i.fa.fa-remove = t('common.button.delete')
-          - if user_signed_in?
-            a.btn.btn-white.btn-xs#new-question-comment data-toggle='modal' data-question-id="#{@question.id}" data-target='#edit-answer-form'
-              i.fa.fa-comment = t('common.button.comment')
-            - if @question.subscribed?(current_user)
-              = link_to unsubscribe_question_path(@question), method: :delete, class: 'btn btn-white btn-xs', id: 'unsubscribe-question'
-                i.fa.fa-comment = t('common.button.unsubscribe')
-            - else
-              = link_to subscribe_question_path(@question), method: :post, class: 'btn btn-white btn-xs', id: 'subscribe-question'
-                i.fa.fa-comment = t('common.button.subscribe')
-        .social-avatar
-          a.pull-left
-            img src="#{image_path('a1.jpg')}"
-          .media-body
-            a = "#{@question.user.email} - #{@question.title}"
-            small.text-muted = @question.created_at
-        .social-body data-question-id="#{@question.id}"
-          / Body
-          .row
-            .col-md-9
-              p#question-body = @question.body.html_safe
-              .btn-group.pull-left
-                .vote-actions
-                  = link_to upvote_question_path(@question), method: :patch, remote: true, data: { type: :json }, id: 'question-upvote'
-                    i.fa.fa-chevron-up
-                  div#question-score = @question.score
-                  = link_to downvote_question_path(@question), method: :patch, remote: true, data: { type: :json }, id: 'question-downvote'
-                    i.fa.fa-chevron-down
-            .col-md-3
-              .small.text-right
-                / Attachment
-                h5 Files:
-                - @question.attachments.each do |a|
-                  div data-attachment-id="#{a.id}"
-                    i.fa.fa-file
-                    = link_to " #{a.file.identifier}", a.file.url
-                    - if user_signed_in? && current_user.author_of?(a.attachable)
-                      = link_to attachment_path(a), method: :delete, remote: true, id: 'remove-file'
-                        i.fa.fa-remove
-          / Comments
-          .comments data-question-id="#{@question.id}"
-            h5 Comments:
-            - @question.comments.each do |comment|
-              = render 'questions/comment', comment: comment
-        .social-footer
-          = render 'answers'
-        .modal-footer
-          - if user_signed_in?
-            button.btn.btn-primary.pull-right#new-answer data-toggle="modal" data-target="#edit-answer-form" data-question-id="#{@question.id}" = t('common.button.answer.add_new')
-          - else
-            = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
-
-.modal.inmodal#edit-answer-form tabindex="-1" role="dialog" aria-hidden="true"
-  .modal-dialog
-    .modal-content.animated.bounceInRight
-      .modal-header
-        h4.modal-title Введите данные
-      .edit-form
-        = form_for [@question, @answer], remote: true, method: :post do |f|
-          .ibox
-            .ibox-content
-              .form-group
-                = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
-              .form-group
-                = f.label t('common.titles.attachments')
-                = f.fields_for :attachments, @answer.attachments.build do |attachment|
-                  = render 'attachment_fields', f: attachment
-                .links
-                  = link_to_add_association t('common.button.attachment.add'), f, :attachments, class: 'btn btn-primary'
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .social-feed-box
+          .social-action.pull-right
+            - if user_signed_in? && current_user.author_of?(@question)
+              a.btn.btn-white.btn-xs#edit-question data-toggle='modal' data-target='#edit-answer-form' data-question-id="#{@question.id}"
+                i.fa.fa-edit = t('common.button.edit')
+              = link_to @question, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-white btn-xs', id: 'remove-question'
+                i.fa.fa-remove = t('common.button.delete')
+            - if user_signed_in?
+              a.btn.btn-white.btn-xs#new-question-comment data-toggle='modal' data-question-id="#{@question.id}" data-target='#edit-answer-form'
+                i.fa.fa-comment = t('common.button.comment')
+              - if @question.subscribed?(current_user)
+                = link_to unsubscribe_question_path(@question), method: :delete, class: 'btn btn-white btn-xs', id: 'unsubscribe-question'
+                  i.fa.fa-comment = t('common.button.unsubscribe')
+              - else
+                = link_to subscribe_question_path(@question), method: :post, class: 'btn btn-white btn-xs', id: 'subscribe-question'
+                  i.fa.fa-comment = t('common.button.subscribe')
+          .social-avatar
+            a.pull-left
+              img src="#{image_path('a1.jpg')}"
+            .media-body
+              a = "#{@question.user.email} - #{@question.title}"
+              small.text-muted = @question.created_at
+          .social-body data-question-id="#{@question.id}"
+            / Body
+            .row
+              .col-md-9
+                p#question-body = @question.body.html_safe
+                .btn-group.pull-left
+                  .vote-actions
+                    = link_to upvote_question_path(@question), method: :patch, remote: true, data: { type: :json }, id: 'question-upvote'
+                      i.fa.fa-chevron-up
+                    div#question-score = @question.score
+                    = link_to downvote_question_path(@question), method: :patch, remote: true, data: { type: :json }, id: 'question-downvote'
+                      i.fa.fa-chevron-down
+              .col-md-3
+                .small.text-right
+                  / Attachment
+                  h5 Files:
+                  - @question.attachments.each do |a|
+                    div data-attachment-id="#{a.id}"
+                      i.fa.fa-file
+                      = link_to " #{a.file.identifier}", a.file.url
+                      - if user_signed_in? && current_user.author_of?(a.attachable)
+                        = link_to attachment_path(a), method: :delete, remote: true, id: 'remove-file'
+                          i.fa.fa-remove
+            / Comments
+            .comments data-question-id="#{@question.id}"
+              h5 Comments:
+              - @question.comments.each do |comment|
+                = render 'questions/comment', comment: comment
+          .social-footer
+            = render 'answers'
           .modal-footer
-            button type="button" class="btn btn-white" data-dismiss="modal" Close
-            = f.submit t('common.button.ready'), class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-answer-form' }, id: 'ready-button'
+            - if user_signed_in?
+              button.btn.btn-primary.pull-right#new-answer data-toggle="modal" data-target="#edit-answer-form" data-question-id="#{@question.id}" = t('common.button.answer.add_new')
+            - else
+              = link_to t('common.button.answer.add_new'), new_user_session_path, class: 'btn btn-primary pull-right'
+
+  .modal.inmodal#edit-answer-form tabindex="-1" role="dialog" aria-hidden="true"
+    .modal-dialog
+      .modal-content.animated.bounceInRight
+        .modal-header
+          h4.modal-title Введите данные
+        .edit-form
+          = form_for [@question, @answer], remote: true, method: :post do |f|
+            .ibox
+              .ibox-content
+                .form-group
+                  = f.bootsy_area :body, class: 'form-control', rows: 12, id: 'answer_body'
+                .form-group
+                  = f.label t('common.titles.attachments')
+                  = f.fields_for :attachments, @answer.attachments.build do |attachment|
+                    = render 'attachment_fields', f: attachment
+                  .links
+                    = link_to_add_association t('common.button.attachment.add'), f, :attachments, class: 'btn btn-primary'
+            .modal-footer
+              button type="button" class="btn btn-white" data-dismiss="modal" Close
+              = f.submit t('common.button.ready'), class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-answer-form' }, id: 'ready-button'

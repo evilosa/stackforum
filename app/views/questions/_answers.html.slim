@@ -1,2 +1,3 @@
 - @question.answers.ordered.each do |answer|
-  = render 'questions/answer', answer: answer
+  - cache answer do
+    = render 'questions/answer', answer: answer
