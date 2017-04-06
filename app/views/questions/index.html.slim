@@ -1,4 +1,4 @@
-- cache collection_cache_key_for :question do
+- cache @questions do
   = render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.list')}
 
   .wrapper.wrapper-content.animated.fadeInRight
