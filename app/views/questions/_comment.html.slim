@@ -1,14 +1,15 @@
-.social-comment data-answer-id="#{comment.id}"
-  .media-body
-    a = comment.user.email
-    - if user_signed_in?
-      .btn-group.pull-right
-        /- if current_user.author_of?(comment)
-          a.btn.btn-white.btn-xs#edit-comment data-toggle='modal' data-target='#edit-answer-form'
-            i.fa.fa-edit = t('common.button.edit')
-    br
-    small.text-muted = comment.created_at
-    .row
-      .col-md-12
-        #comment-body data-answer-id="#{comment.id}" = comment.body.html_safe
-  .hr-line-dashed
+- cache comment do
+  .social-comment data-answer-id="#{comment.id}"
+    .media-body
+      a = comment.user.email
+      - if user_signed_in?
+        .btn-group.pull-right
+          /- if current_user.author_of?(comment)
+            a.btn.btn-white.btn-xs#edit-comment data-toggle='modal' data-target='#edit-answer-form'
+              i.fa.fa-edit = t('common.button.edit')
+      br
+      small.text-muted = comment.created_at
+      .row
+        .col-md-12
+          #comment-body data-answer-id="#{comment.id}" = comment.body.html_safe
+    .hr-line-dashed

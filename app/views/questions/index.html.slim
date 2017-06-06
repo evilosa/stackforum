@@ -1,18 +1,19 @@
-= render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.list')}
+- cache @questions do
+  = render 'layouts/breadcrumbs', source: {title: 'Вопросы', second: t('common.titles.pages.questions'), path: questions_path, action: t('common.actions.list')}
 
-.wrapper.wrapper-content.animated.fadeInRight
-  .row
-    .col-lg-12
-      .ibox.float-e-margins
-        .ibox-title
-          h5 Список вопросов
-          .ibox-tools
-            = link_to t('common.button.question.add_new'), new_question_path, class: 'btn btn-primary btn-xs pull-right'
-        .ibox-content
-          table.table.table-hover
-            thead
-              tr
-                td Title
-            tbody#questions-list
-              - @questions.each do |question|
-                = render question
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox.float-e-margins
+          .ibox-title
+            h5 Список вопросов
+            .ibox-tools
+              = link_to t('common.button.question.add_new'), new_question_path, class: 'btn btn-primary btn-xs pull-right'
+          .ibox-content
+            table.table.table-hover
+              thead
+                tr
+                  td Title
+              tbody#questions-list
+                - @questions.each do |question|
+                  = render question
